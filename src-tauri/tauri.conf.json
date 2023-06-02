@@ -13,8 +13,14 @@
   "tauri": {
     "allowlist": {
       "all": false,
-      "shell": {
+      "protocol": {
         "all": false,
+        "asset": true,
+        "assetScope": [
+          "/**/*"
+        ]
+      },
+      "shell": {
         "open": true
       }
     },
@@ -31,7 +37,7 @@
       ]
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; media-src 'self' asset: https://asset.localhost"
     },
     "windows": [
       {

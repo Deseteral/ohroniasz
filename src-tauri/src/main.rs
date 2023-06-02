@@ -3,11 +3,14 @@
 
 use std::fs;
 use std::process::Command;
+use tauri::Manager;
 
 static WORKING_DIR_PATH: &'static str = "/tmp/ohroniasz";
 
+// TODO: this has to be blocking
 fn concat_video_files(output_name: &str) {
     Command::new("ffmpeg")
+        .arg("-y")
         .arg("-f")
         .arg("concat")
         .arg("-safe")
@@ -19,6 +22,8 @@ fn concat_video_files(output_name: &str) {
         .arg(format!("{WORKING_DIR_PATH}/{output_name}.mp4"))
         .spawn()
         .expect("ffmpeg failed");
+
+    // sleep(Duration::from_secs(5));
 }
 
 fn generate_preview_files_for_directory(directory_path: &str) {
@@ -59,6 +64,15 @@ fn main() {
     create_working_dir();
 
     tauri::Builder::default()
+        .setup(|app| {
+            #[cfg(debug_assertions)]
+            {
+                let window = app.get_window("main").unwrap();
+                window.open_devtools();
+                window.close_devtools();
+            }
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
