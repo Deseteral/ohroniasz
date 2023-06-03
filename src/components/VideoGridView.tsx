@@ -27,6 +27,15 @@ const Grid = styled.div`
   grid-row-gap: 0px;
 `;
 
+const ControlsBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 16px;
+  padding: 8px;
+  border: 2px solid white;
+  border-radius: 4px;
+`;
+
 const VideoTile = styled.video<{ position: TilePosition }>`
   width: 100% !important;
   height: auto !important;
@@ -91,9 +100,9 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
             ref={videoRight}
           />
         </Grid>
-        <div>
+        <ControlsBar>
           <button onClick={() => play()} type="button">play</button>
-        </div>
+        </ControlsBar>
       </Column>
     </Container>
   );
