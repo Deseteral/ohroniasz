@@ -7,7 +7,7 @@ use tauri::Manager;
 
 static WORKING_DIR_PATH: &'static str = "/tmp/ohroniasz";
 
-// TODO: this has to be blocking
+// TODO: This could be multithreaded.
 fn concat_video_files(output_name: &str) {
     Command::new("ffmpeg")
         .arg("-y")
@@ -20,10 +20,8 @@ fn concat_video_files(output_name: &str) {
         .arg("-c")
         .arg("copy")
         .arg(format!("{WORKING_DIR_PATH}/{output_name}.mp4"))
-        .spawn()
+        .output()
         .expect("ffmpeg failed");
-
-    // sleep(Duration::from_secs(5));
 }
 
 fn generate_preview_files_for_directory(directory_path: &str) {
