@@ -51,6 +51,14 @@ const VideoTile = styled.video<{ position: TilePosition }>`
   })}
 `;
 
+const TimeSlider = styled.input.attrs(() => ({
+  type: 'range',
+  min: 0,
+  step: 0.01,
+}))`
+  width: 100%;
+`;
+
 interface VideoGridViewProps {
 
 }
@@ -61,18 +69,30 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
   const videoLeft = React.useRef<HTMLVideoElement>(null);
   const videoRight = React.useRef<HTMLVideoElement>(null);
 
-  const play = () => {
+  const [timeSliderValue, setTimeSliderValue] = React.useState<number>(0);
+  const [videoLength, initializeVideoLength] = React.useState<number>(0);
+
+  const actOnAllVideoTiles = (callback: (video: HTMLVideoElement) => void) => {
+    if (videoFront.current) callback(videoFront.current);
+    if (videoBack.current) callback(videoBack.current);
+    if (videoLeft.current) callback(videoLeft.current);
+    if (videoRight.current) callback(videoRight.current);
+  };
+
+  const togglePlayState = () => {
     if (videoFront.current?.paused) {
-      videoFront.current?.play();
-      videoBack.current?.play();
-      videoLeft.current?.play();
-      videoRight.current?.play();
+      actOnAllVideoTiles((video) => video.play());
     } else {
-      videoFront.current?.pause();
-      videoBack.current?.pause();
-      videoLeft.current?.pause();
-      videoRight.current?.pause();
+      actOnAllVideoTiles((video) => video.pause());
     }
+  };
+
+  const userChangedSliderValue = (position: number) => {
+    setTimeSliderValue(position);
+    actOnAllVideoTiles((video) => {
+      video.pause();
+      video.currentTime = position;
+    });
   };
 
   return (
@@ -83,6 +103,8 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
             position={TilePosition.TOP_LEFT}
             src={convertFileSrc('/tmp/ohroniasz/front.mp4')}
             ref={videoFront}
+            onTimeUpdate={() => setTimeSliderValue(videoFront.current?.currentTime || 0)}
+            onLoadedData={() => initializeVideoLength(videoFront.current?.duration || 0)}
           />
           <VideoTile
             position={TilePosition.TOP_RIGHT}
@@ -101,7 +123,12 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
           />
         </Grid>
         <ControlsBar>
-          <button onClick={() => play()} type="button">play</button>
+          <button onClick={() => togglePlayState()} type="button">play</button>
+          <TimeSlider
+            max={videoLength}
+            value={timeSliderValue}
+            onChange={(e) => userChangedSliderValue(parseFloat(e.target.value))}
+          />
         </ControlsBar>
       </Column>
     </Container>
