@@ -51,6 +51,12 @@ const VideoTile = styled.video<{ position: TilePosition }>`
   })}
 `;
 
+const PlayPauseButton = styled.button.attrs(() => ({
+  type: 'button',
+}))`
+  background-color: red;
+`;
+
 const TimeSlider = styled.input.attrs(() => ({
   type: 'range',
   min: 0,
@@ -123,7 +129,7 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
           />
         </Grid>
         <ControlsBar>
-          <button onClick={() => togglePlayState()} type="button">play</button>
+          <PlayPauseButton onClick={() => togglePlayState()}>play</PlayPauseButton>
           <TimeSlider
             max={videoLength}
             value={timeSliderValue}
