@@ -7,14 +7,22 @@ body {
   background-color: black;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 .video-grid-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.video-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  width: 100vw;
-  height: 100vh;
 }
 
 .video-front {
