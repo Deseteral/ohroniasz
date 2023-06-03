@@ -8,7 +8,6 @@ use tauri::Manager;
 
 static WORKING_DIR_PATH: &'static str = "/tmp/ohroniasz";
 
-// TODO: This could be multithreaded.
 fn concat_video_files(src_list_path: &str, output_path: &str) {
     Command::new("ffmpeg")
         .arg("-y")
