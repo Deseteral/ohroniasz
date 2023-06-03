@@ -23,20 +23,20 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
       <div className="column">
         <div className="video-grid">
           <div className="video-front">
-            <video className="video" src={convertFileSrc("/tmp/ohroniasz/front.mp4")} ref={videoFront} />
+            <video className="video" src={convertFileSrc('/tmp/ohroniasz/front.mp4')} ref={videoFront} />
           </div>
           <div className="video-back">
-            <video className="video" src={convertFileSrc("/tmp/ohroniasz/back.mp4")} ref={videoBack} />
+            <video className="video" src={convertFileSrc('/tmp/ohroniasz/back.mp4')} ref={videoBack} />
           </div>
           <div className="video-left">
-            <video className="video" src={convertFileSrc("/tmp/ohroniasz/left_repeater.mp4")} ref={videoLeft} />
+            <video className="video" src={convertFileSrc('/tmp/ohroniasz/left_repeater.mp4')} ref={videoLeft} />
           </div>
           <div className="video-right">
-            <video className="video" src={convertFileSrc("/tmp/ohroniasz/right_repeater.mp4")} ref={videoRight} />
+            <video className="video" src={convertFileSrc('/tmp/ohroniasz/right_repeater.mp4')} ref={videoRight} />
           </div>
         </div>
         <div>
-          <button onClick={() => play()}>play</button>
+          <button onClick={() => play()} type="button">play</button>
         </div>
       </div>
     </div>

@@ -1,0 +1,7 @@
+{
+  "extends": "@deseteral/eslint-config/typescript",
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "jsx-a11y/media-has-caption": "off"
+  }
+}
