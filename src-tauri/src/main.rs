@@ -3,6 +3,7 @@
 
 use std::fs;
 use std::process::Command;
+use std::time::SystemTime;
 use tauri::Manager;
 
 static WORKING_DIR_PATH: &'static str = "/tmp/ohroniasz";
@@ -25,6 +26,8 @@ fn concat_video_files(output_name: &str) {
 }
 
 fn generate_preview_files_for_directory(directory_path: &str) {
+    let time_start = SystemTime::now();
+
     let positions = ["front", "back", "left_repeater", "right_repeater"];
 
     for position in positions {
@@ -52,6 +55,14 @@ fn generate_preview_files_for_directory(directory_path: &str) {
         fs::write(format!("{WORKING_DIR_PATH}/list.txt"), list_file_content).unwrap();
         concat_video_files(&position);
     }
+
+    let time_end = SystemTime::now();
+    let processing_time = time_end
+        .duration_since(time_start)
+        .expect("Time went backwards")
+        .as_millis();
+
+    println!("Generating video files took {processing_time} ms");
 }
 
 fn create_working_dir() {
