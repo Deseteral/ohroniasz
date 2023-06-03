@@ -108,9 +108,9 @@ function VideoGridView(props: VideoGridViewProps): JSX.Element {
           <VideoTile
             position={TilePosition.TOP_LEFT}
             src={convertFileSrc('/tmp/ohroniasz/front.mp4')}
-            ref={videoFront}
             onTimeUpdate={() => setTimeSliderValue(videoFront.current?.currentTime || 0)}
             onLoadedData={() => initializeVideoLength(videoFront.current?.duration || 0)}
+            ref={videoFront}
           />
           <VideoTile
             position={TilePosition.TOP_RIGHT}
