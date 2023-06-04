@@ -1,7 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import { CamEvent } from '../../src-tauri/bindings/CamEvent';
 import { VideoGridView } from './VideoGridView';
 import { WelcomeView } from './WelcomeView';
+import { SidebarView } from './SidebarView';
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 interface AppProps {
 
@@ -9,11 +16,19 @@ interface AppProps {
 
 function App(props: AppProps): JSX.Element {
   const [camEvents, setCamEvents] = React.useState<CamEvent[] | null>(null);
+  const [wasEventSelected, setEventSelected] = React.useState<boolean>(false);
 
   return (
     <>
-      <WelcomeView onLibraryLoaded={(events) => setCamEvents(events)} />
-      {false && <VideoGridView />}
+      {camEvents === null && (
+        <WelcomeView onLibraryLoaded={(events) => setCamEvents(events)} />
+      )}
+      {camEvents !== null && (
+        <Row>
+          <SidebarView events={camEvents} onEventSelected={() => setEventSelected(true)} />
+          {wasEventSelected && <VideoGridView />}
+        </Row>
+      )}
     </>
   );
 }
