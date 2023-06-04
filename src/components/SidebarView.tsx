@@ -6,6 +6,9 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  width: 280px;
+  height: 100vh;
+  border-right: 1px solid white;
 `;
 
 const CamEventView = styled.div`
