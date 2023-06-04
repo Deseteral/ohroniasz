@@ -15,7 +15,7 @@ struct ViewModel {
 }
 
 #[tauri::command]
-async fn select_directory() -> Option<ViewModel> {
+async fn select_library() -> Option<ViewModel> {
     FileDialogBuilder::new()
         .pick_folder()
         .map(|tesla_cam_path| {
@@ -37,7 +37,7 @@ fn main() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![select_directory])
+        .invoke_handler(tauri::generate_handler![select_library])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
