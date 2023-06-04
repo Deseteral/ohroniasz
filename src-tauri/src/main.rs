@@ -9,19 +9,11 @@ use config::create_working_dir;
 use library_scanner::{scan_library, CamEvent};
 use tauri::{api::dialog::blocking::FileDialogBuilder, Manager};
 
-#[derive(serde::Serialize)]
-struct ViewModel {
-    events: Vec<CamEvent>,
-}
-
 #[tauri::command]
-async fn select_library() -> Option<ViewModel> {
+async fn select_and_scan_library() -> Option<Vec<CamEvent>> {
     FileDialogBuilder::new()
         .pick_folder()
-        .map(|tesla_cam_path| {
-            let events = scan_library(&tesla_cam_path);
-            ViewModel { events }
-        })
+        .map(|tesla_cam_path| scan_library(&tesla_cam_path))
 }
 
 fn main() {
@@ -37,7 +29,7 @@ fn main() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![select_library])
+        .invoke_handler(tauri::generate_handler![select_and_scan_library])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

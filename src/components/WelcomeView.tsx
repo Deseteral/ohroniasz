@@ -1,12 +1,14 @@
-import { invoke } from '@tauri-apps/api/tauri';
+import { CamEvent } from '../../src-tauri/bindings/CamEvent';
+import { selectAndScanLibrary } from '../services/ipc';
 
 interface WelcomeViewProps {
-
+  onLibraryLoaded: (events: CamEvent[]) => void,
 }
 
-function WelcomeView(props: WelcomeViewProps): JSX.Element {
-  const selectLibrary = () => {
-    invoke('select_library').then((res) => console.log(res));
+function WelcomeView({ onLibraryLoaded }: WelcomeViewProps): JSX.Element {
+  const selectLibrary = async () => {
+    const events = await selectAndScanLibrary();
+    onLibraryLoaded(events);
   };
 
   return (

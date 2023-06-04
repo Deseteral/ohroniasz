@@ -1,19 +1,21 @@
+use serde::Serialize;
 use std::{
     fs,
     path::{Path, PathBuf},
     vec,
 };
+use ts_rs::TS;
 
-use serde::Serialize;
-
-#[derive(Serialize)]
+#[derive(Serialize, Clone, TS, Debug)]
+#[ts(export)]
 pub struct CamEvent {
     date: String,
     path: PathBuf,
     kind: CamEventKind,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Clone, TS, Debug)]
+#[ts(export)]
 enum CamEventKind {
     SavedClip,
     SentryClip,
