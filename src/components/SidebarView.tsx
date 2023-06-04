@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CamEvent } from '../../src-tauri/bindings/CamEvent';
+import { generatePreviews } from '../services/ipc';
 
 const Column = styled.div`
   display: flex;
@@ -14,12 +15,15 @@ const CamEventView = styled.div`
 
 interface SidebarViewProps {
   events: CamEvent[],
-  onEventSelected: () => void,
+  onSelectedEventChange: () => void,
+  onPreviewGenerationFinished: () => void,
 }
 
-function SidebarView({ events, onEventSelected }: SidebarViewProps): JSX.Element {
-  const onEventClick = (event: CamEvent) => {
-    onEventSelected();
+function SidebarView({ events, onSelectedEventChange, onPreviewGenerationFinished }: SidebarViewProps): JSX.Element {
+  const onEventClick = async (event: CamEvent) => {
+    onSelectedEventChange();
+    await generatePreviews(event.path);
+    onPreviewGenerationFinished();
   };
 
   return (

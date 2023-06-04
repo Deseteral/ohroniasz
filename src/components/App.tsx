@@ -25,7 +25,11 @@ function App(props: AppProps): JSX.Element {
       )}
       {camEvents !== null && (
         <Row>
-          <SidebarView events={camEvents} onEventSelected={() => setEventSelected(true)} />
+          <SidebarView
+            events={camEvents}
+            onSelectedEventChange={() => setEventSelected(false)}
+            onPreviewGenerationFinished={() => setEventSelected(true)}
+          />
           {wasEventSelected && <VideoGridView />}
         </Row>
       )}
