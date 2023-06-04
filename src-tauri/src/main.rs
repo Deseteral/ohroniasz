@@ -2,15 +2,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod config;
+mod library_scanner;
 mod video_processing;
 
 use config::create_working_dir;
+use library_scanner::{scan_library, CamEvent};
 use tauri::{api::dialog::blocking::FileDialogBuilder, Manager};
-
-#[derive(serde::Serialize)]
-struct CamEvent {
-    date: String,
-}
 
 #[derive(serde::Serialize)]
 struct ViewModel {
@@ -21,7 +18,10 @@ struct ViewModel {
 async fn select_directory() -> Option<ViewModel> {
     FileDialogBuilder::new()
         .pick_folder()
-        .map(|_tesla_cam_path| ViewModel { events: vec![] })
+        .map(|tesla_cam_path| {
+            let events = scan_library(&tesla_cam_path);
+            ViewModel { events }
+        })
 }
 
 fn main() {
