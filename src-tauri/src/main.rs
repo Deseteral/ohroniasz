@@ -5,15 +5,27 @@ mod config;
 mod video_processing;
 
 use config::create_working_dir;
-use tauri::Manager;
-use video_processing::generate_preview_files_for_directory;
+use tauri::{api::dialog::blocking::FileDialogBuilder, Manager};
+
+#[derive(serde::Serialize)]
+struct CamEvent {
+    date: String,
+}
+
+#[derive(serde::Serialize)]
+struct ViewModel {
+    events: Vec<CamEvent>,
+}
+
+#[tauri::command]
+async fn select_directory() -> Option<ViewModel> {
+    FileDialogBuilder::new()
+        .pick_folder()
+        .map(|_tesla_cam_path| ViewModel { events: vec![] })
+}
 
 fn main() {
     create_working_dir();
-
-    generate_preview_files_for_directory(
-        "/Users/deseteral/Downloads/TeslaCam/SavedClips/2023-05-29_14-09-51",
-    );
 
     tauri::Builder::default()
         .setup(|app| {
@@ -25,6 +37,7 @@ fn main() {
             }
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![select_directory])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

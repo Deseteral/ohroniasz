@@ -1,4 +1,5 @@
 import { VideoGridView } from './VideoGridView';
+import { WelcomeView } from './WelcomeView';
 
 interface AppProps {
 
@@ -6,7 +7,10 @@ interface AppProps {
 
 function App(props: AppProps): JSX.Element {
   return (
-    <VideoGridView />
+    <>
+      <WelcomeView />
+      {false && <VideoGridView />}
+    </>
   );
 }
 
