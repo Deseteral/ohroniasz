@@ -30,11 +30,9 @@ struct CamEventLocation {
 }
 
 pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
-    let saved_clips_path = library_path.join("SavedClips");
-    let sentry_clips_path = library_path.join("SentryClips");
-
     let mut events: Vec<CamEvent> = vec![];
 
+    let saved_clips_path = library_path.join("SavedClips");
     for dir_entry in fs::read_dir(&saved_clips_path).unwrap() {
         let dir_entry = dir_entry.unwrap();
         if let Some(cam_event) = dir_entry_to_cam_event(dir_entry, CamEventKind::SavedClip) {
@@ -42,6 +40,7 @@ pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
         }
     }
 
+    let sentry_clips_path = library_path.join("SentryClips");
     for dir_entry in fs::read_dir(&sentry_clips_path).unwrap() {
         let dir_entry = dir_entry.unwrap();
         if let Some(cam_event) = dir_entry_to_cam_event(dir_entry, CamEventKind::SentryClip) {
