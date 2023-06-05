@@ -40,6 +40,7 @@ function SidebarView({ events, onSelectedEventChange, onPreviewGenerationFinishe
         <CamEventView key={event.date} onClick={() => onEventClick(event)}>
           <div>{event.date}</div>
           <div>{event.kind}</div>
+          <div>{event.location.city}</div>
         </CamEventView>
       ))}
     </Column>
