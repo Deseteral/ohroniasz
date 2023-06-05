@@ -16,6 +16,7 @@ const Column = styled.div`
 `;
 
 const CamEventView = styled.div`
+  font-size: 14px;
   padding: 4px;
   border-bottom: 1px solid gray;
   cursor: pointer;
