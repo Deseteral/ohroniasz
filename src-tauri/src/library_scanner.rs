@@ -1,5 +1,6 @@
 use serde::Serialize;
 use std::{
+    fmt::format,
     fs,
     path::{Path, PathBuf},
     vec,
@@ -38,7 +39,7 @@ pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
         let dir_name = dir_entry.file_name().into_string().unwrap();
 
         events.push(CamEvent {
-            date: dir_name,
+            date: dir_name_to_date(&dir_name),
             path,
             kind: CamEventKind::SavedClip,
         });
@@ -55,7 +56,7 @@ pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
         let dir_name = dir_entry.file_name().into_string().unwrap();
 
         events.push(CamEvent {
-            date: dir_name,
+            date: dir_name_to_date(&dir_name),
             path,
             kind: CamEventKind::SentryClip,
         });
@@ -64,4 +65,11 @@ pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
     events.sort_by(|a, b| b.date.cmp(&a.date));
 
     events
+}
+
+fn dir_name_to_date(dir_name: &str) -> String {
+    let s: Vec<&str> = dir_name.split("_").collect();
+    let d = s[0];
+    let t = s[1].replace("-", ":");
+    return format!("{d} {t}");
 }
