@@ -3,7 +3,7 @@ import { CamEvent } from '../../src-tauri/bindings/CamEvent';
 import { generatePreviews } from '../services/ipc';
 
 export const SidebarSize = {
-  width: '280px',
+  width: '230px',
 } as const;
 
 const Column = styled.div`
@@ -16,6 +16,7 @@ const Column = styled.div`
 `;
 
 const CamEventView = styled.div`
+  padding: 4px;
   border-bottom: 1px solid gray;
   cursor: pointer;
 `;
