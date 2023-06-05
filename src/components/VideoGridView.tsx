@@ -1,6 +1,7 @@
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 import React from 'react';
 import styled from 'styled-components';
+import { SidebarSize } from './SidebarView';
 
 enum TilePosition {
   TOP_LEFT,
@@ -10,7 +11,7 @@ enum TilePosition {
 }
 
 const Container = styled.div`
-  width: 100vw;
+  width: calc(100vw - ${SidebarSize.width});
   height: 100vh;
 `;
 

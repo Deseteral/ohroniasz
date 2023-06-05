@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import { CamEvent } from '../../src-tauri/bindings/CamEvent';
 import { generatePreviews } from '../services/ipc';
 
+export const SidebarSize = {
+  width: '280px',
+} as const;
+
 const Column = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  width: 280px;
+  width: ${SidebarSize.width};
   height: 100vh;
   border-right: 1px solid white;
 `;
