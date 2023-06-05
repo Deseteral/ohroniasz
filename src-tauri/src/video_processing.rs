@@ -3,7 +3,7 @@ use std::process::Command;
 use std::time::SystemTime;
 use std::{fs, thread, vec};
 
-static CAMERA_POSITIONS: [&'static str; 4] = ["front", "back", "left_repeater", "right_repeater"];
+static CAMERA_POSITIONS: [&str; 4] = ["front", "back", "left_repeater", "right_repeater"];
 
 pub fn generate_preview_files_for_directory(directory_path: &str) {
     let time_start = SystemTime::now();

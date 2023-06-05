@@ -1,6 +1,5 @@
 use serde::Serialize;
 use std::{
-    fmt::format,
     fs,
     path::{Path, PathBuf},
     vec,
@@ -68,8 +67,8 @@ pub fn scan_library(library_path: &Path) -> Vec<CamEvent> {
 }
 
 fn dir_name_to_date(dir_name: &str) -> String {
-    let s: Vec<&str> = dir_name.split("_").collect();
+    let s: Vec<&str> = dir_name.split('_').collect();
     let d = s[0];
-    let t = s[1].replace("-", ":");
-    return format!("{d} {t}");
+    let t = s[1].replace('-', ":");
+    format!("{d} {t}")
 }
