@@ -37,7 +37,9 @@ const ControlsBar = styled.div`
   border-radius: 4px;
 `;
 
-const VideoTile = styled.video<{ position: TilePosition }>`
+const VideoTile = styled.video.attrs(() => ({
+  onContextMenu: (e: MouseEvent) => e.preventDefault(),
+})) <{ position: TilePosition }>`
   width: 100% !important;
   height: auto !important;
 
