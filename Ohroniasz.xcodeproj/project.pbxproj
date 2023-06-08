@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
+		BFC015CB2A3256EE008DF774 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* ContentView.swift */; };
+		BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CC2A3256EF008DF774 /* Assets.xcassets */; };
+		BFC015D02A3256EF008DF774 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CF2A3256EF008DF774 /* Preview Assets.xcassets */; };
+		BFC015DB2A3256EF008DF774 /* OhroniaszTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015DA2A3256EF008DF774 /* OhroniaszTests.swift */; };
+		BFC015E52A3256EF008DF774 /* OhroniaszUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */; };
+		BFC015E72A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BFC015D72A3256EF008DF774 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFC015BD2A3256EE008DF774 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFC015C42A3256EE008DF774;
+			remoteInfo = Ohroniasz;
+		};
+		BFC015E12A3256EF008DF774 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFC015BD2A3256EE008DF774 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFC015C42A3256EE008DF774;
+			remoteInfo = Ohroniasz;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
+		BFC015CA2A3256EE008DF774 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BFC015CC2A3256EF008DF774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFC015CF2A3256EF008DF774 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BFC015D12A3256EF008DF774 /* Ohroniasz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ohroniasz.entitlements; sourceTree = "<group>"; };
+		BFC015D62A3256EF008DF774 /* OhroniaszTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OhroniaszTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC015DA2A3256EF008DF774 /* OhroniaszTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszTests.swift; sourceTree = "<group>"; };
+		BFC015E02A3256EF008DF774 /* OhroniaszUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OhroniaszUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITests.swift; sourceTree = "<group>"; };
+		BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BFC015C22A3256EE008DF774 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015D32A3256EF008DF774 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015DD2A3256EF008DF774 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BFC015BC2A3256EE008DF774 = {
+			isa = PBXGroup;
+			children = (
+				BFC015C72A3256EE008DF774 /* Ohroniasz */,
+				BFC015D92A3256EF008DF774 /* OhroniaszTests */,
+				BFC015E32A3256EF008DF774 /* OhroniaszUITests */,
+				BFC015C62A3256EE008DF774 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BFC015C62A3256EE008DF774 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015C52A3256EE008DF774 /* Ohroniasz.app */,
+				BFC015D62A3256EF008DF774 /* OhroniaszTests.xctest */,
+				BFC015E02A3256EF008DF774 /* OhroniaszUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BFC015C72A3256EE008DF774 /* Ohroniasz */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */,
+				BFC015CA2A3256EE008DF774 /* ContentView.swift */,
+				BFC015CC2A3256EF008DF774 /* Assets.xcassets */,
+				BFC015D12A3256EF008DF774 /* Ohroniasz.entitlements */,
+				BFC015CE2A3256EF008DF774 /* Preview Content */,
+			);
+			path = Ohroniasz;
+			sourceTree = "<group>";
+		};
+		BFC015CE2A3256EF008DF774 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015CF2A3256EF008DF774 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BFC015D92A3256EF008DF774 /* OhroniaszTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015DA2A3256EF008DF774 /* OhroniaszTests.swift */,
+			);
+			path = OhroniaszTests;
+			sourceTree = "<group>";
+		};
+		BFC015E32A3256EF008DF774 /* OhroniaszUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */,
+				BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */,
+			);
+			path = OhroniaszUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BFC015C42A3256EE008DF774 /* Ohroniasz */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC015EA2A3256EF008DF774 /* Build configuration list for PBXNativeTarget "Ohroniasz" */;
+			buildPhases = (
+				BFC015C12A3256EE008DF774 /* Sources */,
+				BFC015C22A3256EE008DF774 /* Frameworks */,
+				BFC015C32A3256EE008DF774 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Ohroniasz;
+			productName = Ohroniasz;
+			productReference = BFC015C52A3256EE008DF774 /* Ohroniasz.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BFC015D52A3256EF008DF774 /* OhroniaszTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC015ED2A3256EF008DF774 /* Build configuration list for PBXNativeTarget "OhroniaszTests" */;
+			buildPhases = (
+				BFC015D22A3256EF008DF774 /* Sources */,
+				BFC015D32A3256EF008DF774 /* Frameworks */,
+				BFC015D42A3256EF008DF774 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFC015D82A3256EF008DF774 /* PBXTargetDependency */,
+			);
+			name = OhroniaszTests;
+			productName = OhroniaszTests;
+			productReference = BFC015D62A3256EF008DF774 /* OhroniaszTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BFC015DF2A3256EF008DF774 /* OhroniaszUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFC015F02A3256EF008DF774 /* Build configuration list for PBXNativeTarget "OhroniaszUITests" */;
+			buildPhases = (
+				BFC015DC2A3256EF008DF774 /* Sources */,
+				BFC015DD2A3256EF008DF774 /* Frameworks */,
+				BFC015DE2A3256EF008DF774 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFC015E22A3256EF008DF774 /* PBXTargetDependency */,
+			);
+			name = OhroniaszUITests;
+			productName = OhroniaszUITests;
+			productReference = BFC015E02A3256EF008DF774 /* OhroniaszUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFC015BD2A3256EE008DF774 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					BFC015C42A3256EE008DF774 = {
+						CreatedOnToolsVersion = 14.3;
+					};
+					BFC015D52A3256EF008DF774 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = BFC015C42A3256EE008DF774;
+					};
+					BFC015DF2A3256EF008DF774 = {
+						CreatedOnToolsVersion = 14.3;
+						TestTargetID = BFC015C42A3256EE008DF774;
+					};
+				};
+			};
+			buildConfigurationList = BFC015C02A3256EE008DF774 /* Build configuration list for PBXProject "Ohroniasz" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BFC015BC2A3256EE008DF774;
+			productRefGroup = BFC015C62A3256EE008DF774 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BFC015C42A3256EE008DF774 /* Ohroniasz */,
+				BFC015D52A3256EF008DF774 /* OhroniaszTests */,
+				BFC015DF2A3256EF008DF774 /* OhroniaszUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BFC015C32A3256EE008DF774 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC015D02A3256EF008DF774 /* Preview Assets.xcassets in Resources */,
+				BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015D42A3256EF008DF774 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015DE2A3256EF008DF774 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BFC015C12A3256EE008DF774 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC015CB2A3256EE008DF774 /* ContentView.swift in Sources */,
+				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015D22A3256EF008DF774 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC015DB2A3256EF008DF774 /* OhroniaszTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFC015DC2A3256EF008DF774 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC015E72A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift in Sources */,
+				BFC015E52A3256EF008DF774 /* OhroniaszUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BFC015D82A3256EF008DF774 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFC015C42A3256EE008DF774 /* Ohroniasz */;
+			targetProxy = BFC015D72A3256EF008DF774 /* PBXContainerItemProxy */;
+		};
+		BFC015E22A3256EF008DF774 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFC015C42A3256EE008DF774 /* Ohroniasz */;
+			targetProxy = BFC015E12A3256EF008DF774 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BFC015E82A3256EF008DF774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BFC015E92A3256EF008DF774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BFC015EB2A3256EF008DF774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ohroniasz/Ohroniasz.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ohroniasz/Preview Content\"";
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.Ohroniasz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		BFC015EC2A3256EF008DF774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Ohroniasz/Ohroniasz.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Ohroniasz/Preview Content\"";
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.Ohroniasz;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BFC015EE2A3256EF008DF774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.OhroniaszTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ohroniasz.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ohroniasz";
+			};
+			name = Debug;
+		};
+		BFC015EF2A3256EF008DF774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.OhroniaszTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ohroniasz.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Ohroniasz";
+			};
+			name = Release;
+		};
+		BFC015F12A3256EF008DF774 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.OhroniaszUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Ohroniasz;
+			};
+			name = Debug;
+		};
+		BFC015F22A3256EF008DF774 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W637SV8XK5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.deseteral.OhroniaszUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Ohroniasz;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BFC015C02A3256EE008DF774 /* Build configuration list for PBXProject "Ohroniasz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC015E82A3256EF008DF774 /* Debug */,
+				BFC015E92A3256EF008DF774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFC015EA2A3256EF008DF774 /* Build configuration list for PBXNativeTarget "Ohroniasz" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC015EB2A3256EF008DF774 /* Debug */,
+				BFC015EC2A3256EF008DF774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFC015ED2A3256EF008DF774 /* Build configuration list for PBXNativeTarget "OhroniaszTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC015EE2A3256EF008DF774 /* Debug */,
+				BFC015EF2A3256EF008DF774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFC015F02A3256EF008DF774 /* Build configuration list for PBXNativeTarget "OhroniaszUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFC015F12A3256EF008DF774 /* Debug */,
+				BFC015F22A3256EF008DF774 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFC015BD2A3256EE008DF774 /* Project object */;
+}
