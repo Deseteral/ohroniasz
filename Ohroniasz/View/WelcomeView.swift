@@ -12,6 +12,7 @@ struct WelcomeView: View {
             Button("Select") {
                 self.selectFolder()
             }
+            .buttonStyle(.borderedProminent)
         }
         .padding()
     }
@@ -27,10 +28,12 @@ struct WelcomeView: View {
         folderPicker.allowsMultipleSelection = false
         
         folderPicker.begin { response in
-            if response == .OK {
-                let pickedFolderPath = folderPicker.url!.path
-                print(pickedFolderPath)
+            if response != .OK {
+                return
             }
+            
+            let pickedFolderPath = folderPicker.url!.path
+            print(pickedFolderPath)
         }
     }
 }
@@ -38,5 +41,6 @@ struct WelcomeView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WelcomeView()
+            .preferredColorScheme(.dark)
     }
 }
