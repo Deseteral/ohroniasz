@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    let onFolderPicked : (String) -> ()
+    
     var body: some View {
         VStack {
             Image(systemName: "car.front.waves.up.fill")
@@ -33,14 +35,16 @@ struct WelcomeView: View {
             }
             
             let pickedFolderPath = folderPicker.url!.path
-            print(pickedFolderPath)
+            self.onFolderPicked(pickedFolderPath)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
-            .preferredColorScheme(.dark)
+        WelcomeView() { path in
+            print("folder picked")
+        }
+        .preferredColorScheme(.dark)
     }
 }
