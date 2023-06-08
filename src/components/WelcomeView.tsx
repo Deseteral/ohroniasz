@@ -26,7 +26,7 @@ const Button = styled.button.attrs(() => ({
   type: 'button',
 }))`
   background: none;
-  background-color: #1E88E5;
+  background-color: var(--color-main);
   color: white;
   padding: 8px;
   border: none;
@@ -37,7 +37,7 @@ const Button = styled.button.attrs(() => ({
   transition: background-color .3s ease-in-out;
 
   &:hover {
-    background-color: #1976D2;
+    background-color: var(--color-main-darker);
   }
 `;
 

@@ -7,4 +7,7 @@ body {
   background-color: black;
   color: white;
   font-family: "Berkeley Mono";
+
+  --color-main: #ff2d55;
+  --color-main-darker: #fe0f3c;
 }
