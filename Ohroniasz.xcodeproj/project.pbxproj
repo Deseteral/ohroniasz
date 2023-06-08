@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
-		BFC015CB2A3256EE008DF774 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* ContentView.swift */; };
+		BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* WelcomeView.swift */; };
 		BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CC2A3256EF008DF774 /* Assets.xcassets */; };
 		BFC015D02A3256EF008DF774 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CF2A3256EF008DF774 /* Preview Assets.xcassets */; };
 		BFC015DB2A3256EF008DF774 /* OhroniaszTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015DA2A3256EF008DF774 /* OhroniaszTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
-		BFC015CA2A3256EE008DF774 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BFC015CA2A3256EE008DF774 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		BFC015CC2A3256EF008DF774 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFC015CF2A3256EF008DF774 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BFC015D12A3256EF008DF774 /* Ohroniasz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Ohroniasz.entitlements; sourceTree = "<group>"; };
@@ -95,8 +95,8 @@
 		BFC015C72A3256EE008DF774 /* Ohroniasz */ = {
 			isa = PBXGroup;
 			children = (
+				BFC015F32A3259CC008DF774 /* View */,
 				BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */,
-				BFC015CA2A3256EE008DF774 /* ContentView.swift */,
 				BFC015CC2A3256EF008DF774 /* Assets.xcassets */,
 				BFC015D12A3256EF008DF774 /* Ohroniasz.entitlements */,
 				BFC015CE2A3256EF008DF774 /* Preview Content */,
@@ -127,6 +127,14 @@
 				BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */,
 			);
 			path = OhroniaszUITests;
+			sourceTree = "<group>";
+		};
+		BFC015F32A3259CC008DF774 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BFC015CA2A3256EE008DF774 /* WelcomeView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFC015CB2A3256EE008DF774 /* ContentView.swift in Sources */,
+				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

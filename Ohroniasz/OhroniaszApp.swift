@@ -4,7 +4,7 @@ import SwiftUI
 struct OhroniaszApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WelcomeView()
                 .preferredColorScheme(.dark)
         }
     }
