@@ -15,6 +15,7 @@
 		BFC015E52A3256EF008DF774 /* OhroniaszUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */; };
 		BFC015E72A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */; };
 		BFC015F52A32606C008DF774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F42A32606C008DF774 /* AppDelegate.swift */; };
+		BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F82A32634F008DF774 /* LibraryManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITests.swift; sourceTree = "<group>"; };
 		BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BFC015F42A32606C008DF774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BFC015F82A32634F008DF774 /* LibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				BFC015CC2A3256EF008DF774 /* Assets.xcassets */,
 				BFC015D12A3256EF008DF774 /* Ohroniasz.entitlements */,
 				BFC015CE2A3256EF008DF774 /* Preview Content */,
+				BFC015F82A32634F008DF774 /* LibraryManager.swift */,
 			);
 			path = Ohroniasz;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				BFC015F52A32606C008DF774 /* AppDelegate.swift in Sources */,
 				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
+				BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
