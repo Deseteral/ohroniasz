@@ -28,7 +28,7 @@ class LibraryManager {
         let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
         
         let dtFormatter = DateFormatter()
-        dtFormatter.dateFormat = "yyy-MM-dd_HH-mm-ss"
+        dtFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
         
         do {
             let sentryItems = try FileManager.default.contentsOfDirectory(atPath: sentryClipsPath)
