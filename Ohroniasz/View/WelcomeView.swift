@@ -15,6 +15,7 @@ struct WelcomeView: View {
                 self.selectFolder()
             }
             .buttonStyle(.borderedProminent)
+            .controlSize(.large)
         }
         .padding()
     }
