@@ -24,7 +24,7 @@ class LibraryManager {
         
         // TODO: Find a way to make this paths better than with concat
         let sentryClipsPath = self.libraryPath + "/SentryClips"
-//        let savedClipsPath = self.libraryPath + "/SavedClips"
+        let savedClipsPath = self.libraryPath + "/SavedClips"
         
         let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
         
@@ -49,6 +49,30 @@ class LibraryManager {
             }
         } catch {
             print("Failed to read SentryClips directory")
+        }
+        
+        do {
+            let savedItems = try FileManager.default.contentsOfDirectory(atPath: savedClipsPath)
+                .filter { it in it.wholeMatch(of: dateFolderRegex) != nil }
+
+            for folderName in savedItems {
+                let path = savedClipsPath + "/" + folderName
+                if let dt = dtFormatter.date(from: folderName) {
+                    let event = CamEvent(
+                        id: path,
+                        date: dt, // TODO: Fix wrong date - load it from event.json metadata
+                        kind: .savedClip,
+                        path: path
+                    )
+                    events.append(event)
+                }
+            }
+        } catch {
+            print("Failed to read SavedClips directory")
+        }
+        
+        events.sort { a, b in
+            a.date.compare(b.date) == .orderedDescending
         }
         
         return events
