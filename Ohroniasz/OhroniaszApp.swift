@@ -5,6 +5,7 @@ struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @State private var libraryManager: LibraryManager? = nil
+    @State private var events: [CamEvent] = []
     
     var body: some Scene {
         WindowGroup {
@@ -14,7 +15,7 @@ struct OhroniaszApp: App {
                 } else {
                     WelcomeView() { libraryPath in
                         self.libraryManager = LibraryManager(libraryPath: libraryPath)
-                        self.libraryManager?.scanLibrary()
+                        self.events = self.libraryManager!.scanLibrary()
                     }
                 }
             }

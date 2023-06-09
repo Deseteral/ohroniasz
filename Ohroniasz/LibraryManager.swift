@@ -19,18 +19,36 @@ class LibraryManager {
     }
     
     func scanLibrary() -> [CamEvent] {
-        let fileManager = FileManager.default
-
+        var events: [CamEvent] = []
+        
+        // TODO: Find a way to make this paths better than with concat
+        let sentryClipsPath = self.libraryPath + "/SentryClips"
+//        let savedClipsPath = self.libraryPath + "/SavedClips"
+        
+        let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
+        
+        let dtFormatter = DateFormatter()
+        dtFormatter.dateFormat = "yyy-MM-dd_HH-mm-ss"
+        
         do {
-            let items = try fileManager.contentsOfDirectory(atPath: self.libraryPath)
+            let sentryItems = try FileManager.default.contentsOfDirectory(atPath: sentryClipsPath)
+                .filter { it in it.wholeMatch(of: dateFolderRegex) != nil }
 
-            for item in items {
-                print("Found \(item)")
+            for folderName in sentryItems {
+                let path = sentryClipsPath + "/" + folderName
+                if let dt = dtFormatter.date(from: folderName) {
+                    let event = CamEvent(
+                        date: dt, // TODO: Fix wrong date - load it from event.json metadata
+                        kind: .sentryClip,
+                        path: path
+                    )
+                    events.append(event)
+                }
             }
         } catch {
-            print("failed to read directory")
+            print("Failed to read SentryClips directory")
         }
         
-        return []
+        return events
     }
 }
