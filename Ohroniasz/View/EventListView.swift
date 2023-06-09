@@ -4,6 +4,8 @@ struct EventListView: View {
     let events: [CamEvent]
     
     @State private var dateColumnWidth: CGFloat = 160
+    private let kindIconColumnWidth: CGFloat = 17
+    
     private let dateFormatter = DateFormatter()
     
     init(events: [CamEvent]) {
@@ -16,12 +18,15 @@ struct EventListView: View {
     var body: some View {
         Table(events) {
             TableColumn("") { event in
-                switch (event.kind) {
-                case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
-                case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
+                VStack(alignment: .center) {
+                    switch (event.kind) {
+                    case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
+                    case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
+                    }
                 }
+                .frame(width: kindIconColumnWidth)
             }
-            .width(15)
+            .width(kindIconColumnWidth)
             
             TableColumn("Date") { event in
                 Text(dateFormatter.string(from: event.date))
