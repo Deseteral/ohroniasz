@@ -1,8 +1,17 @@
 import SwiftUI
 
+enum EventFilter: String, CaseIterable {
+    case all = "All clips"
+    case sentry = "Sentry"
+    case saved = "Saved clips"
+    case sentryAndSaved = "Sentry & saved"
+}
+
 @main
 struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @State private var eventFilter: EventFilter = .all
     
     @State private var libraryManager: LibraryManager? = nil
     @State private var events: [CamEvent] = []
@@ -10,8 +19,18 @@ struct OhroniaszApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if !events.isEmpty {
-                    EventListView(events: events)
+                if isLibraryLoaded {
+                    NavigationSplitView {
+                        List(selection: $eventFilter) {
+                            ForEach(EventFilter.allCases, id: \.rawValue) { filter in
+                                NavigationLink(filter.rawValue, value: filter)
+                            }
+                        }
+                    } content: {
+                        EventListView(events: events)
+                    } detail: {
+                        Text("Video grid view")
+                    }
                 } else {
                     WelcomeView() { libraryPath in
                         self.libraryManager = LibraryManager(libraryPath: libraryPath)
@@ -21,5 +40,9 @@ struct OhroniaszApp: App {
             }
             .preferredColorScheme(.dark)
         }
+    }
+    
+    private var isLibraryLoaded: Bool {
+        return self.libraryManager != nil
     }
 }
