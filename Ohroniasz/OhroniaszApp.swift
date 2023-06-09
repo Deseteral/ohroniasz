@@ -10,8 +10,8 @@ struct OhroniaszApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if let libraryManager = libraryManager {
-                    Text("hello")
+                if !events.isEmpty {
+                    EventListView(events: events)
                 } else {
                     WelcomeView() { libraryPath in
                         self.libraryManager = LibraryManager(libraryPath: libraryPath)

@@ -1,12 +1,13 @@
 import Foundation
 
-struct CamEvent {
+struct CamEvent: Identifiable {
+    let id: String
     let date: Date
     let kind: CamEventKind
     let path: String
 }
 
-enum CamEventKind {
+enum CamEventKind: String {
     case savedClip
     case sentryClip
 }
@@ -38,6 +39,7 @@ class LibraryManager {
                 let path = sentryClipsPath + "/" + folderName
                 if let dt = dtFormatter.date(from: folderName) {
                     let event = CamEvent(
+                        id: path,
                         date: dt, // TODO: Fix wrong date - load it from event.json metadata
                         kind: .sentryClip,
                         path: path
