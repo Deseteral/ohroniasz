@@ -36,7 +36,9 @@ struct OhroniaszApp: App {
                             ForEach(EventFilter.allCases, id: \.rawValue) { filter in
                                 NavigationLink(value: filter) {
                                     HStack {
-                                        Image(systemName: filter.systemIcon).foregroundColor(.accentColor)
+                                        Image(systemName: filter.systemIcon)
+                                            .foregroundColor(.accentColor)
+                                            .frame(width: 18)
                                         Text(filter.rawValue)
                                     }
                                 }
@@ -46,7 +48,7 @@ struct OhroniaszApp: App {
                         EventListView(events: events, selectedEvent: $selectedEvent)
                     } detail: {
                         if selectedEvent == nil {
-                            Text("Select video clip from the list.")
+                            Text("Select event from the list")
                         } else {
                             if let selectedPlaylist = selectedPlaylist {
                                 VideoGridView(playlist: selectedPlaylist)
