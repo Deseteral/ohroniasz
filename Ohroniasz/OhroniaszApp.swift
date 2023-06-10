@@ -12,9 +12,10 @@ struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @State private var eventFilter: EventFilter = .all
+    @State private var events: [CamEvent] = []
+    @State private var selectedEvent: CamEvent.ID? = nil
     
     @State private var libraryManager: LibraryManager? = nil
-    @State private var events: [CamEvent] = []
     
     var body: some Scene {
         WindowGroup {
@@ -27,9 +28,13 @@ struct OhroniaszApp: App {
                             }
                         }
                     } content: {
-                        EventListView(events: events)
+                        EventListView(events: events, selectedEvent: $selectedEvent)
                     } detail: {
-                        Text("Video grid view")
+                        if selectedEvent == nil {
+                            Text("Select video clip from the list.")
+                        } else {
+                            Text("Video grid view")
+                        }
                     }
                 } else {
                     WelcomeView() { libraryPath in

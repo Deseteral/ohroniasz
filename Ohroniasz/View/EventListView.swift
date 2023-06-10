@@ -2,21 +2,24 @@ import SwiftUI
 
 struct EventListView: View {
     let events: [CamEvent]
+    @Binding var selectedEvent: CamEvent.ID?
     
     @State private var dateColumnWidth: CGFloat = 160
     private let kindIconColumnWidth: CGFloat = 17
     
     private let dateFormatter = DateFormatter()
     
-    init(events: [CamEvent]) {
+    init(events: [CamEvent], selectedEvent: Binding<CamEvent.ID?>) {
         self.events = events
+        self._selectedEvent = selectedEvent
+        
         dateFormatter.timeStyle = .medium
         dateFormatter.dateStyle = .long
         dateFormatter.locale = Locale.autoupdatingCurrent
     }
     
     var body: some View {
-        Table(events) {
+        Table(events, selection: $selectedEvent) {
             TableColumn("") { event in
                 VStack(alignment: .center) {
                     switch (event.kind) {
@@ -41,6 +44,6 @@ struct EventListView: View {
 
 struct EventListView_Previews: PreviewProvider {
     static var previews: some View {
-        EventListView(events: [])
+        EventListView(events: [], selectedEvent: .constant(nil))
     }
 }
