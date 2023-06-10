@@ -4,11 +4,11 @@ import AVKit
 struct CamEvent: Identifiable {
     let id: String
     let date: Date
-    let kind: CamEventKind
+    let type: CamEventType
     let path: String
 }
 
-enum CamEventKind: String {
+enum CamEventType: String {
     case savedClip
     case sentryClip
 }
@@ -45,7 +45,7 @@ class LibraryManager {
                     let event = CamEvent(
                         id: path,
                         date: dt, // TODO: Fix wrong date - load it from event.json metadata
-                        kind: .sentryClip,
+                        type: .sentryClip,
                         path: path
                     )
                     events.append(event)
@@ -65,7 +65,7 @@ class LibraryManager {
                     let event = CamEvent(
                         id: path,
                         date: dt, // TODO: Fix wrong date - load it from event.json metadata
-                        kind: .savedClip,
+                        type: .savedClip,
                         path: path
                     )
                     events.append(event)

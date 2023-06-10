@@ -5,7 +5,7 @@ struct EventListView: View {
     @Binding var selectedEvent: CamEvent.ID?
     
     @State private var dateColumnWidth: CGFloat = 200
-    private let kindIconColumnWidth: CGFloat = 17
+    private let eventTypeIconColumnWidth: CGFloat = 17
     
     private let dateFormatter = DateFormatter()
     
@@ -22,14 +22,14 @@ struct EventListView: View {
         Table(events, selection: $selectedEvent) {
             TableColumn("") { event in
                 VStack(alignment: .center) {
-                    switch (event.kind) {
+                    switch (event.type) {
                     case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
                     case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
                     }
                 }
-                .frame(width: kindIconColumnWidth)
+                .frame(width: eventTypeIconColumnWidth)
             }
-            .width(kindIconColumnWidth)
+            .width(eventTypeIconColumnWidth)
             
             TableColumn("Date") { event in
                 Text(dateFormatter.string(from: event.date))
