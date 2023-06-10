@@ -5,6 +5,15 @@ enum EventFilter: String, CaseIterable {
     case sentry = "Sentry"
     case saved = "Saved clips"
     case sentryAndSaved = "Sentry & saved"
+    
+    var systemIcon: String {
+        switch(self) {
+        case .all: return "folder"
+        case .sentry: return "circle"
+        case .saved: return "star"
+        case .sentryAndSaved: return "star.circle"
+        }
+    }
 }
 
 @main
@@ -24,7 +33,12 @@ struct OhroniaszApp: App {
                     NavigationSplitView {
                         List(selection: $eventFilter) {
                             ForEach(EventFilter.allCases, id: \.rawValue) { filter in
-                                NavigationLink(filter.rawValue, value: filter)
+                                NavigationLink(value: filter) {
+                                    HStack {
+                                        Image(systemName: filter.systemIcon).foregroundColor(.accentColor)
+                                        Text(filter.rawValue)
+                                    }
+                                }
                             }
                         }
                     } content: {
