@@ -6,6 +6,13 @@ struct CamEvent: Identifiable {
     let date: Date
     let type: CamEventType
     let path: String
+    let location: CamEventLocation
+}
+
+struct CamEventLocation {
+    let city: String
+    let lat: Double
+    let lon: Double
 }
 
 enum CamEventType: String {
@@ -25,6 +32,8 @@ struct CamEventPlaylist {
 struct CamEventMetadata: Codable {
     let timestamp: Date
     let city: String
+    let est_lat: String
+    let est_lon: String
 }
 
 class LibraryManager {
@@ -73,7 +82,12 @@ class LibraryManager {
                 id: path,
                 date: metadata.timestamp,
                 type: type,
-                path: path
+                path: path,
+                location: CamEventLocation(
+                    city: metadata.city,
+                    lat: Double(metadata.est_lat)!,
+                    lon: Double(metadata.est_lon)!
+                )
             )
 
             events.append(event)
