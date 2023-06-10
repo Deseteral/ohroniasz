@@ -23,18 +23,12 @@ struct CamEventPlaylist {
 }
 
 class LibraryManager {
-    let libraryPath: String
-    
-    init(libraryPath: String) {
-        self.libraryPath = libraryPath
-    }
-    
-    func scanLibrary() -> [CamEvent] {
+    static func scanLibrary(libraryPath: String) -> [CamEvent] {
         var events: [CamEvent] = []
         
         // TODO: Find a way to make this paths better than with concat
-        let sentryClipsPath = self.libraryPath + "/SentryClips"
-        let savedClipsPath = self.libraryPath + "/SavedClips"
+        let sentryClipsPath = libraryPath + "/SentryClips"
+        let savedClipsPath = libraryPath + "/SavedClips"
         
         let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
         
@@ -88,7 +82,7 @@ class LibraryManager {
         return events
     }
     
-    func loadEventPlaylist(eventPath: String) -> CamEventPlaylist? {
+    static func loadEventPlaylist(eventPath: String) -> CamEventPlaylist? {
         do {
             let files = try FileManager.default.contentsOfDirectory(atPath: eventPath)
                 .map { fileName in eventPath + "/" + fileName }

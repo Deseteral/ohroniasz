@@ -24,13 +24,11 @@ struct OhroniaszApp: App {
     @State private var events: [CamEvent] = []
     @State private var selectedEvent: CamEvent.ID? = nil
     @State private var selectedPlaylist: CamEventPlaylist? = nil
-    
-    @State private var libraryManager: LibraryManager? = nil
-    
+
     var body: some Scene {
         WindowGroup {
             Group {
-                if isLibraryLoaded {
+                if events.count > 0 {
                     NavigationSplitView {
                         List(selection: $eventFilter) {
                             ForEach(EventFilter.allCases, id: \.rawValue) { filter in
@@ -62,21 +60,17 @@ struct OhroniaszApp: App {
                     }
                     .onChange(of: self.selectedEvent) { newValue in
                         if newValue == nil { return }
+
                         let event = events.first { e in e.id == newValue }
-                        self.selectedPlaylist = self.libraryManager!.loadEventPlaylist(eventPath: event!.path)
+                        self.selectedPlaylist = LibraryManager.loadEventPlaylist(eventPath: event!.path)
                     }
                 } else {
                     WelcomeView() { libraryPath in
-                        self.libraryManager = LibraryManager(libraryPath: libraryPath)
-                        self.events = self.libraryManager!.scanLibrary()
+                        self.events = LibraryManager.scanLibrary(libraryPath: libraryPath)
                     }
                 }
             }
             .preferredColorScheme(.dark)
         }
-    }
-    
-    private var isLibraryLoaded: Bool {
-        return self.libraryManager != nil
     }
 }
