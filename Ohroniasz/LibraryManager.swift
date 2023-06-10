@@ -22,6 +22,11 @@ struct CamEventPlaylist {
     let duration: Double
 }
 
+struct CamEventMetadata: Codable {
+    let timestamp: Date
+    let city: String
+}
+
 class LibraryManager {
     static func scanLibrary(libraryPath: String) -> [CamEvent] {
         return (
@@ -34,9 +39,6 @@ class LibraryManager {
 
     private static func scanEventsFolder(eventsFolderPath: String, type: CamEventType) -> [CamEvent] {
         let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
-
-        let dtFormatter = DateFormatter()
-        dtFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
 
         let items = try? FileManager.default
             .contentsOfDirectory(atPath: eventsFolderPath)
@@ -51,15 +53,30 @@ class LibraryManager {
 
         for folderName in items {
             let path = eventsFolderPath + "/" + folderName
-            if let dt = dtFormatter.date(from: folderName) {
-                let event = CamEvent(
-                    id: path,
-                    date: dt, // TODO: Fix wrong date - load it from event.json metadata
-                    type: type,
-                    path: path
-                )
-                events.append(event)
+            let metadataPath = path + "/" + "event.json"
+
+            guard let jsonData = try? String(contentsOfFile: metadataPath).data(using: .utf8) else {
+                continue
             }
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+            guard let metadata = try? jsonDecoder.decode(CamEventMetadata.self, from: jsonData) else {
+                continue
+            }
+
+            let event = CamEvent(
+                id: path,
+                date: metadata.timestamp,
+                type: type,
+                path: path
+            )
+
+            events.append(event)
         }
 
         return events
