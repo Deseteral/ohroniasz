@@ -24,74 +24,57 @@ struct CamEventPlaylist {
 
 class LibraryManager {
     static func scanLibrary(libraryPath: String) -> [CamEvent] {
-        var events: [CamEvent] = []
-        
-        // TODO: Find a way to make this paths better than with concat
-        let sentryClipsPath = libraryPath + "/SentryClips"
-        let savedClipsPath = libraryPath + "/SavedClips"
-        
-        let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
-        
-        let dtFormatter = DateFormatter()
-        dtFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-        
-        do {
-            let sentryItems = try FileManager.default.contentsOfDirectory(atPath: sentryClipsPath)
-                .filter { it in it.wholeMatch(of: dateFolderRegex) != nil }
-
-            for folderName in sentryItems {
-                let path = sentryClipsPath + "/" + folderName
-                if let dt = dtFormatter.date(from: folderName) {
-                    let event = CamEvent(
-                        id: path,
-                        date: dt, // TODO: Fix wrong date - load it from event.json metadata
-                        type: .sentryClip,
-                        path: path
-                    )
-                    events.append(event)
-                }
-            }
-        } catch {
-            print("Failed to read SentryClips directory")
-        }
-        
-        do {
-            let savedItems = try FileManager.default.contentsOfDirectory(atPath: savedClipsPath)
-                .filter { it in it.wholeMatch(of: dateFolderRegex) != nil }
-
-            for folderName in savedItems {
-                let path = savedClipsPath + "/" + folderName
-                if let dt = dtFormatter.date(from: folderName) {
-                    let event = CamEvent(
-                        id: path,
-                        date: dt, // TODO: Fix wrong date - load it from event.json metadata
-                        type: .savedClip,
-                        path: path
-                    )
-                    events.append(event)
-                }
-            }
-        } catch {
-            print("Failed to read SavedClips directory")
-        }
-        
-        events.sort { a, b in
+        return (
+            scanEventsFolder(eventsFolderPath: (libraryPath + "/SentryClips"), type: .sentryClip) +
+            scanEventsFolder(eventsFolderPath: (libraryPath + "/SavedClips"), type: .savedClip)
+        ).sorted { a, b in
             a.date.compare(b.date) == .orderedDescending
         }
-        
+    }
+
+    private static func scanEventsFolder(eventsFolderPath: String, type: CamEventType) -> [CamEvent] {
+        let dateFolderRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}/
+
+        let dtFormatter = DateFormatter()
+        dtFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+
+        let items = try? FileManager.default
+            .contentsOfDirectory(atPath: eventsFolderPath)
+            .filter { $0.wholeMatch(of: dateFolderRegex) != nil }
+
+        guard let items else {
+            print("Failed to scan events from '\(eventsFolderPath)' folder.")
+            return []
+        }
+
+        var events: [CamEvent] = []
+
+        for folderName in items {
+            let path = eventsFolderPath + "/" + folderName
+            if let dt = dtFormatter.date(from: folderName) {
+                let event = CamEvent(
+                    id: path,
+                    date: dt, // TODO: Fix wrong date - load it from event.json metadata
+                    type: type,
+                    path: path
+                )
+                events.append(event)
+            }
+        }
+
         return events
     }
     
     static func loadEventPlaylist(eventPath: String) async -> CamEventPlaylist? {
         guard let files = try? FileManager.default.contentsOfDirectory(atPath: eventPath) else {
-            print("Failed to read contents of \(eventPath) directory.")
+            print("Failed to read contents of '\(eventPath)' directory.")
             return nil
         }
 
         let paths = files
             .map { fileName in eventPath + "/" + fileName }
             .sorted()
-            
+
         async let front = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
         async let back = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
         async let leftRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
