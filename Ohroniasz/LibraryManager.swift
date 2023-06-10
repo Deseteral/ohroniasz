@@ -92,14 +92,14 @@ class LibraryManager {
             .map { fileName in eventPath + "/" + fileName }
             .sorted()
             
-        let front = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
-        let back = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
-        let leftRepeater = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
-        let rightRepeater = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") })
+        async let front = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
+        async let back = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
+        async let leftRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
+        async let rightRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") })
 
-        let duration = max(front.duration.seconds, back.duration.seconds, leftRepeater.duration.seconds, rightRepeater.duration.seconds)
+        let duration = await max(front.duration.seconds, back.duration.seconds, leftRepeater.duration.seconds, rightRepeater.duration.seconds)
 
-        return CamEventPlaylist(
+        return await CamEventPlaylist(
             front: AVPlayer(playerItem: front),
             back: AVPlayer(playerItem: back),
             leftRepeater: AVPlayer(playerItem: leftRepeater),
