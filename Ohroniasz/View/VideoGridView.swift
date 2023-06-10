@@ -15,10 +15,10 @@ struct VideoGridView: View {
     init(playlist: CamEventPlaylist) {
         self.playlist = playlist
 
-        playerTopLeft = AVPlayer(playerItem: playlist.front)
-        playerTopRight = AVPlayer(playerItem: playlist.back)
-        playerBottomLeft = AVPlayer(playerItem: playlist.leftRepeater)
-        playerBottomRight = AVPlayer(playerItem: playlist.rightRepeater)
+        self.playerTopLeft = playlist.front
+        self.playerTopRight = playlist.back
+        self.playerBottomLeft = playlist.leftRepeater
+        self.playerBottomRight = playlist.rightRepeater
     }
     
     var body: some View {

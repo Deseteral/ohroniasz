@@ -14,10 +14,10 @@ enum CamEventKind: String {
 }
 
 struct CamEventPlaylist {
-    let front: AVPlayerItem
-    let back: AVPlayerItem
-    let leftRepeater: AVPlayerItem
-    let rightRepeater: AVPlayerItem
+    let front: AVPlayer
+    let back: AVPlayer
+    let leftRepeater: AVPlayer
+    let rightRepeater: AVPlayer
     
     let duration: Double
 }
@@ -99,7 +99,13 @@ class LibraryManager {
 
         let duration = max(front.duration.seconds, back.duration.seconds, leftRepeater.duration.seconds, rightRepeater.duration.seconds)
 
-        return CamEventPlaylist(front: front, back: back, leftRepeater: leftRepeater, rightRepeater: rightRepeater, duration: duration)
+        return CamEventPlaylist(
+            front: AVPlayer(playerItem: front),
+            back: AVPlayer(playerItem: back),
+            leftRepeater: AVPlayer(playerItem: leftRepeater),
+            rightRepeater: AVPlayer(playerItem: rightRepeater),
+            duration: duration
+        )
     }
 
     private static func concatVideoClips(from clipPaths: [String]) -> AVPlayerItem {
