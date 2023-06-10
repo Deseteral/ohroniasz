@@ -36,6 +36,9 @@ struct OhroniaszApp: App {
                             VideoGridView()
                         }
                     }
+                    .onChange(of: self.eventFilter) { _ in
+                        self.selectedEvent = nil
+                    }
                 } else {
                     WelcomeView() { libraryPath in
                         self.libraryManager = LibraryManager(libraryPath: libraryPath)
