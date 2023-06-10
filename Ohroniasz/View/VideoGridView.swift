@@ -11,27 +11,14 @@ struct VideoGridView: View {
     
     @State private var sliderValue = 0.0
     @State private var isUserDraggingSlider = false
-    @State private var wholeDuration = 0.0
     
     init(playlist: CamEventPlaylist) {
         self.playlist = playlist
 
-        let avItemFront = VideoGridView.concatVideoClips(from: playlist.front)
-        let avItemBack = VideoGridView.concatVideoClips(from: playlist.back)
-        let avItemLeftRepeater = VideoGridView.concatVideoClips(from: playlist.leftRepeater)
-        let avItemRightRepeater = VideoGridView.concatVideoClips(from: playlist.rightRepeater)
-
-        wholeDuration = max(
-            avItemFront.duration.seconds,
-            avItemBack.duration.seconds,
-            avItemLeftRepeater.duration.seconds,
-            avItemRightRepeater.duration.seconds
-        )
-
-        playerTopLeft = AVPlayer(playerItem: avItemFront)
-        playerTopRight = AVPlayer(playerItem: avItemBack)
-        playerBottomLeft = AVPlayer(playerItem: avItemLeftRepeater)
-        playerBottomRight = AVPlayer(playerItem: avItemRightRepeater)
+        playerTopLeft = AVPlayer(playerItem: playlist.front)
+        playerTopRight = AVPlayer(playerItem: playlist.back)
+        playerBottomLeft = AVPlayer(playerItem: playlist.leftRepeater)
+        playerBottomRight = AVPlayer(playerItem: playlist.rightRepeater)
     }
     
     var body: some View {
@@ -52,34 +39,14 @@ struct VideoGridView: View {
                     .buttonStyle(.bordered)
                     .controlSize(.large)
                 
-                Slider(value: $sliderValue, in: 0...wholeDuration) { editing in self.isUserDraggingSlider = editing }
+                Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
                     .tint(.accentColor)
                     .onChange(of: sliderValue, perform: sliderChanged)
             }
             .padding()
         }
     }
-    
-    private static func concatVideoClips(from clipPaths: [String]) -> AVPlayerItem {
-        let movie = AVMutableComposition()
-        do {
-            let videoTrack = movie.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
-            var accumulatedDuration: Double = 0.0
-            
-            for clipPath in clipPaths {
-                let clipAsset = AVURLAsset(url: URL(fileURLWithPath: clipPath))
-                let clipVideoTrack = clipAsset.tracks(withMediaType: .video).first!
-                let range = CMTimeRangeMake(start: CMTime.zero, duration: clipAsset.duration)
-                try videoTrack?.insertTimeRange(range, of: clipVideoTrack, at: CMTime(seconds: accumulatedDuration, preferredTimescale: 60000))
-                accumulatedDuration += clipAsset.duration.seconds
-            }
-        } catch {
-            print("Cannot bla bla")
-        }
-        
-        return AVPlayerItem(asset: movie)
-    }
-    
+
     private func sliderChanged(to newValue: Double) {
         if (!isUserDraggingSlider) {
             return

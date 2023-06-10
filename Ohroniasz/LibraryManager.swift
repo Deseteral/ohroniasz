@@ -14,10 +14,10 @@ enum CamEventKind: String {
 }
 
 struct CamEventPlaylist {
-    let front: [String]
-    let back: [String]
-    let leftRepeater: [String]
-    let rightRepeater: [String]
+    let front: AVPlayerItem
+    let back: AVPlayerItem
+    let leftRepeater: AVPlayerItem
+    let rightRepeater: AVPlayerItem
     
     let duration: Double
 }
@@ -83,25 +83,39 @@ class LibraryManager {
     }
     
     static func loadEventPlaylist(eventPath: String) -> CamEventPlaylist? {
-        do {
-            let files = try FileManager.default.contentsOfDirectory(atPath: eventPath)
-                .map { fileName in eventPath + "/" + fileName }
-                .sorted()
-            
-            let front = files.filter { filePath in filePath.hasSuffix("-front.mp4") }
-            let back = files.filter { filePath in filePath.hasSuffix("-back.mp4") }
-            let leftRepeater = files.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") }
-            let rightRepeater = files.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") }
-
-            let duration = front
-                .map { filePath in AVURLAsset(url: URL(fileURLWithPath: filePath)) }
-                .map { asset in asset.duration.seconds }
-                .reduce(0, +)
-
-            return CamEventPlaylist(front: front, back: back, leftRepeater: leftRepeater, rightRepeater: rightRepeater, duration: duration)
-        } catch {
-            print("Failed to load event playlist")
+        guard let files = try? FileManager.default.contentsOfDirectory(atPath: eventPath) else {
+            print("Failed to read contents of \(eventPath) directory.")
             return nil
         }
+
+        let paths = files
+            .map { fileName in eventPath + "/" + fileName }
+            .sorted()
+            
+        let front = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
+        let back = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
+        let leftRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
+        let rightRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") })
+
+        let duration = max(front.duration.seconds, back.duration.seconds, leftRepeater.duration.seconds, rightRepeater.duration.seconds)
+
+        return CamEventPlaylist(front: front, back: back, leftRepeater: leftRepeater, rightRepeater: rightRepeater, duration: duration)
+    }
+
+    private static func concatVideoClips(from clipPaths: [String]) -> AVPlayerItem {
+        let clip = AVMutableComposition()
+
+        let videoTrack = clip.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
+        var accumulatedDuration: Double = 0.0
+
+        for clipPath in clipPaths {
+            let clipAsset = AVURLAsset(url: URL(fileURLWithPath: clipPath))
+            let clipVideoTrack = clipAsset.tracks(withMediaType: .video).first!
+            let range = CMTimeRangeMake(start: CMTime.zero, duration: clipAsset.duration)
+            try? videoTrack?.insertTimeRange(range, of: clipVideoTrack, at: CMTime(seconds: accumulatedDuration, preferredTimescale: 60000)) // TODO: Do error handling
+            accumulatedDuration += clipAsset.duration.seconds
+        }
+
+        return AVPlayerItem(asset: clip)
     }
 }
