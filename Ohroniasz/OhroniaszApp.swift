@@ -73,7 +73,7 @@ struct OhroniaszApp: App {
                         self.selectedPlaylist = .loading
 
                         Task {
-                            let event = events.first { e in e.id == newValue }
+                            let event = events.first { $0.id == newValue }
                             if let playlist = await LibraryManager.loadEventPlaylist(eventPath: event!.path) {
                                 self.selectedPlaylist = .loaded(playlist)
                             }
