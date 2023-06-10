@@ -36,8 +36,6 @@ struct EventListView: View {
                     .overlay( GeometryReader { geo in Color.clear.onAppear { self.dateColumnWidth = geo.size.width }})
             }
 //            .width(self.dateColumnWidth)
-
-            TableColumn("Path", value: \.path)
         }
     }
 }
