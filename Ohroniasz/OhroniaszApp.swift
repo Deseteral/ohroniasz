@@ -25,9 +25,10 @@ enum PlaylistLoadingState {
 @main
 struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    @State private var eventFilter: EventFilter = .all
+
     @State private var events: [CamEvent] = []
+
+    @State private var eventFilter: EventFilter = .all
     @State private var selectedEvent: CamEvent.ID? = nil
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
