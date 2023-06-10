@@ -33,7 +33,7 @@ struct OhroniaszApp: App {
                         if selectedEvent == nil {
                             Text("Select video clip from the list.")
                         } else {
-                            Text("Video grid view")
+                            VideoGridView()
                         }
                     }
                 } else {
