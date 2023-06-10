@@ -19,6 +19,7 @@ enum EventFilter: String, CaseIterable {
 enum PlaylistLoadingState {
     case notSelected
     case loading
+    case error
     case loaded(CamEventPlaylist)
 }
 
@@ -57,6 +58,8 @@ struct OhroniaszApp: App {
                                 Text("Select event from the list")
                             case .loading:
                                 ProgressView()
+                            case .error:
+                                Text("Something went wrong")
                             case .loaded(let playlist):
                                 VideoGridView(playlist: playlist)
                         }
@@ -70,11 +73,15 @@ struct OhroniaszApp: App {
                             return
                         }
 
+                        guard let event = (events.first { $0.id == newValue }) else {
+                            self.selectedPlaylist = .error
+                            return
+                        }
+
                         self.selectedPlaylist = .loading
 
                         Task {
-                            let event = events.first { $0.id == newValue }
-                            if let playlist = await LibraryManager.loadEventPlaylist(eventPath: event!.path) {
+                            if let playlist = await LibraryManager.loadEventPlaylist(eventPath: event.path) {
                                 self.selectedPlaylist = .loaded(playlist)
                             }
                         }
