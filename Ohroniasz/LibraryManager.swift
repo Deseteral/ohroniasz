@@ -1,4 +1,5 @@
 import Foundation
+import AVKit
 
 struct CamEvent: Identifiable {
     let id: String
@@ -10,6 +11,15 @@ struct CamEvent: Identifiable {
 enum CamEventKind: String {
     case savedClip
     case sentryClip
+}
+
+struct CamEventPlaylist {
+    let front: [String]
+    let back: [String]
+    let leftRepeater: [String]
+    let rightRepeater: [String]
+    
+    let duration: Double
 }
 
 class LibraryManager {
@@ -76,5 +86,28 @@ class LibraryManager {
         }
         
         return events
+    }
+    
+    func loadEventPlaylist(eventPath: String) -> CamEventPlaylist? {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: eventPath)
+                .map { fileName in eventPath + "/" + fileName }
+                .sorted()
+            
+            let front = files.filter { filePath in filePath.hasSuffix("-front.mp4") }
+            let back = files.filter { filePath in filePath.hasSuffix("-back.mp4") }
+            let leftRepeater = files.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") }
+            let rightRepeater = files.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") }
+
+            let duration = front
+                .map { filePath in AVURLAsset(url: URL(fileURLWithPath: filePath)) }
+                .map { asset in asset.duration.seconds }
+                .reduce(0, +)
+
+            return CamEventPlaylist(front: front, back: back, leftRepeater: leftRepeater, rightRepeater: rightRepeater, duration: duration)
+        } catch {
+            print("Failed to load event playlist")
+            return nil
+        }
     }
 }

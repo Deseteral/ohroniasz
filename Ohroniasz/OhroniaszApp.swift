@@ -23,6 +23,7 @@ struct OhroniaszApp: App {
     @State private var eventFilter: EventFilter = .all
     @State private var events: [CamEvent] = []
     @State private var selectedEvent: CamEvent.ID? = nil
+    @State private var selectedPlaylist: CamEventPlaylist? = nil
     
     @State private var libraryManager: LibraryManager? = nil
     
@@ -47,11 +48,20 @@ struct OhroniaszApp: App {
                         if selectedEvent == nil {
                             Text("Select video clip from the list.")
                         } else {
-                            VideoGridView()
+                            if let selectedPlaylist = selectedPlaylist {
+                                VideoGridView(playlist: selectedPlaylist)
+                            } else {
+                                ProgressView()
+                            }
                         }
                     }
                     .onChange(of: self.eventFilter) { _ in
                         self.selectedEvent = nil
+                    }
+                    .onChange(of: self.selectedEvent) { newValue in
+                        if newValue == nil { return }
+                        let event = events.first { e in e.id == newValue }
+                        self.selectedPlaylist = self.libraryManager!.loadEventPlaylist(eventPath: event!.path)
                     }
                 } else {
                     WelcomeView() { libraryPath in
