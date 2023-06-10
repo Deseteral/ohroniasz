@@ -7,11 +7,11 @@ enum EventFilter: String, CaseIterable {
     case sentryAndSaved = "Sentry & saved"
     
     var systemIcon: String {
-        switch(self) {
-        case .all: return "folder"
-        case .sentry: return "circle"
-        case .saved: return "star"
-        case .sentryAndSaved: return "star.circle"
+        switch self {
+            case .all: return "folder"
+            case .sentry: return "circle"
+            case .saved: return "star"
+            case .sentryAndSaved: return "star.circle"
         }
     }
 }
