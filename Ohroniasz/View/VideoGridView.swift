@@ -9,8 +9,8 @@ struct VideoGridView: View {
     private let playerBottomLeft: AVPlayer
     private let playerBottomRight: AVPlayer
     
-    @State private var sliderValue = 0.0
-    @State private var isUserDraggingSlider = false
+    @State private var sliderValue: Double = 0.0
+    @State private var isUserDraggingSlider: Bool = false
     
     init(playlist: CamEventPlaylist) {
         self.playlist = playlist
@@ -48,37 +48,30 @@ struct VideoGridView: View {
     }
 
     private func sliderChanged(to newValue: Double) {
-        if (!isUserDraggingSlider) {
+        guard isUserDraggingSlider else {
             return
         }
         
-        actOnCurrentPlayers { player in player.pause() }
+        actOnAllPlayers { $0.pause() }
 
         let time =  CMTime(seconds: newValue, preferredTimescale: 60000)
-        actOnCurrentPlayers { player in
+        actOnAllPlayers { player in
             player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
     
     private func togglePlayPause() {
         if playerTopLeft.isPlaying {
-            actOnCurrentPlayers { player in player.pause() }
+            actOnAllPlayers { $0.pause() }
         } else {
-            actOnCurrentPlayers { player in player.play() }
+            actOnAllPlayers { $0.play() }
         }
     }
     
-    private func actOnCurrentPlayers(callback: (AVPlayer) -> ()) {
+    private func actOnAllPlayers(callback: (AVPlayer) -> ()) {
         callback(playerTopLeft)
         callback(playerTopRight)
         callback(playerBottomLeft)
         callback(playerBottomRight)
-    }
-}
-
-// TODO: Extract from here.
-extension AVPlayer {
-    var isPlaying: Bool {
-        return rate != 0 && error == nil
     }
 }

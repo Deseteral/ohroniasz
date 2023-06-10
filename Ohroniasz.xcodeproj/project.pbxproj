@@ -18,6 +18,7 @@
 		BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F82A32634F008DF774 /* LibraryManager.swift */; };
 		BFC015FB2A33CF8D008DF774 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015FA2A33CF8D008DF774 /* EventListView.swift */; };
 		BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015FE2A33F69D008DF774 /* VideoGridView.swift */; };
+		BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		BFC015F82A32634F008DF774 /* LibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
 		BFC015FA2A33CF8D008DF774 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		BFC015FE2A33F69D008DF774 /* VideoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGridView.swift; sourceTree = "<group>"; };
+		BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayer+isPlaying.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		BFC015C72A3256EE008DF774 /* Ohroniasz */ = {
 			isa = PBXGroup;
 			children = (
+				BFE820732A352DC800C8C03A /* Extensions */,
 				BFC015F32A3259CC008DF774 /* View */,
 				BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */,
 				BFC015F42A32606C008DF774 /* AppDelegate.swift */,
@@ -147,6 +150,14 @@
 				BFC015FE2A33F69D008DF774 /* VideoGridView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BFE820732A352DC800C8C03A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +296,7 @@
 				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
 				BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */,
+				BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
