@@ -4,7 +4,7 @@ struct EventListView: View {
     let events: [CamEvent]
     @Binding var selectedEvent: CamEvent.ID?
     
-    @State private var dateColumnWidth: CGFloat = 160
+    @State private var dateColumnWidth: CGFloat = 200
     private let kindIconColumnWidth: CGFloat = 17
     
     private let dateFormatter = DateFormatter()
@@ -35,7 +35,7 @@ struct EventListView: View {
                 Text(dateFormatter.string(from: event.date))
                     .overlay( GeometryReader { geo in Color.clear.onAppear { self.dateColumnWidth = geo.size.width }})
             }
-            .width(self.dateColumnWidth)
+//            .width(self.dateColumnWidth)
 
             TableColumn("Path", value: \.path)
         }
