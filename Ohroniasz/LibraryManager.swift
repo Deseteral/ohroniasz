@@ -82,7 +82,7 @@ class LibraryManager {
         return events
     }
     
-    static func loadEventPlaylist(eventPath: String) -> CamEventPlaylist? {
+    static func loadEventPlaylist(eventPath: String) async -> CamEventPlaylist? {
         guard let files = try? FileManager.default.contentsOfDirectory(atPath: eventPath) else {
             print("Failed to read contents of \(eventPath) directory.")
             return nil
@@ -92,10 +92,10 @@ class LibraryManager {
             .map { fileName in eventPath + "/" + fileName }
             .sorted()
             
-        let front = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
-        let back = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
-        let leftRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
-        let rightRepeater = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") })
+        let front = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
+        let back = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-back.mp4") })
+        let leftRepeater = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-left_repeater.mp4") })
+        let rightRepeater = await concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-right_repeater.mp4") })
 
         let duration = max(front.duration.seconds, back.duration.seconds, leftRepeater.duration.seconds, rightRepeater.duration.seconds)
 
@@ -108,7 +108,8 @@ class LibraryManager {
         )
     }
 
-    private static func concatVideoClips(from clipPaths: [String]) -> AVPlayerItem {
+    // TODO: Do actual error handling.
+    private static func concatVideoClips(from clipPaths: [String]) async -> AVPlayerItem {
         let clip = AVMutableComposition()
 
         let videoTrack = clip.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
@@ -116,10 +117,11 @@ class LibraryManager {
 
         for clipPath in clipPaths {
             let clipAsset = AVURLAsset(url: URL(fileURLWithPath: clipPath))
-            let clipVideoTrack = clipAsset.tracks(withMediaType: .video).first!
-            let range = CMTimeRangeMake(start: CMTime.zero, duration: clipAsset.duration)
-            try? videoTrack?.insertTimeRange(range, of: clipVideoTrack, at: CMTime(seconds: accumulatedDuration, preferredTimescale: 60000)) // TODO: Do error handling
-            accumulatedDuration += clipAsset.duration.seconds
+            let clipVideoTrack = try? await clipAsset.loadTracks(withMediaType: .video).first!
+            let clipDuration = try? await clipAsset.load(.duration)
+            let range = CMTimeRangeMake(start: CMTime.zero, duration: clipDuration!)
+            try? videoTrack?.insertTimeRange(range, of: clipVideoTrack!, at: CMTime(seconds: accumulatedDuration, preferredTimescale: 60000))
+            accumulatedDuration += clipDuration!.seconds
         }
 
         return AVPlayerItem(asset: clip)

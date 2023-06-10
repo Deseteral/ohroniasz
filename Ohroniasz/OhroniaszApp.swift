@@ -16,6 +16,12 @@ enum EventFilter: String, CaseIterable {
     }
 }
 
+enum PlaylistLoadingState {
+    case notSelected
+    case loading
+    case loaded(CamEventPlaylist)
+}
+
 @main
 struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -23,7 +29,7 @@ struct OhroniaszApp: App {
     @State private var eventFilter: EventFilter = .all
     @State private var events: [CamEvent] = []
     @State private var selectedEvent: CamEvent.ID? = nil
-    @State private var selectedPlaylist: CamEventPlaylist? = nil
+    @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
     var body: some Scene {
         WindowGroup {
@@ -45,24 +51,32 @@ struct OhroniaszApp: App {
                     } content: {
                         EventListView(events: events, selectedEvent: $selectedEvent)
                     } detail: {
-                        if selectedEvent == nil {
-                            Text("Select event from the list")
-                        } else {
-                            if let selectedPlaylist = selectedPlaylist {
-                                VideoGridView(playlist: selectedPlaylist)
-                            } else {
+                        switch selectedPlaylist {
+                            case .notSelected:
+                                Text("Select event from the list")
+                            case .loading:
                                 ProgressView()
-                            }
+                            case .loaded(let playlist):
+                                VideoGridView(playlist: playlist)
                         }
                     }
                     .onChange(of: self.eventFilter) { _ in
                         self.selectedEvent = nil
                     }
                     .onChange(of: self.selectedEvent) { newValue in
-                        if newValue == nil { return }
+                        guard let newValue else {
+                            self.selectedPlaylist = .notSelected
+                            return
+                        }
 
-                        let event = events.first { e in e.id == newValue }
-                        self.selectedPlaylist = LibraryManager.loadEventPlaylist(eventPath: event!.path)
+                        self.selectedPlaylist = .loading
+
+                        Task {
+                            let event = events.first { e in e.id == newValue }
+                            if let playlist = await LibraryManager.loadEventPlaylist(eventPath: event!.path) {
+                                self.selectedPlaylist = .loaded(playlist)
+                            }
+                        }
                     }
                 } else {
                     WelcomeView() { libraryPath in
