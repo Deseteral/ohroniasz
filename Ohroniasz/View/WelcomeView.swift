@@ -10,12 +10,10 @@ struct WelcomeView: View {
                 .padding(.bottom, 4)
             
             Text("Open *TeslaCam* folder with the footage you would like to watch.")
-            
-            Button("Select") {
-                self.selectFolder()
-            }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
+
+            Button("Select", action: self.selectFolder)
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
         }
         .padding()
     }
@@ -31,9 +29,7 @@ struct WelcomeView: View {
         folderPicker.allowsMultipleSelection = false
         
         folderPicker.begin { response in
-            if response != .OK {
-                return
-            }
+            guard response == .OK else { return }
             
             let pickedFolderPath = folderPicker.url!.path
             self.onFolderPicked(pickedFolderPath)
