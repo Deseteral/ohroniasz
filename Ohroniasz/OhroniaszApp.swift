@@ -81,7 +81,7 @@ struct OhroniaszApp: App {
                         self.selectedPlaylist = .loading
 
                         Task {
-                            if let playlist = await LibraryManager.loadEventPlaylist(eventPath: event.path) {
+                            if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: event.path) {
                                 self.selectedPlaylist = .loaded(playlist)
                             }
                         }
