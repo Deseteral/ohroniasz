@@ -17,7 +17,7 @@
 		BFC015E52A3256EF008DF774 /* OhroniaszUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */; };
 		BFC015E72A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */; };
 		BFC015F52A32606C008DF774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F42A32606C008DF774 /* AppDelegate.swift */; };
-		BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F82A32634F008DF774 /* LibraryManager.swift */; };
+		BFC015F92A32634F008DF774 /* LibraryScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015F82A32634F008DF774 /* LibraryScanner.swift */; };
 		BFC015FB2A33CF8D008DF774 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015FA2A33CF8D008DF774 /* EventListView.swift */; };
 		BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015FE2A33F69D008DF774 /* VideoGridView.swift */; };
 		BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */; };
@@ -55,7 +55,7 @@
 		BFC015E42A3256EF008DF774 /* OhroniaszUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITests.swift; sourceTree = "<group>"; };
 		BFC015E62A3256EF008DF774 /* OhroniaszUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BFC015F42A32606C008DF774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BFC015F82A32634F008DF774 /* LibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
+		BFC015F82A32634F008DF774 /* LibraryScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryScanner.swift; sourceTree = "<group>"; };
 		BFC015FA2A33CF8D008DF774 /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		BFC015FE2A33F69D008DF774 /* VideoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoGridView.swift; sourceTree = "<group>"; };
 		BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayer+isPlaying.swift"; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		BF191E792A3795AF0018938C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BFC015F82A32634F008DF774 /* LibraryManager.swift */,
+				BFC015F82A32634F008DF774 /* LibraryScanner.swift */,
 				BF191E7A2A37A7060018938C /* VideoProcessor.swift */,
 			);
 			path = Services;
@@ -309,7 +309,7 @@
 				BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */,
 				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
-				BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */,
+				BFC015F92A32634F008DF774 /* LibraryScanner.swift in Sources */,
 				BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */,
 				BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */,
 				BF191E7D2A37E0AA0018938C /* FileManager+directoryExists.swift in Sources */,

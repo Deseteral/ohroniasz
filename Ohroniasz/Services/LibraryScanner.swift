@@ -43,7 +43,7 @@ struct CamEventMetadata: Codable {
     let est_lon: String
 }
 
-class LibraryManager {
+class LibraryScanner {
     static func scanLibrary(atPath libraryPath: String) -> [CamEvent] {
         return (
             scanClipsFolder(atPath: (libraryPath + "/SentryClips"), eventType: .sentryClip) +

@@ -88,7 +88,7 @@ struct OhroniaszApp: App {
                     }
                 } else {
                     WelcomeView() { libraryPath in
-                        self.events = LibraryManager.scanLibrary(atPath: libraryPath)
+                        self.events = LibraryScanner.scanLibrary(atPath: libraryPath)
                     }
                 }
             }
