@@ -22,9 +22,10 @@ struct EventListView: View {
         Table(events, selection: $selectedEvent) {
             TableColumn("") { event in
                 VStack(alignment: .center) {
-                    switch (event.type) {
-                    case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
-                    case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
+                    switch event.type {
+                        case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
+                        case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
+                        case .recentClip: Image(systemName: "timer").foregroundColor(.yellow)
                     }
                 }
                 .frame(width: eventTypeIconColumnWidth)
@@ -37,7 +38,13 @@ struct EventListView: View {
             }
 //            .width(self.dateColumnWidth)
 
-            TableColumn("Location", value: \.location.city)
+            TableColumn("Location") { event in
+                if let location = event.location {
+                    Text(location.city)
+                } else {
+                    EmptyView()
+                }
+            }
         }
     }
 }

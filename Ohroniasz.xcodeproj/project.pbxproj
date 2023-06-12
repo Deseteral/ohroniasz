@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7A2A37A7060018938C /* VideoProcessor.swift */; };
+		BF191E7D2A37E0AA0018938C /* FileManager+directoryExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */; };
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
 		BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* WelcomeView.swift */; };
 		BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CC2A3256EF008DF774 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		BF191E7A2A37A7060018938C /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
+		BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+directoryExists.swift"; sourceTree = "<group>"; };
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
 		BFC015CA2A3256EE008DF774 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				BFE820742A352DF600C8C03A /* AVPlayer+isPlaying.swift */,
+				BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				BFC015F92A32634F008DF774 /* LibraryManager.swift in Sources */,
 				BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */,
 				BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */,
+				BF191E7D2A37E0AA0018938C /* FileManager+directoryExists.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
