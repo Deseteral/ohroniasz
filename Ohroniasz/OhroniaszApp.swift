@@ -15,7 +15,7 @@ struct OhroniaszApp: App {
     @State private var displayEvents: [CamEvent] = []
 
     @State private var eventFilter: EventFilter = .all
-    @State private var selectedEvent: CamEvent.ID? = nil
+    @State private var selectedEventId: CamEvent.ID? = nil
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
     var body: some Scene {
@@ -36,7 +36,7 @@ struct OhroniaszApp: App {
                             }
                         }
                     } content: {
-                        EventListView(events: displayEvents, selectedEvent: $selectedEvent)
+                        EventListView(events: displayEvents, selectedEvent: $selectedEventId)
                     } detail: {
                         switch selectedPlaylist {
                             case .notSelected:
@@ -50,15 +50,15 @@ struct OhroniaszApp: App {
                         }
                     }
                     .onChange(of: self.eventFilter) { _ in
-                        self.selectedEvent = nil
+                        self.selectedEventId = nil
                     }
-                    .onChange(of: self.selectedEvent) { newValue in
+                    .onChange(of: self.selectedEventId) { newValue in
                         guard let newValue else {
                             self.selectedPlaylist = .notSelected
                             return
                         }
 
-                        guard let event = (events.first { $0.id == newValue }) else {
+                        guard let selectedEvent = EventManager.findEvent(by: newValue, events: events) else {
                             self.selectedPlaylist = .error
                             return
                         }
@@ -66,7 +66,7 @@ struct OhroniaszApp: App {
                         self.selectedPlaylist = .loading
 
                         Task {
-                            if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: event.path) {
+                            if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: selectedEvent.path) {
                                 self.selectedPlaylist = .loaded(playlist)
                             }
                         }

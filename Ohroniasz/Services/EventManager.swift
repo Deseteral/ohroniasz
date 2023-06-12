@@ -23,4 +23,8 @@ class EventManager {
                 return events.filter { $0.type == .savedClip }
         }
     }
+
+    static func findEvent(by eventId: CamEvent.ID, events: [CamEvent]) -> CamEvent? {
+        return events.first { $0.id == eventId }
+    }
 }
