@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7A2A37A7060018938C /* VideoProcessor.swift */; };
 		BF191E7D2A37E0AA0018938C /* FileManager+directoryExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */; };
+		BF191E7F2A37E2330018938C /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7E2A37E2330018938C /* EventManager.swift */; };
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
 		BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* WelcomeView.swift */; };
 		BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CC2A3256EF008DF774 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		BF191E7A2A37A7060018938C /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
 		BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+directoryExists.swift"; sourceTree = "<group>"; };
+		BF191E7E2A37E2330018938C /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
 		BFC015CA2A3256EE008DF774 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				BFC015F82A32634F008DF774 /* LibraryScanner.swift */,
 				BF191E7A2A37A7060018938C /* VideoProcessor.swift */,
+				BF191E7E2A37E2330018938C /* EventManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF191E7F2A37E2330018938C /* EventManager.swift in Sources */,
 				BFC015FB2A33CF8D008DF774 /* EventListView.swift in Sources */,
 				BFC015F52A32606C008DF774 /* AppDelegate.swift in Sources */,
 				BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */,

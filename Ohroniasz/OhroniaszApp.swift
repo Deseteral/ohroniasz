@@ -1,21 +1,5 @@
 import SwiftUI
 
-enum EventFilter: String, CaseIterable {
-    case all = "All clips"
-    case sentry = "Sentry"
-    case saved = "Saved clips"
-    case sentryAndSaved = "Sentry & saved"
-    
-    var systemIcon: String {
-        switch self {
-            case .all: return "folder"
-            case .sentry: return "circle"
-            case .saved: return "star"
-            case .sentryAndSaved: return "star.circle"
-        }
-    }
-}
-
 enum PlaylistLoadingState {
     case notSelected
     case loading
@@ -28,6 +12,7 @@ struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     @State private var events: [CamEvent] = []
+    @State private var displayEvents: [CamEvent] = []
 
     @State private var eventFilter: EventFilter = .all
     @State private var selectedEvent: CamEvent.ID? = nil
@@ -51,7 +36,7 @@ struct OhroniaszApp: App {
                             }
                         }
                     } content: {
-                        EventListView(events: events, selectedEvent: $selectedEvent)
+                        EventListView(events: displayEvents, selectedEvent: $selectedEvent)
                     } detail: {
                         switch selectedPlaylist {
                             case .notSelected:
@@ -86,9 +71,13 @@ struct OhroniaszApp: App {
                             }
                         }
                     }
+                    .onChange(of: eventFilter) { newValue in
+                        self.displayEvents = EventManager.filterEvents(events: events, filter: newValue)
+                    }
                 } else {
                     WelcomeView() { libraryPath in
                         self.events = LibraryScanner.scanLibrary(atPath: libraryPath)
+                        self.displayEvents = EventManager.filterEvents(events: events, filter: eventFilter)
                     }
                 }
             }
