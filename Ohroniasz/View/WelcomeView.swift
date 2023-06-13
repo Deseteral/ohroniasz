@@ -36,12 +36,3 @@ struct WelcomeView: View {
         }
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        WelcomeView() { path in
-            print("folder picked")
-        }
-        .preferredColorScheme(.dark)
-    }
-}
