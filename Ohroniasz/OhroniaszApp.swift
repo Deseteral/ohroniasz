@@ -1,8 +1,9 @@
 import SwiftUI
+import AppKit
 
 @main
 struct OhroniaszApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @NSApplicationDelegateAdaptor(AppDelegate.self) fileprivate var appDelegate
 
     @State private var events: [CamEvent] = []
 
@@ -19,5 +20,11 @@ struct OhroniaszApp: App {
             }
             .preferredColorScheme(.dark)
         }
+    }
+}
+
+fileprivate class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
     }
 }
