@@ -19,18 +19,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            List(selection: $eventFilter) {
-                ForEach(EventFilter.allCases, id: \.rawValue) { filter in
-                    NavigationLink(value: filter) {
-                        HStack {
-                            Image(systemName: filter.systemIcon)
-                                .foregroundColor(.accentColor)
-                                .frame(width: 18)
-                            Text(filter.rawValue)
-                        }
-                    }
-                }
-            }
+            SidebarView(eventFilter: $eventFilter)
         } content: {
             EventListView(events: displayEvents, selectedEvent: $selectedEventId)
         } detail: {
