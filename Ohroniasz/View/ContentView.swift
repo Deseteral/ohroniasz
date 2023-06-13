@@ -11,17 +11,18 @@ struct ContentView: View {
     let events: [CamEvent]
 
     @State private var eventFilter: EventFilter = .all
-    @State private var displayEvents: [CamEvent] = []
-
     @State private var selectedEventId: CamEvent.ID? = nil
-
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
     var body: some View {
         NavigationSplitView {
             SidebarView(eventFilter: $eventFilter)
         } content: {
-            EventListView(events: displayEvents, selectedEvent: $selectedEventId)
+            EventListView(
+                events: events,
+                eventFilter: eventFilter,
+                selectedEvent: $selectedEventId
+            )
         } detail: {
             switch selectedPlaylist {
                 case .notSelected:
@@ -55,12 +56,6 @@ struct ContentView: View {
                     self.selectedPlaylist = .loaded(playlist)
                 }
             }
-        }
-        .onChange(of: eventFilter) { newValue in
-            self.displayEvents = EventManager.filterEvents(events: events, filter: newValue)
-        }
-        .onAppear {
-            self.displayEvents = EventManager.filterEvents(events: events, filter: eventFilter)
         }
     }
 }

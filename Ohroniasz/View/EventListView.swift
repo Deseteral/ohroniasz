@@ -2,24 +2,23 @@ import SwiftUI
 
 struct EventListView: View {
     let events: [CamEvent]
+    let eventFilter: EventFilter
     @Binding var selectedEvent: CamEvent.ID?
-    
-    @State private var dateColumnWidth: CGFloat = 200
+
+    @State private var displayEvents: [CamEvent] = []
+
+    private let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.timeStyle = .medium
+        df.dateStyle = .long
+        df.locale = Locale.autoupdatingCurrent
+        return df
+    }()
+
     private let eventTypeIconColumnWidth: CGFloat = 17
-    
-    private let dateFormatter = DateFormatter()
-    
-    init(events: [CamEvent], selectedEvent: Binding<CamEvent.ID?>) {
-        self.events = events
-        self._selectedEvent = selectedEvent
-        
-        dateFormatter.timeStyle = .medium
-        dateFormatter.dateStyle = .long
-        dateFormatter.locale = Locale.autoupdatingCurrent
-    }
-    
+
     var body: some View {
-        Table(events, selection: $selectedEvent) {
+        Table(displayEvents, selection: $selectedEvent) {
             TableColumn("") { event in
                 VStack(alignment: .center) {
                     switch event.type {
@@ -34,9 +33,7 @@ struct EventListView: View {
             
             TableColumn("Date") { event in
                 Text(dateFormatter.string(from: event.date))
-                    .overlay( GeometryReader { geo in Color.clear.onAppear { self.dateColumnWidth = geo.size.width }})
             }
-//            .width(self.dateColumnWidth)
 
             TableColumn("Location") { event in
                 if let location = event.location {
@@ -46,11 +43,11 @@ struct EventListView: View {
                 }
             }
         }
-    }
-}
-
-struct EventListView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventListView(events: [], selectedEvent: .constant(nil))
+        .onAppear {
+            self.displayEvents = EventManager.filterEvents(events: events, filter: eventFilter)
+        }
+        .onChange(of: eventFilter) { nextFilterValue in
+            self.displayEvents = EventManager.filterEvents(events: events, filter: nextFilterValue)
+        }
     }
 }
