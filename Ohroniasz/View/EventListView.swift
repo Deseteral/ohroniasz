@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct EventListView: View {
-    let events: [CamEvent]
     let eventFilter: EventFilter
     @Binding var selectedEvent: CamEvent.ID?
+
+    @EnvironmentObject private var eventLibrary: EventLibrary
 
     @State private var displayEvents: [CamEvent] = []
 
@@ -44,10 +45,10 @@ struct EventListView: View {
             }
         }
         .onAppear {
-            self.displayEvents = EventManager.filterEvents(events: events, filter: eventFilter)
+            self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
         }
         .onChange(of: eventFilter) { nextFilterValue in
-            self.displayEvents = EventManager.filterEvents(events: events, filter: nextFilterValue)
+            self.displayEvents = eventLibrary.filterEvents(type: nextFilterValue)
         }
     }
 }

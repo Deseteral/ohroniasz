@@ -8,8 +8,9 @@ fileprivate enum PlaylistLoadingState {
 }
 
 struct DetailView: View {
-    let events: [CamEvent]
     let selectedEventId: CamEvent.ID?
+
+    @EnvironmentObject private var eventLibrary: EventLibrary
 
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
@@ -32,7 +33,7 @@ struct DetailView: View {
                 return
             }
 
-            guard let selectedEvent = EventManager.findEvent(by: nextSelectedEventId, events: events) else {
+            guard let selectedEvent = eventLibrary.findEvent(by: nextSelectedEventId) else {
                 self.selectedPlaylist = .error
                 return
             }

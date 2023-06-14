@@ -5,19 +5,21 @@ import AppKit
 struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) fileprivate var appDelegate
 
-    @State private var events: [CamEvent] = []
+    @StateObject private var eventLibrary = EventLibrary()
 
     var body: some Scene {
         WindowGroup {
             Group {
-                if events.count > 0 {
-                    ContentView(events: events)
+                if eventLibrary.hasEventsLoaded {
+                    ContentView()
                 } else {
                     WelcomeView() { libraryPath in
-                        self.events = LibraryScanner.scanLibrary(atPath: libraryPath)
+                        let events = LibraryScanner.scanLibrary(atPath: libraryPath)
+                        self.eventLibrary.events = events
                     }
                 }
             }
+            .environmentObject(eventLibrary)
             .preferredColorScheme(.dark)
         }
     }
