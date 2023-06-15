@@ -10,7 +10,7 @@ struct ContentView: View {
         NavigationSplitView {
             SidebarView(eventFilter: $eventFilter)
         } content: {
-            EventListView(eventFilter: eventFilter, selectedEvent: $selectedEventId)
+            EventTableView(eventFilter: eventFilter, selectedEvent: $selectedEventId)
         } detail: {
             DetailView(selectedEventId: selectedEventId)
         }

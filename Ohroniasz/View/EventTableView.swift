@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct EventListView: View {
+struct EventTableView: View {
     let eventFilter: EventFilter
     @Binding var selectedEvent: CamEvent.ID?
 
@@ -50,6 +50,7 @@ struct EventListView: View {
                 EventLocationView(selectedEventId: selectedEvent)
             }
         }
+        .frame(minWidth: 420)
         .onAppear {
             self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
         }
