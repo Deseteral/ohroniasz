@@ -4,18 +4,18 @@ struct ContentView: View {
     @EnvironmentObject private var eventLibrary: EventLibrary
 
     @State private var eventFilter: EventFilter = .all
-    @State private var selectedEventId: CamEvent.ID? = nil
+    @State private var selectedEvent: CamEvent? = nil
 
     var body: some View {
         NavigationSplitView {
             SidebarView(eventFilter: $eventFilter)
         } content: {
-            EventTableView(eventFilter: eventFilter, selectedEvent: $selectedEventId)
+            EventTableView(eventFilter: eventFilter, selectedEvent: $selectedEvent)
         } detail: {
-            DetailView(selectedEventId: selectedEventId)
+            DetailView(selectedEvent: selectedEvent)
         }
         .onChange(of: self.eventFilter) { _ in
-            self.selectedEventId = nil
+            self.selectedEvent = nil
         }
     }
 }

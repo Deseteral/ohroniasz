@@ -2,7 +2,7 @@ import SwiftUI
 import MapKit
 
 struct EventLocationView: View {
-    let selectedEventId: CamEvent.ID
+    let location: CamEventLocation
 
     // This is a workaround for "Modifying state during view update, this will cause undefined behavior" issue.
     @State private var region: MKCoordinateRegion = .init()
@@ -23,24 +23,22 @@ struct EventLocationView: View {
         }
         .frame(maxHeight: 280)
         .onAppear {
-            setRegion(for: selectedEventId)
+            setRegion(for: location)
         }
-        .onChange(of: selectedEventId) { nextSelectedEventId in
-            setRegion(for: nextSelectedEventId)
+        .onChange(of: location) { nextLocation in
+            setRegion(for: nextLocation)
         }
     }
 
-    private func setRegion(for eventId: CamEvent.ID) {
-        guard let location = eventLibrary.findEvent(by: eventId)?.location else { return }
-
+    private func setRegion(for location: CamEventLocation) {
         let center = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
 
         self.region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005))
-        self.markers = [Marker(id: eventId, coordinate: center)]
+        self.markers = [Marker(coordinate: center)]
     }
 }
 
 fileprivate struct Marker: Identifiable {
-    let id: CamEvent.ID
+    let id = UUID()
     var coordinate: CLLocationCoordinate2D
 }

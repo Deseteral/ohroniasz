@@ -2,11 +2,12 @@ import SwiftUI
 
 struct EventTableView: View {
     let eventFilter: EventFilter
-    @Binding var selectedEvent: CamEvent.ID?
+    @Binding var selectedEvent: CamEvent?
+
+    @State private var selectedEventId: CamEvent.ID? = nil
+    @State private var displayEvents: [CamEvent] = []
 
     @EnvironmentObject private var eventLibrary: EventLibrary
-
-    @State private var displayEvents: [CamEvent] = []
 
     private let dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -20,7 +21,7 @@ struct EventTableView: View {
 
     var body: some View {
         VStack {
-            Table(displayEvents, selection: $selectedEvent) {
+            Table(displayEvents, selection: $selectedEventId) {
                 TableColumn("") { event in
                     VStack(alignment: .center) {
                         switch event.type {
@@ -46,16 +47,27 @@ struct EventTableView: View {
                 }
             }
 
-            if let selectedEvent {
-                EventLocationView(selectedEventId: selectedEvent)
+            if let location = selectedEvent?.location {
+                EventLocationView(location: location)
             }
         }
         .frame(minWidth: 420)
         .onAppear {
             self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
+
+            if let selectedEvent {
+                self.selectedEventId = selectedEvent.id
+            }
         }
         .onChange(of: eventFilter) { nextFilterValue in
             self.displayEvents = eventLibrary.filterEvents(type: nextFilterValue)
+        }
+        .onChange(of: selectedEventId) { nextSelectedEventId in
+            if let nextSelectedEventId {
+                self.selectedEvent = eventLibrary.findEvent(by: nextSelectedEventId)
+            } else {
+                self.selectedEvent = nil
+            }
         }
     }
 }

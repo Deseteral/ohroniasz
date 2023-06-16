@@ -1,15 +1,19 @@
 import Foundation
 import AVKit
 
-struct CamEvent: Identifiable {
+struct CamEvent: Identifiable, Equatable {
     let id: String
     let date: Date
     let type: CamEventType
     let path: String
     let location: CamEventLocation?
+
+    static func == (lhs: CamEvent, rhs: CamEvent) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
-struct CamEventLocation {
+struct CamEventLocation: Equatable {
     let city: String
     let lat: Double
     let lon: Double

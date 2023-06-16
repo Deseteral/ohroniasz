@@ -3,12 +3,11 @@ import SwiftUI
 fileprivate enum PlaylistLoadingState {
     case notSelected
     case loading
-    case error
     case loaded(CamEventPlaylist)
 }
 
 struct DetailView: View {
-    let selectedEventId: CamEvent.ID?
+    let selectedEvent: CamEvent?
 
     @EnvironmentObject private var eventLibrary: EventLibrary
 
@@ -21,27 +20,20 @@ struct DetailView: View {
                     Text("Select event from the list")
                 case .loading:
                     ProgressView()
-                case .error:
-                    Text("Something went wrong")
                 case .loaded(let playlist):
                     VideoGridView(playlist: playlist)
             }
         }
-        .onChange(of: self.selectedEventId) { nextSelectedEventId in
-            guard let nextSelectedEventId else {
+        .onChange(of: self.selectedEvent) { nextSelectedEvent in
+            guard let nextSelectedEvent else {
                 self.selectedPlaylist = .notSelected
-                return
-            }
-
-            guard let selectedEvent = eventLibrary.findEvent(by: nextSelectedEventId) else {
-                self.selectedPlaylist = .error
                 return
             }
 
             self.selectedPlaylist = .loading
 
             Task {
-                if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: selectedEvent.path) {
+                if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: nextSelectedEvent.path) {
                     self.selectedPlaylist = .loaded(playlist)
                 }
             }
