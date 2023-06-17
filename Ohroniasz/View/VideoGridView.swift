@@ -41,6 +41,7 @@ struct VideoGridView: View {
                 })
                 .buttonStyle(.bordered)
                 .controlSize(.large)
+                .keyboardShortcut(.space, modifiers: [])
 
                 Text(self.formattedTimeLabel)
                     .monospacedDigit()
