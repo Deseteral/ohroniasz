@@ -8,6 +8,7 @@ struct CamEvent: Identifiable, Equatable {
     let type: CamEventType
     let path: String
     let location: CamEventLocation?
+    let incidentTimeOffset: Double?
 
     static func == (lhs: CamEvent, rhs: CamEvent) -> Bool {
         return lhs.id == rhs.id
@@ -113,32 +114,39 @@ class LibraryScanner {
             return []
         }
 
-        guard let date = getDateFromClipFileName(clipsFolderPath: clipsFolderPath) else {
+        guard let date = getDateFromFirstClipFileName(clipsFolderPath: clipsFolderPath) else {
             return []
         }
 
-        return [CamEvent(id: clipsFolderPath, date: date, type: .recentClip, path: clipsFolderPath, location: nil)]
+        return [CamEvent(id: clipsFolderPath, date: date, type: .recentClip, path: clipsFolderPath, location: nil, incidentTimeOffset: nil)]
     }
 
     private static func readEvent(eventPath: String, eventType: CamEventType) -> CamEvent? {
         let metadata = readEventMetadata(eventPath: eventPath)
+        let dateFromFirstFile = getDateFromFirstClipFileName(clipsFolderPath: eventPath)
 
-        let date: Date;
-        let location: CamEventLocation?;
+        var date: Date? = nil
+        var location: CamEventLocation? = nil
+        var incidentTimeOffset: Double? = nil
 
         if let metadata {
             date = metadata.timestamp
             location = CamEventLocation(metadata: metadata)
-        } else {
-            guard let dateFromFile = getDateFromClipFileName(clipsFolderPath: eventPath) else {
-                return nil
-            }
 
-            date = dateFromFile
-            location = nil
+            if let dateFromFirstFile {
+                incidentTimeOffset = metadata.timestamp.timeIntervalSince(dateFromFirstFile)
+            }
+        } else {
+            if let dateFromFirstFile {
+                date = dateFromFirstFile
+            }
         }
 
-        return CamEvent(id: eventPath, date: date, type: eventType, path: eventPath, location: location)
+        guard let date else {
+            return nil
+        }
+
+        return CamEvent(id: eventPath, date: date, type: eventType, path: eventPath, location: location, incidentTimeOffset: incidentTimeOffset)
     }
 
     private static func readEventMetadata(eventPath: String) -> CamEventMetadata? {
@@ -162,11 +170,12 @@ class LibraryScanner {
     }
 
     // TODO: I hate this function.
-    private static func getDateFromClipFileName(clipsFolderPath: String) -> Date? {
+    private static func getDateFromFirstClipFileName(clipsFolderPath: String) -> Date? {
         let clipFileRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-back\.mp4/
 
         let items = try? FileManager.default
             .contentsOfDirectory(atPath: clipsFolderPath)
+            .sorted()
             .filter { $0.wholeMatch(of: clipFileRegex) != nil }
 
         guard var firstItem = items?.first else {
