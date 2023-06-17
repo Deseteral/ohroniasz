@@ -14,6 +14,8 @@ struct VideoGridView: View {
     @State private var isUserDraggingSlider: Bool = false
     @State private var formattedTimeLabel: String = "00:00"
 
+    private let markerCircleSize = 16.0
+
     init(playlist: CamEventPlaylist, event: CamEvent) {
         self.playlist = playlist
         self.event = event
@@ -53,8 +55,8 @@ struct VideoGridView: View {
                         if let incidentTimeOffset = event.incidentTimeOffset {
                             Circle()
                                 .fill(.red)
-                                .frame(width: 16, height: 16)
-                                .padding(.leading, (incidentTimeOffset / playlist.duration) * geometry.size.width)
+                                .frame(width: markerCircleSize, height: markerCircleSize)
+                                .padding(.leading, (incidentTimeOffset / playlist.duration) * (geometry.size.width - markerCircleSize))
                         }
                         
                         Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
