@@ -12,10 +12,10 @@ struct VideoGridView: View {
     @State private var sliderValue: Double = 0.0
     @State private var isUserDraggingSlider: Bool = false
     @State private var formattedTimeLabel: String = "00:00"
-
+    
     init(playlist: CamEventPlaylist) {
         self.playlist = playlist
-
+        
         self.playerTopLeft = playlist.front
         self.playerTopRight = playlist.back
         self.playerBottomLeft = playlist.leftRepeater
@@ -36,16 +36,18 @@ struct VideoGridView: View {
             }
             
             HStack {
-                Button(action: togglePlayPause, label: { Image(systemName: "play.fill") })
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
-
+                Button(action: togglePlayPause, label: {
+                    Image(systemName: playerTopLeft.isPlaying ? "pause.fill" : "play.fill")
+                })
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+                
                 Text(self.formattedTimeLabel)
                     .monospacedDigit()
-
+                
                 Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
                     .tint(.accentColor)
-
+                
                 Text(VideoGridView.formatTimeLabel(seconds: playlist.duration))
                     .monospacedDigit()
             }
@@ -58,31 +60,31 @@ struct VideoGridView: View {
         }
         .onChange(of: sliderValue, perform: sliderValueChanged)
     }
-
+    
     private func playerTimeChanged(to time: CMTime) {
         guard !isUserDraggingSlider else {
             return
         }
         self.sliderValue = time.seconds
     }
-
+    
     private func sliderValueChanged(to newValue: Double) {
         self.formattedTimeLabel = VideoGridView.formatTimeLabel(seconds: newValue)
-
+        
         if isUserDraggingSlider {
             seek(to: newValue)
         }
     }
-
+    
     private func seek(to seconds: Double) {
         actOnAllPlayers { $0.pause() }
-
+        
         let time =  CMTime(seconds: seconds, preferredTimescale: 60000)
         actOnAllPlayers { player in
             player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
     }
-
+    
     private func togglePlayPause() {
         if playerTopLeft.isPlaying {
             actOnAllPlayers { $0.pause() }
@@ -97,13 +99,13 @@ struct VideoGridView: View {
         callback(playerBottomLeft)
         callback(playerBottomRight)
     }
-
+    
     private static func formatTimeLabel(seconds: Double) -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.zeroFormattingBehavior = .pad
         formatter.unitsStyle = .positional
-
+        
         return formatter.string(from: TimeInterval(seconds))!
     }
 }
