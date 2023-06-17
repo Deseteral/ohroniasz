@@ -21,7 +21,7 @@ struct DetailView: View {
                 case .loading:
                     ProgressView()
                 case .loaded(let playlist):
-                    VideoGridView(playlist: playlist)
+                    VideoGridView(playlist: playlist, event: selectedEvent!)
             }
         }
         .onChange(of: self.selectedEvent) { nextSelectedEvent in

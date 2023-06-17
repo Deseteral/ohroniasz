@@ -3,6 +3,7 @@ import AVKit
 
 struct VideoGridView: View {
     let playlist: CamEventPlaylist
+    let event: CamEvent
 
     private let playerTopLeft: AVPlayer
     private let playerTopRight: AVPlayer
@@ -13,8 +14,9 @@ struct VideoGridView: View {
     @State private var isUserDraggingSlider: Bool = false
     @State private var formattedTimeLabel: String = "00:00"
 
-    init(playlist: CamEventPlaylist) {
+    init(playlist: CamEventPlaylist, event: CamEvent) {
         self.playlist = playlist
+        self.event = event
 
         self.playerTopLeft = playlist.front
         self.playerTopRight = playlist.back
@@ -46,8 +48,20 @@ struct VideoGridView: View {
                 Text(self.formattedTimeLabel)
                     .monospacedDigit()
 
-                Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
-                    .tint(.accentColor)
+                GeometryReader { geometry in
+                    ZStack(alignment: .leading) {
+                        if let incidentTimeOffset = event.incidentTimeOffset {
+                            Circle()
+                                .fill(.red)
+                                .frame(width: 16, height: 16)
+                                .padding(.leading, (incidentTimeOffset / playlist.duration) * geometry.size.width)
+                        }
+                        
+                        Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
+                            .tint(.accentColor)
+                    }
+                }
+                .frame(height: 18)
 
                 Text(VideoGridView.formatTimeLabel(seconds: playlist.duration))
                     .monospacedDigit()
