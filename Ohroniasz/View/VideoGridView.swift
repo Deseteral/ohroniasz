@@ -41,10 +41,20 @@ struct VideoGridView: View {
                 
                 Slider(value: $sliderValue, in: 0...playlist.duration) { editing in self.isUserDraggingSlider = editing }
                     .tint(.accentColor)
-                    .onChange(of: sliderValue, perform: sliderChanged)
+
+                Text(formattedTimeLabel)
             }
             .padding()
         }
+        .onAppear {
+            actOnAllPlayers { player in
+                player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.01, preferredTimescale: 60000), queue: nil) { time in
+                    guard !isUserDraggingSlider else { return }
+                    self.sliderValue = time.seconds
+                }
+            }
+        }
+        .onChange(of: sliderValue, perform: sliderChanged)
     }
 
     private func sliderChanged(to newValue: Double) {
