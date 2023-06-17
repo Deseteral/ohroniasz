@@ -33,7 +33,7 @@ enum EventFilter: String, CaseIterable {
         switch self {
             case .all: return "folder"
             case .sentry: return "circle"
-            case .saved: return "star"
+            case .saved: return "externaldrive"
         }
     }
 }

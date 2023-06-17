@@ -24,11 +24,8 @@ struct EventTableView: View {
             Table(displayEvents, selection: $selectedEventId) {
                 TableColumn("") { event in
                     VStack(alignment: .center) {
-                        switch event.type {
-                            case .savedClip: Image(systemName: "externaldrive.fill").foregroundColor(.blue)
-                            case .sentryClip: Image(systemName: "circle.fill").foregroundColor(.red)
-                            case .recentClip: Image(systemName: "timer").foregroundColor(.yellow)
-                        }
+                        Image(systemName: event.type.systemImage)
+                            .foregroundColor(event.type.color)
                     }
                     .frame(width: eventTypeIconColumnWidth)
                 }

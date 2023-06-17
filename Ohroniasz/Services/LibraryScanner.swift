@@ -1,5 +1,6 @@
 import Foundation
 import AVKit
+import SwiftUI
 
 struct CamEvent: Identifiable, Equatable {
     let id: String
@@ -29,6 +30,28 @@ enum CamEventType: String {
     case savedClip
     case sentryClip
     case recentClip
+
+    var systemImage: String {
+        switch self {
+            case .savedClip:
+                return "externaldrive.fill"
+            case .sentryClip:
+                return "circle.fill"
+            case .recentClip:
+                return "timer"
+        }
+    }
+
+    var color: Color {
+        switch self {
+            case .savedClip:
+                return .blue
+            case .sentryClip:
+                return .red
+            case .recentClip:
+                return .yellow
+        }
+    }
 }
 
 struct CamEventPlaylist {
