@@ -47,6 +47,14 @@ struct VideoGridView: View {
                 .controlSize(.large)
                 .keyboardShortcut(.space, modifiers: [])
 
+                if event.incidentTimeOffset != nil {
+                    Button(action: seekToEventMarker, label: {
+                        Image(systemName: "goforward")
+                    })
+                    .buttonStyle(.bordered)
+                    .controlSize(.large)
+                }
+
                 Text(self.formattedTimeLabel)
                     .monospacedDigit()
 
@@ -107,6 +115,12 @@ struct VideoGridView: View {
             actOnAllPlayers { $0.pause() }
         } else {
             actOnAllPlayers { $0.play() }
+        }
+    }
+
+    private func seekToEventMarker() {
+        if let incidentTimeOffset = event.incidentTimeOffset {
+            seek(to: incidentTimeOffset)
         }
     }
 
