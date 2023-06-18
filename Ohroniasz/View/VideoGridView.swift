@@ -3,7 +3,6 @@ import AVKit
 
 struct VideoGridView: View {
     let playlist: CamEventPlaylist
-    let event: CamEvent
 
     private let playerTopLeft: AVPlayer
     private let playerTopRight: AVPlayer
@@ -16,9 +15,8 @@ struct VideoGridView: View {
 
     private let markerCircleSize = 16.0
 
-    init(playlist: CamEventPlaylist, event: CamEvent) {
+    init(playlist: CamEventPlaylist) {
         self.playlist = playlist
-        self.event = event
 
         self.playerTopLeft = playlist.front
         self.playerTopRight = playlist.back
@@ -47,12 +45,10 @@ struct VideoGridView: View {
                 .controlSize(.large)
                 .keyboardShortcut(.space, modifiers: [])
 
-                if event.incidentTimeOffset != nil {
-                    Button(action: seekToEventMarker, label: {
-                        Image(systemName: "goforward")
-                    })
-                    .buttonStyle(.bordered)
-                    .controlSize(.large)
+                if playlist.event.hasMarker {
+                    Button(action: seekToEventMarker, label: { Image(systemName: "goforward") })
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
                 }
 
                 Text(self.formattedTimeLabel)
@@ -60,7 +56,7 @@ struct VideoGridView: View {
 
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
-                        if let incidentTimeOffset = event.incidentTimeOffset {
+                        if let incidentTimeOffset = playlist.event.incidentTimeOffset {
                             Circle()
                                 .fill(.red)
                                 .frame(width: markerCircleSize, height: markerCircleSize)
@@ -119,7 +115,7 @@ struct VideoGridView: View {
     }
 
     private func seekToEventMarker() {
-        if let incidentTimeOffset = event.incidentTimeOffset {
+        if let incidentTimeOffset = playlist.event.incidentTimeOffset {
             seek(to: incidentTimeOffset)
         }
     }

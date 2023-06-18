@@ -1,14 +1,14 @@
 import AVKit
 
 class VideoProcessor {
-    static func loadEventPlaylist(eventPath: String) async -> CamEventPlaylist? {
-        guard let files = try? FileManager.default.contentsOfDirectory(atPath: eventPath) else {
-            print("Failed to read contents of '\(eventPath)' directory.")
+    static func loadEventPlaylist(event: CamEvent) async -> CamEventPlaylist? {
+        guard let files = try? FileManager.default.contentsOfDirectory(atPath: event.path) else {
+            print("Failed to read contents of '\(event.path)' directory.")
             return nil
         }
 
         let paths = files
-            .map { fileName in eventPath + "/" + fileName }
+            .map { fileName in event.path + "/" + fileName }
             .sorted()
 
         async let front = concatVideoClips(from: paths.filter { filePath in filePath.hasSuffix("-front.mp4") })
@@ -23,7 +23,8 @@ class VideoProcessor {
             back: AVPlayer(playerItem: back),
             leftRepeater: AVPlayer(playerItem: leftRepeater),
             rightRepeater: AVPlayer(playerItem: rightRepeater),
-            duration: duration
+            duration: duration,
+            event: event
         )
     }
 

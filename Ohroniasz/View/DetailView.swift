@@ -9,9 +9,9 @@ fileprivate enum PlaylistLoadingState {
 struct DetailView: View {
     let selectedEvent: CamEvent?
 
-    @EnvironmentObject private var eventLibrary: EventLibrary
-
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
+
+    @EnvironmentObject private var eventLibrary: EventLibrary
 
     var body: some View {
         Group {
@@ -21,7 +21,7 @@ struct DetailView: View {
                 case .loading:
                     ProgressView()
                 case .loaded(let playlist):
-                    VideoGridView(playlist: playlist, event: selectedEvent!)
+                    VideoGridView(playlist: playlist)
             }
         }
         .onChange(of: self.selectedEvent) { nextSelectedEvent in
@@ -33,7 +33,7 @@ struct DetailView: View {
             self.selectedPlaylist = .loading
 
             Task {
-                if let playlist = await VideoProcessor.loadEventPlaylist(eventPath: nextSelectedEvent.path) {
+                if let playlist = await VideoProcessor.loadEventPlaylist(event: nextSelectedEvent) {
                     self.selectedPlaylist = .loaded(playlist)
                 }
             }

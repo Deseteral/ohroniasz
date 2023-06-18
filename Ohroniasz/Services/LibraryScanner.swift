@@ -13,6 +13,10 @@ struct CamEvent: Identifiable, Equatable {
     static func == (lhs: CamEvent, rhs: CamEvent) -> Bool {
         return lhs.id == rhs.id
     }
+
+    var hasMarker: Bool {
+        return incidentTimeOffset != nil
+    }
 }
 
 struct CamEventLocation: Equatable {
@@ -62,6 +66,7 @@ struct CamEventPlaylist {
     let rightRepeater: AVPlayer
     
     let duration: Double
+    let event: CamEvent
 }
 
 struct CamEventMetadata: Codable {
