@@ -12,6 +12,7 @@ struct VideoGridView: View {
     @State private var sliderValue: Double = 0.0
     @State private var isUserDraggingSlider: Bool = false
     @State private var formattedTimeLabel: String = "00:00"
+    @State private var cameraLabelOpacity = 0.0;
 
     private let markerCircleSize = 16.0
 
@@ -28,12 +29,29 @@ struct VideoGridView: View {
         VStack {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
-                    VideoPlayer(player: playerTopLeft)
-                    VideoPlayer(player: playerTopRight)
+                    ZStack(alignment: .topLeading) {
+                        VideoPlayer(player: playerTopLeft)
+                        Text("Front camera").padding().opacity(cameraLabelOpacity)
+                    }
+                    ZStack(alignment: .topLeading) {
+                        VideoPlayer(player: playerTopRight)
+                        Text("Back camera").padding().opacity(cameraLabelOpacity)
+                    }
                 }
                 HStack(spacing: 0) {
-                    VideoPlayer(player: playerBottomLeft)
-                    VideoPlayer(player: playerBottomRight)
+                    ZStack(alignment: .topLeading) {
+                        VideoPlayer(player: playerBottomLeft)
+                        Text("Left repeater camera").padding().opacity(cameraLabelOpacity)
+                    }
+                    ZStack(alignment: .topLeading) {
+                        VideoPlayer(player: playerBottomRight)
+                        Text("Right repeater camera").padding().opacity(cameraLabelOpacity)
+                    }
+                }
+            }
+            .onHover { isHovering in
+                withAnimation {
+                    self.cameraLabelOpacity = isHovering ? 1 : 0
                 }
             }
 
