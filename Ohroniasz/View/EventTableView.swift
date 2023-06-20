@@ -30,7 +30,11 @@ struct EventTableView: View {
                     .frame(width: eventTypeIconColumnWidth)
                 }
                 .width(eventTypeIconColumnWidth)
-                
+
+                TableColumn("Description") { event in
+                    TextField("", text: $eventLibrary.events.first { $0.id == event.id }!.description)
+                }
+
                 TableColumn("Date") { event in
                     Text(dateFormatter.string(from: event.date))
                 }
