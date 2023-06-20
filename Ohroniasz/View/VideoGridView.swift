@@ -57,7 +57,7 @@ struct VideoGridView: View {
 
             HStack {
                 Button(action: togglePlayPause, label: {
-                    Image(systemName: playerTopLeft.isPlaying ? "pause.fill" : "play.fill")
+                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
                 })
                 .buttonStyle(.bordered)
                 .controlSize(.large)
@@ -100,6 +100,10 @@ struct VideoGridView: View {
         .onChange(of: sliderValue, perform: sliderValueChanged)
     }
 
+    private var isPlaying: Bool {
+        return playerTopLeft.isPlaying
+    }
+
     private func playerTimeChanged(to time: CMTime) {
         guard !isUserDraggingSlider else {
             return
@@ -125,7 +129,7 @@ struct VideoGridView: View {
     }
 
     private func togglePlayPause() {
-        if playerTopLeft.isPlaying {
+        if isPlaying {
             actOnAllPlayers { $0.pause() }
         } else {
             actOnAllPlayers { $0.play() }
