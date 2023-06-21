@@ -10,11 +10,7 @@ struct CamEvent: Identifiable, Equatable {
     let location: CamEventLocation?
     let incidentTimeOffset: Double?
 
-    var description: String = "" {
-        didSet {
-            print("did set to \(description)")
-        }
-    }
+    var description: String = ""
 
     static func == (lhs: CamEvent, rhs: CamEvent) -> Bool {
         return lhs.id == rhs.id
