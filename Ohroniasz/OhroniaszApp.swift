@@ -15,8 +15,7 @@ struct OhroniaszApp: App {
                 } else {
                     WelcomeView() { libraryPath in
                         let events = LibraryScanner.scanLibrary(atPath: libraryPath)
-                        self.eventLibrary.libraryPath = libraryPath
-                        self.eventLibrary.events = events
+                        self.eventLibrary.loadEvents(libraryPath: libraryPath, events: events)
                     }
                 }
             }

@@ -4,11 +4,7 @@ import SwiftUI
 class EventLibrary: ObservableObject {
     var libraryPath: String = ""
 
-    @Published var events: [CamEvent] = [] {
-        didSet {
-            writeLibraryDataToDisk()
-        }
-    }
+    @Published var events: [CamEvent] = []
 
     var hasEventsLoaded: Bool {
         return events.count > 0
@@ -16,6 +12,12 @@ class EventLibrary: ObservableObject {
 
     private var dataFilePath: String {
         return libraryPath + "/" + "ohroniasz.json"
+    }
+
+    func loadEvents(libraryPath: String, events: [CamEvent]) {
+        self.libraryPath = libraryPath
+        self.events = events
+        readLibraryDataFromDisk()
     }
 
     func filterEvents(type: EventFilter) -> [CamEvent] {
@@ -49,9 +51,23 @@ class EventLibrary: ObservableObject {
             print(error)
         }
     }
+
+    private func readLibraryDataFromDisk() {
+        do {
+            let jsonData = try String(contentsOfFile: dataFilePath).data(using: .utf8)
+            let data = try JSONDecoder().decode(LibraryData.self, from: jsonData!)
+
+            for description in data.descriptions {
+                guard let idx = events.firstIndex(where: { $0.id == description.key }) else { continue }
+                events[idx].description = description.value
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 
-struct LibraryData: Codable {
+fileprivate struct LibraryData: Codable {
     var descriptions: [CamEvent.ID: String] = [:]
 }
 

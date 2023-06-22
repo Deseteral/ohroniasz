@@ -7,6 +7,8 @@ struct EventTableView: View {
     @State private var selectedEventId: CamEvent.ID? = nil
     @State private var displayEvents: [CamEvent] = []
 
+    @FocusState private var isDescriptionFieldFocused: Bool
+
     @EnvironmentObject private var eventLibrary: EventLibrary
 
     private let dateFormatter: DateFormatter = {
@@ -33,6 +35,7 @@ struct EventTableView: View {
 
                 TableColumn("Description") { event in
                     TextField("", text: $eventLibrary.events.first { $0.id == event.id }!.description)
+                        .focused($isDescriptionFieldFocused)
                 }
 
                 TableColumn("Date") { event in
@@ -68,6 +71,11 @@ struct EventTableView: View {
                 self.selectedEvent = eventLibrary.findEvent(by: nextSelectedEventId)
             } else {
                 self.selectedEvent = nil
+            }
+        }
+        .onChange(of: isDescriptionFieldFocused) { isDescriptionFieldFocused in
+            if !isDescriptionFieldFocused {
+                eventLibrary.writeLibraryDataToDisk()
             }
         }
     }
