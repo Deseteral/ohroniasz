@@ -59,6 +59,17 @@ enum CamEventType: String {
                 return .yellow
         }
     }
+
+    var helpText: String {
+        switch self {
+            case .savedClip:
+                return "Saved clip"
+            case .sentryClip:
+                return "Sentry clip"
+            case .recentClip:
+                return "Recent drive"
+        }
+    }
 }
 
 struct CamEventPlaylist {

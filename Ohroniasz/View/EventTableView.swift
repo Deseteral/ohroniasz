@@ -28,6 +28,7 @@ struct EventTableView: View {
                     VStack(alignment: .center) {
                         Image(systemName: event.type.systemImage)
                             .foregroundColor(event.type.color)
+                            .help(event.type.helpText)
                     }
                     .frame(width: eventTypeIconColumnWidth)
                 }
