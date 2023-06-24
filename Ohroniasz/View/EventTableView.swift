@@ -5,6 +5,7 @@ struct EventTableView: View {
     @Binding var selectedEvent: CamEvent?
 
     @State private var selectedEventId: CamEvent.ID? = nil
+    @State private var searchText: String = ""
     @State private var displayEvents: [CamEvent] = []
 
     @FocusState private var isDescriptionFieldFocused: Bool
@@ -42,7 +43,7 @@ struct EventTableView: View {
                 TableColumn("Date") { event in
                     Text(dateFormatter.string(from: event.date))
                 }
-                
+
                 TableColumn("Location") { event in
                     if let location = event.location {
                         Text(location.city)
@@ -57,6 +58,10 @@ struct EventTableView: View {
             }
         }
         .frame(minWidth: 420)
+        .searchable(text: $searchText)
+        .toolbar {
+            ContentToolbar()
+        }
         .onAppear {
             self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
 

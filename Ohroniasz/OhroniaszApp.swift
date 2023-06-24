@@ -22,6 +22,7 @@ struct OhroniaszApp: App {
             .environmentObject(eventLibrary)
             .preferredColorScheme(.dark)
         }
+        .windowToolbarStyle(UnifiedWindowToolbarStyle())
     }
 }
 
