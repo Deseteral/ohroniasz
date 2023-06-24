@@ -28,6 +28,8 @@ class EventLibrary: ObservableObject {
                 return events.filter { $0.type == .sentryClip }
             case .saved:
                 return events.filter { $0.type == .savedClip }
+            case .favorites:
+                return []
         }
     }
 
@@ -75,12 +77,14 @@ enum EventFilter: String, CaseIterable {
     case all = "All clips"
     case sentry = "Sentry"
     case saved = "Saved clips"
+    case favorites = "Favorite clips"
 
     var systemIcon: String {
         switch self {
             case .all: return "folder"
             case .sentry: return "circle"
             case .saved: return "externaldrive"
+            case .favorites: return "star"
         }
     }
 }
