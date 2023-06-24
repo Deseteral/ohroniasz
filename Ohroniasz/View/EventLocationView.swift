@@ -14,12 +14,26 @@ struct EventLocationView: View {
     }
 
     @State private var markers: [Marker] = []
+    @State private var buttonOpacity = 0.0
 
     @EnvironmentObject private var eventLibrary: EventLibrary
 
     var body: some View {
-        Map(coordinateRegion: regionBinding, annotationItems: markers) {
-            marker in MapMarker(coordinate: marker.coordinate)
+        ZStack(alignment: .bottomTrailing) {
+            Map(coordinateRegion: regionBinding, annotationItems: markers) {
+                marker in MapMarker(coordinate: marker.coordinate)
+            }
+
+            Button(action: { print("Open in maps") }, label: {
+                HStack {
+                    Text("Open in Apple Maps")
+                    Image(systemName: "map")
+                }
+            })
+            .opacity(buttonOpacity)
+            .shadow(radius: 4)
+            .buttonStyle(.link)
+            .padding()
         }
         .frame(maxHeight: 280)
         .onAppear {
@@ -27,6 +41,11 @@ struct EventLocationView: View {
         }
         .onChange(of: location) { nextLocation in
             setRegion(for: nextLocation)
+        }
+        .onHover { isHovering in
+            withAnimation {
+                self.buttonOpacity = isHovering ? 1 : 0
+            }
         }
     }
 
