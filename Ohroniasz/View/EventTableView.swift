@@ -8,6 +8,7 @@ struct EventTableView: View {
     @State private var searchText: String = ""
     @State private var displayEvents: [CamEvent] = []
 
+    @FocusState private var isTableFocused: Bool
     @FocusState private var isDescriptionFieldFocused: Bool
 
     @EnvironmentObject private var eventLibrary: EventLibrary
@@ -52,6 +53,7 @@ struct EventTableView: View {
                     }
                 }
             }
+            .focused($isTableFocused)
 
             if let location = selectedEvent?.location {
                 EventLocationView(location: location)
@@ -68,6 +70,8 @@ struct EventTableView: View {
             if let selectedEvent {
                 self.selectedEventId = selectedEvent.id
             }
+
+            self.isTableFocused = true
         }
         .onChange(of: eventFilter) { nextFilterValue in
             self.displayEvents = eventLibrary.filterEvents(type: nextFilterValue)
