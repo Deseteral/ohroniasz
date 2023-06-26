@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentToolbar: ToolbarContent {
+    let selectedEvent: CamEvent?
+
     var body: some ToolbarContent {
         ToolbarItemGroup {
             Button {
@@ -11,7 +13,9 @@ struct ContentToolbar: ToolbarContent {
             .help("Mark as favorite")
 
             Button {
-                print("show in finder")
+                if let selectedEvent {
+                    PlatformInterface.revealInFinder(path: selectedEvent.path)
+                }
             } label: {
                 Image(systemName: "folder")
             }

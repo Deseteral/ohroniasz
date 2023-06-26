@@ -62,7 +62,7 @@ struct EventTableView: View {
         .frame(minWidth: 420)
         .searchable(text: $searchText)
         .toolbar {
-            ContentToolbar()
+            ContentToolbar(selectedEvent: selectedEvent)
         }
         .onAppear {
             self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
