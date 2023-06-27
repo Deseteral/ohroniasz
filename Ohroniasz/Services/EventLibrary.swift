@@ -75,7 +75,7 @@ fileprivate struct LibraryData: Codable {
 
 enum EventFilter: String, CaseIterable {
     case all = "All clips"
-    case sentry = "Sentry"
+    case sentry = "Sentry events"
     case saved = "Saved clips"
     case favorites = "Favorite clips"
 
