@@ -16,6 +16,7 @@
 		BF38D3212A3945460059AB6F /* EventLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF38D3202A3945460059AB6F /* EventLocationView.swift */; };
 		BF475C9C2A468CE300417C44 /* ToolbarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9B2A468CE300417C44 /* ToolbarContent.swift */; };
 		BF475C9E2A4A3F0C00417C44 /* PlatformInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */; };
+		BF475CA02A4BAE2700417C44 /* LibraryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9F2A4BAE2700417C44 /* LibraryData.swift */; };
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
 		BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* WelcomeView.swift */; };
 		BFC015CD2A3256EF008DF774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFC015CC2A3256EF008DF774 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		BF38D3202A3945460059AB6F /* EventLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationView.swift; sourceTree = "<group>"; };
 		BF475C9B2A468CE300417C44 /* ToolbarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContent.swift; sourceTree = "<group>"; };
 		BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInterface.swift; sourceTree = "<group>"; };
+		BF475C9F2A4BAE2700417C44 /* LibraryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryData.swift; sourceTree = "<group>"; };
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
 		BFC015CA2A3256EE008DF774 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				BF191E7A2A37A7060018938C /* VideoProcessor.swift */,
 				BF38D2E92A393C7D0059AB6F /* EventLibrary.swift */,
 				BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */,
+				BF475C9F2A4BAE2700417C44 /* LibraryData.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				BF38D2EA2A393C7D0059AB6F /* EventLibrary.swift in Sources */,
 				BF191E852A392E100018938C /* DetailView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
+				BF475CA02A4BAE2700417C44 /* LibraryData.swift in Sources */,
 				BFC015F92A32634F008DF774 /* LibraryScanner.swift in Sources */,
 				BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */,
 				BFE820752A352DF600C8C03A /* AVPlayer+isPlaying.swift in Sources */,

@@ -85,7 +85,7 @@ struct EventTableView: View {
         }
         .onChange(of: isDescriptionFieldFocused) { isDescriptionFieldFocused in
             if !isDescriptionFieldFocused {
-                eventLibrary.writeLibraryDataToDisk()
+                eventLibrary.saveLibraryData()
             }
         }
     }

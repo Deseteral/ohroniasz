@@ -10,14 +10,10 @@ class EventLibrary: ObservableObject {
         return events.count > 0
     }
 
-    private var dataFilePath: String {
-        return libraryPath + "/" + "ohroniasz.json"
-    }
-
     func loadEvents(libraryPath: String, events: [CamEvent]) {
         self.libraryPath = libraryPath
         self.events = events
-        readLibraryDataFromDisk()
+        readLibraryData()
     }
 
     func filterEvents(type: EventFilter) -> [CamEvent] {
@@ -37,40 +33,30 @@ class EventLibrary: ObservableObject {
         return events.first { $0.id == eventId }
     }
 
-    func writeLibraryDataToDisk() {
-        var data = LibraryData()
+    func saveLibraryData() {
+        let data = LibraryData()
 
         for event in events {
             guard !event.description.isEmpty else { continue }
             data.descriptions[event.id] = event.description
         }
 
-        do {
-            let jsonData = try JSONEncoder().encode(data)
-            let json = String(data: jsonData, encoding: .utf8)
-            try json?.write(toFile: dataFilePath, atomically: true, encoding: .utf8)
-        } catch {
-            print(error)
-        }
+        data.saveToDisk(libraryPath: libraryPath)
     }
 
-    private func readLibraryDataFromDisk() {
-        do {
-            let jsonData = try String(contentsOfFile: dataFilePath).data(using: .utf8)
-            let data = try JSONDecoder().decode(LibraryData.self, from: jsonData!)
+    private func readLibraryData() {
+        let data = LibraryData.readFromDisk(libraryPath: libraryPath)
 
-            for description in data.descriptions {
-                guard let idx = events.firstIndex(where: { $0.id == description.key }) else { continue }
-                events[idx].description = description.value
-            }
-        } catch {
-            print(error)
+        guard let data else {
+            LibraryData.saveDefaultToDisk(libraryPath: libraryPath)
+            return
+        }
+
+        for description in data.descriptions {
+            guard let idx = events.firstIndex(where: { $0.id == description.key }) else { continue }
+            events[idx].description = description.value
         }
     }
-}
-
-fileprivate struct LibraryData: Codable {
-    var descriptions: [CamEvent.ID: String] = [:]
 }
 
 enum EventFilter: String, CaseIterable {
