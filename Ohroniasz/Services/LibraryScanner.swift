@@ -11,6 +11,7 @@ struct CamEvent: Identifiable, Equatable {
     let incidentTimeOffset: Double?
 
     var description: String = ""
+    var isFavorite: Bool = false
 
     static func == (lhs: CamEvent, rhs: CamEvent) -> Bool {
         return lhs.id == rhs.id

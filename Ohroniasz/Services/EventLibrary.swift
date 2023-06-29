@@ -33,12 +33,23 @@ class EventLibrary: ObservableObject {
         return events.first { $0.id == eventId }
     }
 
+    func markAsFavorite(event: CamEvent) {
+        guard let idx = events.firstIndex(of: event) else { return }        
+        events[idx].isFavorite.toggle()
+        saveLibraryData()
+    }
+
     func saveLibraryData() {
         let data = LibraryData()
 
         for event in events {
-            guard !event.description.isEmpty else { continue }
-            data.descriptions[event.id] = event.description
+            if !event.description.isEmpty {
+                data.descriptions[event.id] = event.description
+            }
+
+            if event.isFavorite {
+                data.favorites.append(event.id)
+            }
         }
 
         data.saveToDisk(libraryPath: libraryPath)
@@ -55,6 +66,10 @@ class EventLibrary: ObservableObject {
         for description in data.descriptions {
             guard let idx = events.firstIndex(where: { $0.id == description.key }) else { continue }
             events[idx].description = description.value
+        }
+
+        for (idx, event) in events.enumerated() {
+            events[idx].isFavorite = data.favorites.contains { $0 == event.id }
         }
     }
 }
