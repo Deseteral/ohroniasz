@@ -8,7 +8,9 @@ class LibraryData: Codable {
         let dataFilePath = LibraryData.getDataFilePath(for: libraryPath)
 
         do {
-            let jsonData = try JSONEncoder().encode(self)
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let jsonData = try encoder.encode(self)
             let json = String(data: jsonData, encoding: .utf8)
             try json?.write(toFile: dataFilePath, atomically: true, encoding: .utf8)
         } catch {
