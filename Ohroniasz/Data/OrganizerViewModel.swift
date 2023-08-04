@@ -5,9 +5,7 @@ class OrganizerViewModel: ObservableObject {
     var libraryPath: String = ""
 
     @Published var events: [CamEvent] = []
-
     @Published var eventFilter: EventFilter = .all
-
     @Published var selectedEventId: CamEvent.ID? = nil
 
     var filteredEvents: [CamEvent] {
@@ -28,6 +26,11 @@ class OrganizerViewModel: ObservableObject {
 
     var hasSelectedEvent: Bool {
         return selectedEventId != nil
+    }
+
+    var isSelectedClipTypeRecent: Bool {
+        guard let selectedEvent = selectedEvent else { return false }
+        return selectedEvent.type == .recentClip
     }
 
     func loadEvents(from libraryPath: String) {

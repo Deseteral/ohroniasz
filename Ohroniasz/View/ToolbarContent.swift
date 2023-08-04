@@ -13,7 +13,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: organizerViewModel.selectedEvent?.isFavorite == true ? "star.fill" : "star")
             }
             .help("Mark as favorite")
-            .disabled(!organizerViewModel.hasSelectedEvent)
+            .disabled(!organizerViewModel.hasSelectedEvent || organizerViewModel.isSelectedClipTypeRecent)
 
             Button {
                 if let selectedEvent = organizerViewModel.selectedEvent {
