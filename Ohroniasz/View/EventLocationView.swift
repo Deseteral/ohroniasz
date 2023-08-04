@@ -16,8 +16,6 @@ struct EventLocationView: View {
     @State private var markers: [Marker] = []
     @State private var buttonOpacity = 0.0
 
-    @EnvironmentObject private var eventLibrary: EventLibrary
-
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Map(coordinateRegion: regionBinding, annotationItems: markers) {

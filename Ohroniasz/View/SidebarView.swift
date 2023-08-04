@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct SidebarView: View {
-    @Binding var eventFilter: EventFilter
+    @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
     var body: some View {
-        List(selection: $eventFilter) {
+        List(selection: $organizerViewModel.eventFilter) {
             ForEach(EventFilter.allCases, id: \.rawValue) { filter in
                 NavigationLink(value: filter) {
                     Label(filter.rawValue, systemImage: filter.systemIcon)

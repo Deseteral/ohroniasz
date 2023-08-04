@@ -1,16 +1,12 @@
 import SwiftUI
 
 struct EventTableView: View {
-    let eventFilter: EventFilter
-
-    @State private var selectedEventId: CamEvent.ID? = nil
     @State private var searchText: String = ""
-    @State private var displayEvents: [CamEvent] = []
 
     @FocusState private var isTableFocused: Bool
     @FocusState private var isDescriptionFieldFocused: Bool
 
-    @EnvironmentObject private var eventLibrary: EventLibrary
+    @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
     private let dateFormatter: DateFormatter = {
         let df = DateFormatter()
@@ -24,7 +20,7 @@ struct EventTableView: View {
 
     var body: some View {
         VStack {
-            Table(displayEvents, selection: $selectedEventId) {
+            Table(self.organizerViewModel.filteredEvents, selection: $organizerViewModel.selectedEventId) {
                 TableColumn("") { event in
                     VStack(alignment: .center) {
                         Image(systemName: event.type.systemImage)
@@ -36,7 +32,7 @@ struct EventTableView: View {
                 .width(eventTypeIconColumnWidth)
 
                 TableColumn("Description") { event in
-                    TextField("", text: $eventLibrary.events.first { $0.id == event.id }!.description)
+                    TextField("", text: $organizerViewModel.events.first { $0.id == event.id }!.description)
                         .focused($isDescriptionFieldFocused)
                 }
 
@@ -54,7 +50,7 @@ struct EventTableView: View {
             }
             .focused($isTableFocused)
 
-            if let location = eventLibrary.selectedEvent?.location {
+            if let location = organizerViewModel.selectedEvent?.location {
                 EventLocationView(location: location)
             }
         }
@@ -64,23 +60,11 @@ struct EventTableView: View {
             ContentToolbar()
         }
         .onAppear {
-            self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
-
-            if let selectedEvent = eventLibrary.selectedEvent {
-                self.selectedEventId = selectedEvent.id
-            }
-
             self.isTableFocused = true
-        }
-        .onChange(of: eventFilter) { nextFilterValue in
-            self.displayEvents = eventLibrary.filterEvents(type: nextFilterValue)
-        }
-        .onChange(of: selectedEventId) { nextSelectedEventId in
-            eventLibrary.selectedEventId = nextSelectedEventId
         }
         .onChange(of: isDescriptionFieldFocused) { isDescriptionFieldFocused in
             if !isDescriptionFieldFocused {
-                eventLibrary.saveLibraryData()
+                organizerViewModel.saveLibraryData()
             }
         }
     }

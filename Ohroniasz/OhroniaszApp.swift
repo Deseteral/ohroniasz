@@ -5,21 +5,20 @@ import AppKit
 struct OhroniaszApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) fileprivate var appDelegate
 
-    @StateObject private var eventLibrary = EventLibrary()
+    @StateObject private var organizerViewModel = OrganizerViewModel()
 
     var body: some Scene {
         WindowGroup {
             Group {
-                if eventLibrary.hasEventsLoaded {
+                if organizerViewModel.hasEventsLoaded {
                     ContentView()
                 } else {
                     WelcomeView() { libraryPath in
-                        let events = LibraryScanner.scanLibrary(atPath: libraryPath)
-                        self.eventLibrary.loadEvents(libraryPath: libraryPath, events: events)
+                        self.organizerViewModel.loadEvents(from: libraryPath)
                     }
                 }
             }
-            .environmentObject(eventLibrary)
+            .environmentObject(organizerViewModel)
             .preferredColorScheme(.dark)
         }
         .windowToolbarStyle(UnifiedWindowToolbarStyle())

@@ -1,29 +1,29 @@
 import SwiftUI
 
 struct ContentToolbar: ToolbarContent {
-    @EnvironmentObject private var eventLibrary: EventLibrary
+    @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
     var body: some ToolbarContent {
         ToolbarItemGroup {
             Button {
-                if let selectedEvent = eventLibrary.selectedEvent {
-                    eventLibrary.markAsFavorite(event: selectedEvent)
+                if let selectedEvent = organizerViewModel.selectedEvent {
+                    organizerViewModel.markAsFavorite(event: selectedEvent)
                 }
             } label: {
-                Image(systemName: eventLibrary.selectedEvent?.isFavorite == true ? "star.fill" : "star")
+                Image(systemName: organizerViewModel.selectedEvent?.isFavorite == true ? "star.fill" : "star")
             }
             .help("Mark as favorite")
-            .disabled(eventLibrary.selectedEvent == nil)
+            .disabled(organizerViewModel.hasSelectedEvent)
 
             Button {
-                if let selectedEvent = eventLibrary.selectedEvent {
+                if let selectedEvent = organizerViewModel.selectedEvent {
                     PlatformInterface.revealInFinder(path: selectedEvent.path)
                 }
             } label: {
                 Image(systemName: "folder")
             }
             .help("Show in Finder")
-            .disabled(eventLibrary.selectedEvent == nil)
+            .disabled(organizerViewModel.hasSelectedEvent)
 
             Button {
                 print("remove event")
@@ -31,7 +31,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: "trash")
             }
             .help("Remove event")
-            .disabled(eventLibrary.selectedEvent == nil)
+            .disabled(organizerViewModel.hasSelectedEvent)
         }
     }
 }

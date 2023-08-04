@@ -9,7 +9,7 @@ fileprivate enum PlaylistLoadingState {
 struct DetailView: View {
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
-    @EnvironmentObject private var eventLibrary: EventLibrary
+    @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
     var body: some View {
         Group {
@@ -22,7 +22,7 @@ struct DetailView: View {
                     VideoGridView(playlist: playlist)
             }
         }
-        .onChange(of: eventLibrary.selectedEvent) { nextSelectedEvent in
+        .onChange(of: organizerViewModel.selectedEvent) { nextSelectedEvent in
             guard let nextSelectedEvent else {
                 self.selectedPlaylist = .notSelected
                 return

@@ -1,39 +1,43 @@
 import Foundation
 import SwiftUI
 
-class EventLibrary: ObservableObject {
+class OrganizerViewModel: ObservableObject {
     var libraryPath: String = ""
 
     @Published var events: [CamEvent] = []
 
+    @Published var eventFilter: EventFilter = .all
+
     @Published var selectedEventId: CamEvent.ID? = nil
+
+    var filteredEvents: [CamEvent] {
+        return filterEvents()
+    }
 
     var selectedEvent: CamEvent? {
         get {
-            return if let id = self.selectedEventId {
-                findEvent(by: id)
-            } else {
-                nil
-            }
+            guard let id = self.selectedEventId else { return nil }
+            return findEvent(by: id)
         }
-
-        set {
-            self.selectedEventId = newValue?.id
-        }
+        set { self.selectedEventId = newValue?.id }
     }
 
     var hasEventsLoaded: Bool {
         return events.count > 0
     }
 
-    func loadEvents(libraryPath: String, events: [CamEvent]) {
+    var hasSelectedEvent: Bool {
+        return selectedEventId != nil
+    }
+
+    func loadEvents(from libraryPath: String) {
         self.libraryPath = libraryPath
-        self.events = events
+        self.events = LibraryScanner.scanLibrary(atPath: libraryPath)
         readLibraryData()
     }
 
-    func filterEvents(type: EventFilter) -> [CamEvent] {
-        switch type {
+    private func filterEvents() -> [CamEvent] {
+        switch self.eventFilter {
             case .all:
                 return events
             case .sentry:
