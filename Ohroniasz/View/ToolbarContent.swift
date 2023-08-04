@@ -13,7 +13,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: organizerViewModel.selectedEvent?.isFavorite == true ? "star.fill" : "star")
             }
             .help("Mark as favorite")
-            .disabled(organizerViewModel.hasSelectedEvent)
+            .disabled(!organizerViewModel.hasSelectedEvent)
 
             Button {
                 if let selectedEvent = organizerViewModel.selectedEvent {
@@ -23,7 +23,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: "folder")
             }
             .help("Show in Finder")
-            .disabled(organizerViewModel.hasSelectedEvent)
+            .disabled(!organizerViewModel.hasSelectedEvent)
 
             Button {
                 print("remove event")
@@ -31,7 +31,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: "trash")
             }
             .help("Remove event")
-            .disabled(organizerViewModel.hasSelectedEvent)
+            .disabled(!organizerViewModel.hasSelectedEvent)
         }
     }
 }
