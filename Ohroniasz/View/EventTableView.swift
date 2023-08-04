@@ -56,9 +56,6 @@ struct EventTableView: View {
         }
         .frame(minWidth: 420)
         .searchable(text: $searchText)
-        .toolbar {
-            ContentToolbar()
-        }
         .onAppear {
             self.isTableFocused = true
         }

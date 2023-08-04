@@ -8,6 +8,7 @@ struct ContentView: View {
             SidebarView()
         } content: {
             EventTableView()
+                .toolbar { ContentToolbar() }
         } detail: {
             DetailView()
                 .toolbar { DetailToolbar() }
