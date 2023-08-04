@@ -15,7 +15,7 @@
 		BF191E852A392E100018938C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E842A392E100018938C /* DetailView.swift */; };
 		BF38D2EA2A393C7D0059AB6F /* OrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF38D2E92A393C7D0059AB6F /* OrganizerViewModel.swift */; };
 		BF38D3212A3945460059AB6F /* EventLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF38D3202A3945460059AB6F /* EventLocationView.swift */; };
-		BF475C9C2A468CE300417C44 /* ContentToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9B2A468CE300417C44 /* ContentToolbar.swift */; };
+		BF475C9C2A468CE300417C44 /* ToolbarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9B2A468CE300417C44 /* ToolbarContent.swift */; };
 		BF475C9E2A4A3F0C00417C44 /* PlatformInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */; };
 		BF475CA02A4BAE2700417C44 /* LibraryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9F2A4BAE2700417C44 /* LibraryData.swift */; };
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
@@ -57,7 +57,7 @@
 		BF191E842A392E100018938C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BF38D2E92A393C7D0059AB6F /* OrganizerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewModel.swift; sourceTree = "<group>"; };
 		BF38D3202A3945460059AB6F /* EventLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationView.swift; sourceTree = "<group>"; };
-		BF475C9B2A468CE300417C44 /* ContentToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentToolbar.swift; sourceTree = "<group>"; };
+		BF475C9B2A468CE300417C44 /* ToolbarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContent.swift; sourceTree = "<group>"; };
 		BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInterface.swift; sourceTree = "<group>"; };
 		BF475C9F2A4BAE2700417C44 /* LibraryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryData.swift; sourceTree = "<group>"; };
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +192,7 @@
 				BF191E822A3927F20018938C /* SidebarView.swift */,
 				BF191E842A392E100018938C /* DetailView.swift */,
 				BF38D3202A3945460059AB6F /* EventLocationView.swift */,
-				BF475C9B2A468CE300417C44 /* ContentToolbar.swift */,
+				BF475C9B2A468CE300417C44 /* ToolbarContent.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -337,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF191E812A3924080018938C /* ContentView.swift in Sources */,
-				BF475C9C2A468CE300417C44 /* ContentToolbar.swift in Sources */,
+				BF475C9C2A468CE300417C44 /* ToolbarContent.swift in Sources */,
 				BFC015FB2A33CF8D008DF774 /* EventTableView.swift in Sources */,
 				BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */,
 				BF475C9E2A4A3F0C00417C44 /* PlatformInterface.swift in Sources */,
