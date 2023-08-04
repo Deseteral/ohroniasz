@@ -6,9 +6,11 @@ struct ContentToolbar: ToolbarContent {
     var body: some ToolbarContent {
         ToolbarItemGroup {
             Button {
-                print("mark as favorie")
+                if let selectedEvent = eventLibrary.selectedEvent {
+                    eventLibrary.markAsFavorite(event: selectedEvent)
+                }
             } label: {
-                Image(systemName: "star")
+                Image(systemName: eventLibrary.selectedEvent?.isFavorite == true ? "star.fill" : "star")
             }
             .help("Mark as favorite")
             .disabled(eventLibrary.selectedEvent == nil)
