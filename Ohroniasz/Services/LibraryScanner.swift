@@ -47,7 +47,7 @@ class LibraryScanner {
             return []
         }
 
-        return [CamEvent(id: clipsFolderPath, date: date, type: .recentClip, path: clipsFolderPath, location: nil, incidentTimeOffset: nil)]
+        return [CamEvent(id: "RecentClips", date: date, type: .recentClip, path: clipsFolderPath, location: nil, incidentTimeOffset: nil)]
     }
 
     private static func readEvent(eventPath: String, eventType: CamEventType) -> CamEvent? {
@@ -75,7 +75,9 @@ class LibraryScanner {
             return nil
         }
 
-        return CamEvent(id: eventPath, date: date, type: eventType, path: eventPath, location: location, incidentTimeOffset: incidentTimeOffset)
+        let id = eventPath.split(separator: "/").suffix(2).joined(separator: "/")
+
+        return CamEvent(id: id, date: date, type: eventType, path: eventPath, location: location, incidentTimeOffset: incidentTimeOffset)
     }
 
     private static func readEventMetadata(eventPath: String) -> CamEventMetadata? {
