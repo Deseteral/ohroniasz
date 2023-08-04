@@ -6,6 +6,22 @@ class EventLibrary: ObservableObject {
 
     @Published var events: [CamEvent] = []
 
+    @Published var selectedEventId: CamEvent.ID? = nil
+
+    var selectedEvent: CamEvent? {
+        get {
+            return if let id = self.selectedEventId {
+                findEvent(by: id)
+            } else {
+                nil
+            }
+        }
+
+        set {
+            self.selectedEventId = newValue?.id
+        }
+    }
+
     var hasEventsLoaded: Bool {
         return events.count > 0
     }

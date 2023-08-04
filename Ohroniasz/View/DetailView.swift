@@ -7,8 +7,6 @@ fileprivate enum PlaylistLoadingState {
 }
 
 struct DetailView: View {
-    let selectedEvent: CamEvent?
-
     @State private var selectedPlaylist: PlaylistLoadingState = .notSelected
 
     @EnvironmentObject private var eventLibrary: EventLibrary
@@ -24,7 +22,7 @@ struct DetailView: View {
                     VideoGridView(playlist: playlist)
             }
         }
-        .onChange(of: self.selectedEvent) { nextSelectedEvent in
+        .onChange(of: eventLibrary.selectedEvent) { nextSelectedEvent in
             guard let nextSelectedEvent else {
                 self.selectedPlaylist = .notSelected
                 return

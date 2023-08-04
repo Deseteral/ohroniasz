@@ -2,7 +2,6 @@ import SwiftUI
 
 struct EventTableView: View {
     let eventFilter: EventFilter
-    @Binding var selectedEvent: CamEvent?
 
     @State private var selectedEventId: CamEvent.ID? = nil
     @State private var searchText: String = ""
@@ -55,19 +54,19 @@ struct EventTableView: View {
             }
             .focused($isTableFocused)
 
-            if let location = selectedEvent?.location {
+            if let location = eventLibrary.selectedEvent?.location {
                 EventLocationView(location: location)
             }
         }
         .frame(minWidth: 420)
         .searchable(text: $searchText)
         .toolbar {
-            ContentToolbar(selectedEvent: selectedEvent)
+            ContentToolbar()
         }
         .onAppear {
             self.displayEvents = eventLibrary.filterEvents(type: eventFilter)
 
-            if let selectedEvent {
+            if let selectedEvent = eventLibrary.selectedEvent {
                 self.selectedEventId = selectedEvent.id
             }
 
@@ -77,11 +76,7 @@ struct EventTableView: View {
             self.displayEvents = eventLibrary.filterEvents(type: nextFilterValue)
         }
         .onChange(of: selectedEventId) { nextSelectedEventId in
-            if let nextSelectedEventId {
-                self.selectedEvent = eventLibrary.findEvent(by: nextSelectedEventId)
-            } else {
-                self.selectedEvent = nil
-            }
+            eventLibrary.selectedEventId = nextSelectedEventId
         }
         .onChange(of: isDescriptionFieldFocused) { isDescriptionFieldFocused in
             if !isDescriptionFieldFocused {

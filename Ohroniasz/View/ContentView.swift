@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var eventFilter: EventFilter = .all
-    @State private var selectedEvent: CamEvent? = nil
 
     @EnvironmentObject private var eventLibrary: EventLibrary
 
@@ -10,16 +9,16 @@ struct ContentView: View {
         NavigationSplitView {
             SidebarView(eventFilter: $eventFilter)
         } content: {
-            EventTableView(eventFilter: eventFilter, selectedEvent: $selectedEvent)
+            EventTableView(eventFilter: eventFilter)
         } detail: {
-            DetailView(selectedEvent: selectedEvent)
+            DetailView()
                 .toolbar {
                     DetailToolbar()
                 }
         }
         .navigationSubtitle(eventLibrary.libraryPath)
         .onChange(of: self.eventFilter) { _ in
-            self.selectedEvent = nil
+            self.eventLibrary.selectedEvent = nil
         }
     }
 }

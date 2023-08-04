@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentToolbar: ToolbarContent {
-    let selectedEvent: CamEvent?
+    @EnvironmentObject private var eventLibrary: EventLibrary
 
     var body: some ToolbarContent {
         ToolbarItemGroup {
@@ -11,17 +11,17 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: "star")
             }
             .help("Mark as favorite")
-            .disabled(selectedEvent == nil)
+            .disabled(eventLibrary.selectedEvent == nil)
 
             Button {
-                if let selectedEvent {
+                if let selectedEvent = eventLibrary.selectedEvent {
                     PlatformInterface.revealInFinder(path: selectedEvent.path)
                 }
             } label: {
                 Image(systemName: "folder")
             }
             .help("Show in Finder")
-            .disabled(selectedEvent == nil)
+            .disabled(eventLibrary.selectedEvent == nil)
 
             Button {
                 print("remove event")
@@ -29,7 +29,7 @@ struct ContentToolbar: ToolbarContent {
                 Image(systemName: "trash")
             }
             .help("Remove event")
-            .disabled(selectedEvent == nil)
+            .disabled(eventLibrary.selectedEvent == nil)
         }
     }
 }
