@@ -48,7 +48,7 @@ class OrganizerViewModel: ObservableObject {
             case .saved:
                 return events.filter { $0.type == .savedClip }
             case .favorites:
-                return []
+                return events.filter { $0.isFavorite }
         }
     }
 
