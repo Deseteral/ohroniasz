@@ -26,7 +26,9 @@ struct ContentToolbar: ToolbarContent {
             .disabled(!organizerViewModel.hasSelectedEvent)
 
             Button {
-                print("remove event")
+                if let selectedEvent = organizerViewModel.selectedEvent {
+                    organizerViewModel.removeEvent(event: selectedEvent)
+                }
             } label: {
                 Image(systemName: "trash")
             }

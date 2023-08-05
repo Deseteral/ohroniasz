@@ -62,6 +62,25 @@ class OrganizerViewModel: ObservableObject {
         saveLibraryData()
     }
 
+    func removeEvent(event: CamEvent) {
+        if selectedEventId == event.id {
+            selectedEventId = nil
+        }
+
+        if let idx = events.firstIndex(of: event) {
+            events.remove(at: idx)
+        }
+
+        let url = URL(filePath: event.path, directoryHint: .isDirectory)
+
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            // TODO: Maybe show some message to the user?
+            return
+        }
+    }
+
     func saveLibraryData() {
         let data = LibraryData()
 
