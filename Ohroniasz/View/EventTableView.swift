@@ -1,8 +1,6 @@
 import SwiftUI
 
 struct EventTableView: View {
-    @State private var searchText: String = ""
-
     @FocusState private var isTableFocused: Bool
     @FocusState private var isDescriptionFieldFocused: Bool
 
@@ -55,7 +53,7 @@ struct EventTableView: View {
             }
         }
         .frame(minWidth: 420)
-        .searchable(text: $searchText)
+        .searchable(text: $organizerViewModel.searchText)
         .onAppear {
             self.isTableFocused = true
         }

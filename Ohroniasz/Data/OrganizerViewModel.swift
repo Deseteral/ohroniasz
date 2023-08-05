@@ -7,6 +7,7 @@ class OrganizerViewModel: ObservableObject {
     @Published var events: [CamEvent] = []
     @Published var eventFilter: EventFilter = .all
     @Published var selectedEventId: CamEvent.ID? = nil
+    @Published var searchText: String = ""
 
     var displayEvents: [CamEvent] {
         return getDisplayEvents()
@@ -40,16 +41,24 @@ class OrganizerViewModel: ObservableObject {
     }
 
     private func getDisplayEvents() -> [CamEvent] {
-        switch self.eventFilter {
+        let eventsWithFilter = switch self.eventFilter {
             case .all:
-                return events
+                events
             case .sentry:
-                return events.filter { $0.type == .sentryClip }
+                events.filter { $0.type == .sentryClip }
             case .saved:
-                return events.filter { $0.type == .savedClip }
+                events.filter { $0.type == .savedClip }
             case .favorites:
-                return events.filter { $0.isFavorite }
+                events.filter { $0.isFavorite }
         }
+
+        let eventsWithFilterAndSearch = if searchText.isEmpty {
+            eventsWithFilter
+        } else {
+            eventsWithFilter.filter { $0.description.lowercased().contains(searchText.lowercased()) }
+        }
+
+        return eventsWithFilterAndSearch
     }
 
     func getEvent(by eventId: CamEvent.ID) -> CamEvent? {
