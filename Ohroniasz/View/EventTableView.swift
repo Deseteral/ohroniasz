@@ -20,7 +20,7 @@ struct EventTableView: View {
 
     var body: some View {
         VStack {
-            Table(self.organizerViewModel.filteredEvents, selection: $organizerViewModel.selectedEventId) {
+            Table(self.organizerViewModel.displayEvents, selection: $organizerViewModel.selectedEventId) {
                 TableColumn("") { event in
                     VStack(alignment: .center) {
                         Image(systemName: event.type.systemImage)

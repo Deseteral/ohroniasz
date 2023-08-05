@@ -8,14 +8,14 @@ class OrganizerViewModel: ObservableObject {
     @Published var eventFilter: EventFilter = .all
     @Published var selectedEventId: CamEvent.ID? = nil
 
-    var filteredEvents: [CamEvent] {
-        return filterEvents()
+    var displayEvents: [CamEvent] {
+        return getDisplayEvents()
     }
 
     var selectedEvent: CamEvent? {
         get {
             guard let id = self.selectedEventId else { return nil }
-            return findEvent(by: id)
+            return getEvent(by: id)
         }
         set { self.selectedEventId = newValue?.id }
     }
@@ -39,7 +39,7 @@ class OrganizerViewModel: ObservableObject {
         readLibraryData()
     }
 
-    private func filterEvents() -> [CamEvent] {
+    private func getDisplayEvents() -> [CamEvent] {
         switch self.eventFilter {
             case .all:
                 return events
@@ -52,7 +52,7 @@ class OrganizerViewModel: ObservableObject {
         }
     }
 
-    func findEvent(by eventId: CamEvent.ID) -> CamEvent? {
+    func getEvent(by eventId: CamEvent.ID) -> CamEvent? {
         return events.first { $0.id == eventId }
     }
 
