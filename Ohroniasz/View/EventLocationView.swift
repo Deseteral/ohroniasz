@@ -22,7 +22,7 @@ struct EventLocationView: View {
                 marker in MapMarker(coordinate: marker.coordinate)
             }
 
-            Button(action: { print("Open in maps") }, label: {
+            Button(action: { openLocationInMaps() }, label: {
                 HStack {
                     Text("Open in Apple Maps")
                     Image(systemName: "map")
@@ -52,6 +52,11 @@ struct EventLocationView: View {
 
         self.region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005))
         self.markers = [Marker(coordinate: center)]
+    }
+
+    private func openLocationInMaps() {
+        let query = "Sentry event location".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        PlatformInterface.openInDefaultBrowser(url: URL(string: "http://maps.apple.com/?ll=\(location.lat),\(location.lon)&q=\(query)")!)
     }
 }
 
