@@ -18,7 +18,7 @@ struct EventTableView: View {
 
     var body: some View {
         VStack {
-            Table(self.organizerViewModel.displayEvents, selection: $organizerViewModel.selectedEventId) {
+            Table(self.organizerViewModel.displayEvents, selection: $organizerViewModel.selectedEventId, sortOrder: $organizerViewModel.sortOrder) {
                 TableColumn("") { event in
                     VStack(alignment: .center) {
                         Image(systemName: event.type.systemImage)
@@ -29,12 +29,12 @@ struct EventTableView: View {
                 }
                 .width(eventTypeIconColumnWidth)
 
-                TableColumn("Description") { event in
+                TableColumn("Description", value: \.description) { event in
                     TextField("", text: $organizerViewModel.events.first { $0.id == event.id }!.description)
                         .focused($isDescriptionFieldFocused)
                 }
 
-                TableColumn("Date") { event in
+                TableColumn("Date", value: \.date) { event in
                     Text(dateFormatter.string(from: event.date))
                 }
 

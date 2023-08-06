@@ -5,9 +5,12 @@ class OrganizerViewModel: ObservableObject {
     var libraryPath: String = ""
 
     @Published var events: [CamEvent] = []
+
     @Published var eventFilter: EventFilter = .all
-    @Published var selectedEventId: CamEvent.ID? = nil
     @Published var searchText: String = ""
+    @Published var sortOrder: [KeyPathComparator<CamEvent>] = [KeyPathComparator(\CamEvent.date, order: .reverse)]
+
+    @Published var selectedEventId: CamEvent.ID? = nil
 
     var displayEvents: [CamEvent] {
         return getDisplayEvents()
@@ -58,7 +61,9 @@ class OrganizerViewModel: ObservableObject {
             eventsWithFilter.filter { $0.description.lowercased().contains(searchText.lowercased()) }
         }
 
-        return eventsWithFilterAndSearch
+        let sortedEventsWithFilterAndSearch = eventsWithFilterAndSearch.sorted(using: sortOrder)
+
+        return sortedEventsWithFilterAndSearch
     }
 
     func getEvent(by eventId: CamEvent.ID) -> CamEvent? {
