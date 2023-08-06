@@ -76,6 +76,11 @@ class OrganizerViewModel: ObservableObject {
         saveLibraryData()
     }
 
+    func markAsFavorite(id: CamEvent.ID) {
+        guard let event = getEvent(by: id) else { return }
+        markAsFavorite(event: event)
+    }
+
     func removeEvent(event: CamEvent) {
         if selectedEventId == event.id {
             selectedEventId = nil
@@ -93,6 +98,11 @@ class OrganizerViewModel: ObservableObject {
             // TODO: Maybe show some message to the user?
             return
         }
+    }
+
+    func removeEvent(id: CamEvent.ID) {
+        guard let event = getEvent(by: id) else { return }
+        removeEvent(event: event)
     }
 
     func saveLibraryData() {

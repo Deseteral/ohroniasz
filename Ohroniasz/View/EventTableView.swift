@@ -19,7 +19,7 @@ struct EventTableView: View {
     var body: some View {
         VStack {
             Table(
-                self.organizerViewModel.displayEvents,
+                organizerViewModel.displayEvents,
                 selection: $organizerViewModel.selectedEventId,
                 sortOrder: $organizerViewModel.sortOrder
             ) {
@@ -48,6 +48,21 @@ struct EventTableView: View {
                     } else {
                         EmptyView()
                     }
+                }
+            }
+            .contextMenu(forSelectionType: CamEvent.ID.self) { items in
+                if items.count == 1 {
+                    Button("Mark as favorite") {
+                        organizerViewModel.markAsFavorite(id: items.first!)
+                    }
+                    Button("Reveal in Finder") {
+                        PlatformInterface.revealInFinder(path: organizerViewModel.getEvent(by: items.first!)!.path)
+                    }
+                    Button("Move to trash") {
+                        organizerViewModel.removeEvent(id: items.first!)
+                    }
+                } else {
+                    EmptyView()
                 }
             }
             .focused($isTableFocused)
