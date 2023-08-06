@@ -52,14 +52,16 @@ struct EventTableView: View {
             }
             .contextMenu(forSelectionType: CamEvent.ID.self) { items in
                 if items.count == 1 {
+                    let item = organizerViewModel.getEvent(by: items.first!)!
+
                     Button("Mark as favorite") {
-                        organizerViewModel.markAsFavorite(id: items.first!)
+                        organizerViewModel.markAsFavorite(id: item.id)
                     }
                     Button("Reveal in Finder") {
-                        PlatformInterface.revealInFinder(path: organizerViewModel.getEvent(by: items.first!)!.path)
+                        PlatformInterface.revealInFinder(path: item.path)
                     }
                     Button("Move to trash") {
-                        organizerViewModel.removeEvent(id: items.first!)
+                        organizerViewModel.removeEvent(id: item.id)
                     }
                 } else {
                     EmptyView()
