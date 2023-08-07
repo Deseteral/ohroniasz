@@ -30,21 +30,21 @@ struct VideoGridView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     ZStack(alignment: .topLeading) {
-                        VideoPlayer(player: playerTopLeft)
+                        GridVideoPlayer(player: playerTopLeft)
                         Text("Front camera").padding().opacity(cameraLabelOpacity)
                     }
                     ZStack(alignment: .topLeading) {
-                        VideoPlayer(player: playerTopRight)
+                        GridVideoPlayer(player: playerTopRight)
                         Text("Back camera").padding().opacity(cameraLabelOpacity)
                     }
                 }
                 HStack(spacing: 0) {
                     ZStack(alignment: .topLeading) {
-                        VideoPlayer(player: playerBottomLeft)
+                        GridVideoPlayer(player: playerBottomLeft)
                         Text("Left repeater camera").padding().opacity(cameraLabelOpacity)
                     }
                     ZStack(alignment: .topLeading) {
-                        VideoPlayer(player: playerBottomRight)
+                        GridVideoPlayer(player: playerBottomRight)
                         Text("Right repeater camera").padding().opacity(cameraLabelOpacity)
                     }
                 }
@@ -157,4 +157,17 @@ struct VideoGridView: View {
 
         return formatter.string(from: TimeInterval(seconds))!
     }
+}
+
+fileprivate struct GridVideoPlayer: NSViewRepresentable {
+    var player : AVPlayer
+
+    func makeNSView(context: Context) -> AVPlayerView {
+        let view = AVPlayerView()
+        view.controlsStyle = .none
+        view.player = player
+        return view
+    }
+
+    func updateNSView(_ nsView: AVPlayerView, context: Context) {}
 }
