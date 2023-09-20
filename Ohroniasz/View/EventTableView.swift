@@ -72,6 +72,14 @@ struct EventTableView: View {
             if let location = organizerViewModel.selectedEvent?.location {
                 EventLocationView(location: location)
             }
+
+            VStack {
+                Divider()
+                HStack(alignment: .center) {
+                    Text("Test status bar")
+                        .padding(.bottom, 6)
+                }
+            }
         }
         .frame(minWidth: 420)
         .searchable(text: $organizerViewModel.searchText)
