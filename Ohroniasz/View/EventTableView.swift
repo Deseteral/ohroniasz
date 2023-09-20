@@ -73,12 +73,8 @@ struct EventTableView: View {
                 EventLocationView(location: location)
             }
 
-            VStack {
-                Divider()
-                HStack(alignment: .center) {
-                    Text("Test status bar")
-                        .padding(.bottom, 6)
-                }
+            WindowStatusBar {
+                Text("Test status bar")
             }
         }
         .frame(minWidth: 420)
