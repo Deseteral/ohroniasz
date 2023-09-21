@@ -74,7 +74,7 @@ struct EventTableView: View {
             }
 
             WindowStatusBar {
-                Text("Test status bar")
+                Text(organizerViewModel.tableStatusBarText)
             }
         }
         .frame(minWidth: 420)

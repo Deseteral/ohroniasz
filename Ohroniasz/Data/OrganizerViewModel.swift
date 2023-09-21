@@ -12,6 +12,8 @@ class OrganizerViewModel: ObservableObject {
 
     @Published var selectedEventId: CamEvent.ID? = nil
 
+    @Published var tableStatusBarText: String = ""
+
     var displayEvents: [CamEvent] {
         return getDisplayEvents()
     }
@@ -40,6 +42,7 @@ class OrganizerViewModel: ObservableObject {
     func loadEvents(from libraryPath: String) {
         self.libraryPath = libraryPath
         self.events = LibraryScanner.scanLibrary(atPath: libraryPath)
+        refreshTableStatusBarText()
         readLibraryData()
     }
 
@@ -90,6 +93,8 @@ class OrganizerViewModel: ObservableObject {
             events.remove(at: idx)
         }
 
+        refreshTableStatusBarText()
+
         let url = URL(filePath: event.path, directoryHint: .isDirectory)
 
         do {
@@ -137,6 +142,13 @@ class OrganizerViewModel: ObservableObject {
         for (idx, event) in events.enumerated() {
             events[idx].isFavorite = data.favorites.contains { $0 == event.id }
         }
+    }
+
+    private func refreshTableStatusBarText() {
+        let sizeOnDisk = (try? PlatformInterface.directorySizeOnDisk(path: libraryPath))
+            .map { " \($0) on disk." }
+
+        self.tableStatusBarText = "\(events.count) events in library.\(sizeOnDisk ?? "")"
     }
 }
 
