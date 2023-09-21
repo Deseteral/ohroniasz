@@ -146,9 +146,9 @@ class OrganizerViewModel: ObservableObject {
 
     private func refreshTableStatusBarText() {
         let sizeOnDisk = (try? PlatformInterface.directorySizeOnDisk(path: libraryPath))
-            .map { " \($0) on disk." }
+            .map { ", \($0) on disk" }
 
-        self.tableStatusBarText = "\(events.count) events in library.\(sizeOnDisk ?? "")"
+        self.tableStatusBarText = "\(events.count) events in library\(sizeOnDisk ?? "")"
     }
 }
 
