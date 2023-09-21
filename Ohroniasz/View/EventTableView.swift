@@ -17,7 +17,7 @@ struct EventTableView: View {
     private let eventTypeIconColumnWidth: CGFloat = 17
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Table(
                 organizerViewModel.displayEvents,
                 selection: $organizerViewModel.selectedEventId,
