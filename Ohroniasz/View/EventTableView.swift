@@ -37,10 +37,12 @@ struct EventTableView: View {
                     TextField("", text: $organizerViewModel.events.first { $0.id == event.id }!.description)
                         .focused($isDescriptionFieldFocused)
                 }
+                .width(180)
 
                 TableColumn("Date", value: \.date) { event in
                     Text(dateFormatter.string(from: event.date))
                 }
+                .width(180)
 
                 TableColumn("Location") { event in
                     if let location = event.location {
@@ -49,6 +51,7 @@ struct EventTableView: View {
                         EmptyView()
                     }
                 }
+                .width(180)
             }
             .contextMenu(forSelectionType: CamEvent.ID.self) { items in
                 if items.count == 1 {
