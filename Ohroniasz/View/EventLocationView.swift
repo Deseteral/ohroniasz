@@ -18,9 +18,10 @@ struct EventLocationView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            Map(coordinateRegion: regionBinding, annotationItems: markers) {
-                marker in MapMarker(coordinate: marker.coordinate)
-            }
+            // TODO: Fix map view after MacOS 14 migration
+//            Map(coordinateRegion: regionBinding, annotationItems: markers) {
+//                marker in MapMarker(coordinate: marker.coordinate)
+//            }
 
             Button(action: { openLocationInMaps() }, label: {
                 HStack {
@@ -37,7 +38,7 @@ struct EventLocationView: View {
         .onAppear {
             setRegion(for: location)
         }
-        .onChange(of: location) { nextLocation in
+        .onChange(of: location) { _, nextLocation in
             setRegion(for: nextLocation)
         }
         .onHover { isHovering in

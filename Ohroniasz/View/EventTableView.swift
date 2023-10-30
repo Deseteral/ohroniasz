@@ -85,7 +85,7 @@ struct EventTableView: View {
         .onAppear {
             self.isTableFocused = true
         }
-        .onChange(of: isDescriptionFieldFocused) { isDescriptionFieldFocused in
+        .onChange(of: isDescriptionFieldFocused) { _, isDescriptionFieldFocused in
             if !isDescriptionFieldFocused {
                 organizerViewModel.saveLibraryData()
             }

@@ -22,7 +22,7 @@ struct DetailView: View {
                     VideoGridView(playlist: playlist)
             }
         }
-        .onChange(of: organizerViewModel.selectedEvent) { nextSelectedEvent in
+        .onChange(of: organizerViewModel.selectedEvent) { _, nextSelectedEvent in
             guard let nextSelectedEvent else {
                 self.selectedPlaylist = .notSelected
                 return

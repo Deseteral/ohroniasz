@@ -97,7 +97,9 @@ struct VideoGridView: View {
                 player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.01, preferredTimescale: 60000), queue: nil, using: playerTimeChanged)
             }
         }
-        .onChange(of: sliderValue, perform: sliderValueChanged)
+        .onChange(of: sliderValue) { _, nextSliderValue in
+            sliderValueChanged(to: nextSliderValue)
+        }
     }
 
     private var isPlaying: Bool {
