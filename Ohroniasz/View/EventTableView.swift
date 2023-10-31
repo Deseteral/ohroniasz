@@ -6,6 +6,8 @@ struct EventTableView: View {
 
     @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
+    @State var searchText = ""
+
     private let dateFormatter: DateFormatter = {
         let df = DateFormatter()
         df.timeStyle = .medium
@@ -81,7 +83,10 @@ struct EventTableView: View {
             }
         }
         .frame(minWidth: 420)
-        .searchable(text: $organizerViewModel.searchText)
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { _, nextSearchText in
+            self.organizerViewModel.searchText = nextSearchText
+        }
         .onAppear {
             self.isTableFocused = true
         }
