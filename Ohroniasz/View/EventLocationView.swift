@@ -28,10 +28,10 @@ struct EventLocationView: View {
         }
         .frame(maxHeight: 280)
         .onAppear {
-            setRegion(for: location)
+            setMarkers(for: location)
         }
         .onChange(of: location) { _, nextLocation in
-            setRegion(for: nextLocation)
+            setMarkers(for: nextLocation)
         }
         .onHover { isHovering in
             withAnimation {
@@ -40,7 +40,7 @@ struct EventLocationView: View {
         }
     }
 
-    private func setRegion(for location: CamEventLocation) {
+    private func setMarkers(for location: CamEventLocation) {
         let center = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
         self.markers = [EventLocationMarker(coordinate: center)]
     }
