@@ -4,24 +4,16 @@ import MapKit
 struct EventLocationView: View {
     let location: CamEventLocation
 
-    // This is a workaround for "Modifying state during view update, this will cause undefined behavior" issue.
-    @State private var region: MKCoordinateRegion = .init()
-    private var regionBinding: Binding<MKCoordinateRegion> {
-        .init(
-            get: { region },
-            set: { newValue in DispatchQueue.main.async { region = newValue } }
-        )
-    }
-
-    @State private var markers: [Marker] = []
+    @State private var markers: [EventLocationMarker] = []
     @State private var buttonOpacity = 0.0
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            // TODO: Fix map view after MacOS 14 migration
-//            Map(coordinateRegion: regionBinding, annotationItems: markers) {
-//                marker in MapMarker(coordinate: marker.coordinate)
-//            }
+            Map(bounds: MapCameraBounds(minimumDistance: 150)) {
+                ForEach(markers) { marker in
+                    Marker("Event location", coordinate: marker.coordinate)
+                }
+            }
 
             Button(action: { openLocationInMaps() }, label: {
                 HStack {
@@ -50,9 +42,7 @@ struct EventLocationView: View {
 
     private func setRegion(for location: CamEventLocation) {
         let center = CLLocationCoordinate2D(latitude: location.lat, longitude: location.lon)
-
-        self.region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005))
-        self.markers = [Marker(coordinate: center)]
+        self.markers = [EventLocationMarker(coordinate: center)]
     }
 
     private func openLocationInMaps() {
@@ -61,7 +51,7 @@ struct EventLocationView: View {
     }
 }
 
-fileprivate struct Marker: Identifiable {
+fileprivate struct EventLocationMarker: Identifiable {
     let id = UUID()
     var coordinate: CLLocationCoordinate2D
 }
