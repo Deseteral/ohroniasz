@@ -122,8 +122,6 @@ struct VideoGridView: View {
     }
 
     private func seek(to seconds: Double) {
-        actOnAllPlayers { $0.pause() }
-
         let time =  CMTime(seconds: seconds, preferredTimescale: 60000)
         actOnAllPlayers { player in
             player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
