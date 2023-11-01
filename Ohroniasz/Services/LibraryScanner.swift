@@ -1,6 +1,22 @@
 import Foundation
 
 class LibraryScanner {
+    private static let metadataJsonDecoder: JSONDecoder = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+        let jsonDecoder = JSONDecoder()
+        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+
+        return jsonDecoder
+    }()
+
+    private static let clipFileNameDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
+        return dateFormatter
+    }()
+
     static func scanLibrary(atPath libraryPath: String) -> [CamEvent] {
         return (
             scanClipsFolder(atPath: (libraryPath + "/SentryClips"), eventType: .sentryClip) +
@@ -87,13 +103,7 @@ class LibraryScanner {
             return nil
         }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-        guard let metadata = try? jsonDecoder.decode(CamEventMetadata.self, from: jsonData) else {
+        guard let metadata = try? metadataJsonDecoder.decode(CamEventMetadata.self, from: jsonData) else {
             return nil
         }
 
@@ -115,9 +125,6 @@ class LibraryScanner {
 
         firstItem.replace("-back.mp4", with: "")
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-
-        return dateFormatter.date(from: firstItem)
+        return clipFileNameDateFormatter.date(from: firstItem)
     }
 }
