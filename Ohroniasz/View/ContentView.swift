@@ -4,8 +4,10 @@ struct ContentView: View {
     @EnvironmentObject private var organizerViewModel: OrganizerViewModel
 
     var body: some View {
-        NavigationSplitView {
-            SidebarView()
+        NavigationSplitView(columnVisibility: .constant(NavigationSplitViewVisibility.doubleColumn)) {
+            EmptyView()
+                .toolbar(.hidden, for: .windowToolbar)
+                .toolbar(removing: .sidebarToggle)
         } content: {
             EventTableView()
                 .toolbar { ContentToolbar() }

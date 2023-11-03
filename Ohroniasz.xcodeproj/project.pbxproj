@@ -11,7 +11,6 @@
 		BF191E7B2A37A7060018938C /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7A2A37A7060018938C /* VideoProcessor.swift */; };
 		BF191E7D2A37E0AA0018938C /* FileManager+directoryExists.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */; };
 		BF191E812A3924080018938C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E802A3924080018938C /* ContentView.swift */; };
-		BF191E832A3927F20018938C /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E822A3927F20018938C /* SidebarView.swift */; };
 		BF191E852A392E100018938C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF191E842A392E100018938C /* DetailView.swift */; };
 		BF38D2EA2A393C7D0059AB6F /* OrganizerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF38D2E92A393C7D0059AB6F /* OrganizerViewModel.swift */; };
 		BF38D3212A3945460059AB6F /* EventLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF38D3202A3945460059AB6F /* EventLocationView.swift */; };
@@ -54,7 +53,6 @@
 		BF191E7A2A37A7060018938C /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
 		BF191E7C2A37E0AA0018938C /* FileManager+directoryExists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+directoryExists.swift"; sourceTree = "<group>"; };
 		BF191E802A3924080018938C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BF191E822A3927F20018938C /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		BF191E842A392E100018938C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BF38D2E92A393C7D0059AB6F /* OrganizerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizerViewModel.swift; sourceTree = "<group>"; };
 		BF38D3202A3945460059AB6F /* EventLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventLocationView.swift; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 				BFC015FA2A33CF8D008DF774 /* EventTableView.swift */,
 				BFC015FE2A33F69D008DF774 /* VideoGridView.swift */,
 				BF191E802A3924080018938C /* ContentView.swift */,
-				BF191E822A3927F20018938C /* SidebarView.swift */,
 				BF191E842A392E100018938C /* DetailView.swift */,
 				BF38D3202A3945460059AB6F /* EventLocationView.swift */,
 				BF475C9B2A468CE300417C44 /* ToolbarContent.swift */,
@@ -344,7 +341,6 @@
 				BFC015FB2A33CF8D008DF774 /* EventTableView.swift in Sources */,
 				BFC015FF2A33F69D008DF774 /* VideoGridView.swift in Sources */,
 				BF475C9E2A4A3F0C00417C44 /* PlatformInterface.swift in Sources */,
-				BF191E832A3927F20018938C /* SidebarView.swift in Sources */,
 				BF38D3212A3945460059AB6F /* EventLocationView.swift in Sources */,
 				BF92258F2ABB8353001CAD81 /* WindowStatusBar.swift in Sources */,
 				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
