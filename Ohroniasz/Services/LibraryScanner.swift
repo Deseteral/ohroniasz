@@ -110,18 +110,18 @@ class LibraryScanner {
         return metadata
     }
 
-    // TODO: I hate this function.
     private static func getDateFromFirstClipFileName(clipsFolderPath: String) -> Date? {
         let items = try? FileManager.default
             .contentsOfDirectory(atPath: clipsFolderPath)
             .sorted()
 
-        guard var firstItem = items?.first else {
+        guard let firstItem = items?.first else {
             return nil
         }
 
-        firstItem = String(firstItem.prefix(19))
+        let dateTextLength = 19
+        let firstItemDateText = String(firstItem.prefix(dateTextLength))
 
-        return clipFileNameDateFormatter.date(from: firstItem)
+        return clipFileNameDateFormatter.date(from: firstItemDateText)
     }
 }
