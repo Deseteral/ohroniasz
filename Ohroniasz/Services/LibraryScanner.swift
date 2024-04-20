@@ -112,18 +112,15 @@ class LibraryScanner {
 
     // TODO: I hate this function.
     private static func getDateFromFirstClipFileName(clipsFolderPath: String) -> Date? {
-        let clipFileRegex = /\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-back\.mp4/
-
         let items = try? FileManager.default
             .contentsOfDirectory(atPath: clipsFolderPath)
             .sorted()
-            .filter { $0.wholeMatch(of: clipFileRegex) != nil }
 
         guard var firstItem = items?.first else {
             return nil
         }
 
-        firstItem.replace("-back.mp4", with: "")
+        firstItem = String(firstItem.prefix(19))
 
         return clipFileNameDateFormatter.date(from: firstItem)
     }
