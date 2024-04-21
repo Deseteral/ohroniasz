@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 import AVKit
 
-struct CamEvent: Identifiable, Equatable {
+struct CamEvent: Identifiable, Equatable, Codable {
     let id: String
     let date: Date
     let type: CamEventType
@@ -22,7 +22,7 @@ struct CamEvent: Identifiable, Equatable {
     }
 }
 
-struct CamEventLocation: Equatable {
+struct CamEventLocation: Equatable, Codable {
     let city: String
     let lat: Double
     let lon: Double
@@ -34,7 +34,7 @@ struct CamEventLocation: Equatable {
     }
 }
 
-enum CamEventType: String {
+enum CamEventType: String, Codable {
     case savedClip
     case sentryClip
     case recentClip
