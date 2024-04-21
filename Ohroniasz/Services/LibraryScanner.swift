@@ -86,7 +86,7 @@ class LibraryScanner {
 
         // Read event from cache. If it's not in cache proceed with normal event read procedure.
         if let eventFromCache = cache[id] {
-            print("Event \(id) is in cache. Skipping reading.")
+            print("Event \(id) is in cache. Skipping.")
             return eventFromCache
         }
 
