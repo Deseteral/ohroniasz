@@ -1,5 +1,7 @@
 import Foundation
 
+fileprivate let logger = makeLogger(for: "LibraryData")
+
 class LibraryData: Codable {
     var descriptions: [CamEvent.ID: String] = [:]
     var favorites: [CamEvent.ID] = []
@@ -15,7 +17,7 @@ class LibraryData: Codable {
             let json = String(data: jsonData, encoding: .utf8)
             try json?.write(toFile: dataFilePath, atomically: true, encoding: .utf8)
         } catch {
-            print(error)
+            logger.error("An error while writing library data. \(error, privacy: .public)")
         }
     }
 

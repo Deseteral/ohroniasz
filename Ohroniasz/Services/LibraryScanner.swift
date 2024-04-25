@@ -1,5 +1,7 @@
 import Foundation
 
+fileprivate let logger = makeLogger(for: "LibraryScanner")
+
 class LibraryScanner {
     private static let metadataJsonDecoder: JSONDecoder = {
         let dateFormatter = DateFormatter()
@@ -19,7 +21,7 @@ class LibraryScanner {
 
     static func scanLibrary(atPath libraryPath: String) -> [CamEvent] {
         let cache = readCache(libraryPath: libraryPath)
-        print("Read cache with \(cache.count) elements.")
+        logger.info("Read cache with \(cache.count, privacy: .public) elements.")
 
         let data = (
             scanClipsFolder(atPath: (libraryPath + "/SentryClips"), eventType: .sentryClip, cache: cache) +
@@ -29,16 +31,16 @@ class LibraryScanner {
             a.date.compare(b.date) == .orderedDescending
         }
 
-        print("Read \(data.count) CamEvents.")
+        logger.info("Read a total of \(data.count, privacy: .public) CamEvents.")
 
         writeCache(events: data, libraryPath: libraryPath)
-        print("Wrote cache.")
+        logger.info("Wrote cache.")
 
         return data
     }
 
     private static func scanClipsFolder(atPath clipsFolderPath: String, eventType: CamEventType, cache: [String : CamEvent]) -> [CamEvent] {
-        print("Scanning clips folder at \"\(clipsFolderPath)\"")
+        logger.log("Scanning clips folder at \"\(clipsFolderPath, privacy: .public)\"")
         guard FileManager.default.directoryExists(atPath: clipsFolderPath) else {
             return []
         }
@@ -53,7 +55,7 @@ class LibraryScanner {
             return []
         }
 
-        print("Found \(items.count) clips.")
+        logger.info("Found \(items.count, privacy: .public) clips.")
 
         var events: [CamEvent] = []
 
@@ -64,7 +66,7 @@ class LibraryScanner {
             }
         }
 
-        print("Read \(events.count) events.")
+        logger.info("Read \(events.count, privacy: .public) events from \"\(clipsFolderPath, privacy: .public)\".")
 
         return events
     }
@@ -86,11 +88,11 @@ class LibraryScanner {
 
         // Read event from cache. If it's not in cache proceed with normal event read procedure.
         if let eventFromCache = cache[id] {
-            print("Event \(id) is in cache. Skipping.")
+            logger.info("Event \(id, privacy: .public) is in cache. Skipping.")
             return eventFromCache
         }
 
-        print("Reading event \(id).")
+        logger.info("Reading event \(id, privacy: .public).")
 
         let metadata = readEventMetadata(eventPath: eventPath)
         let dateFromFirstFile = getDateFromFirstClipFileName(clipsFolderPath: eventPath)
@@ -177,7 +179,7 @@ class LibraryScanner {
             let json = String(data: jsonData, encoding: .utf8)
             try json?.write(toFile: dataFilePath, atomically: true, encoding: .utf8)
         } catch {
-            print(error)
+            logger.error("An error while writing library cache. \(error, privacy: .public)")
         }
     }
 

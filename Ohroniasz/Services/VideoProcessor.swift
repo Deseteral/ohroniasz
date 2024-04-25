@@ -1,9 +1,11 @@
 import AVKit
 
+fileprivate let logger = makeLogger(for: "VideoProcessor")
+
 class VideoProcessor {
     static func loadEventPlaylist(event: CamEvent) async -> CamEventPlaylist? {
         guard let files = try? FileManager.default.contentsOfDirectory(atPath: event.path) else {
-            print("Failed to read contents of '\(event.path)' directory.")
+            logger.error("Failed to read contents of '\(event.path, privacy: .public)' directory.")
             return nil
         }
 
