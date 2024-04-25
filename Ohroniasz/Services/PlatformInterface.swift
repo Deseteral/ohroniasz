@@ -13,7 +13,7 @@ class PlatformInterface {
         let pathUrl = URL(fileURLWithPath: path, isDirectory: true)
 
         guard let urls = FileManager.default
-            .enumerator(at: pathUrl, includingPropertiesForKeys: nil)?
+            .enumerator(at: pathUrl, includingPropertiesForKeys: [.totalFileAllocatedSizeKey])?
             .allObjects as? [URL] else {
                 return nil
             }
