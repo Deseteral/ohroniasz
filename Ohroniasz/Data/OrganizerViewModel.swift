@@ -147,10 +147,13 @@ class OrganizerViewModel: ObservableObject {
     private func refreshTableStatusBarText() {
         self.tableStatusBarText = "\(events.count) events in library, calculating size..."
 
-        DispatchQueue.main.async {
+        DispatchQueue.global(qos: .utility).async {
             let sizeOnDisk = (try? PlatformInterface.directorySizeOnDisk(path: self.libraryPath))
                 .map { ", \($0) on disk" }
-            self.tableStatusBarText = "\(self.events.count) events in library\(sizeOnDisk ?? "")"
+
+            DispatchQueue.main.async {
+                self.tableStatusBarText = "\(self.events.count) events in library\(sizeOnDisk ?? "")"
+            }
         }
     }
 }
