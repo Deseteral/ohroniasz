@@ -158,7 +158,9 @@ class OrganizerViewModel: ObservableObject {
     }
 }
 
-enum EventFilter: String, CaseIterable {
+enum EventFilter: String, CaseIterable, Identifiable {
+    var id: Self { return self }
+
     case all = "All clips"
     case sentry = "Sentry events"
     case saved = "Saved clips"

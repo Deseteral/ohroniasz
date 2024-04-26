@@ -20,6 +20,7 @@ struct EventTableView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            EventTableControlView()
             Table(
                 organizerViewModel.displayEvents,
                 selection: $organizerViewModel.selectedEventId,

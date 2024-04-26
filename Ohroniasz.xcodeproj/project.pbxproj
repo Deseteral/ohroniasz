@@ -17,6 +17,7 @@
 		BF475C9C2A468CE300417C44 /* ToolbarContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9B2A468CE300417C44 /* ToolbarContent.swift */; };
 		BF475C9E2A4A3F0C00417C44 /* PlatformInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */; };
 		BF475CA02A4BAE2700417C44 /* LibraryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF475C9F2A4BAE2700417C44 /* LibraryData.swift */; };
+		BF6B7E392BDC41A7002E6634 /* EventTableControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6B7E382BDC41A7002E6634 /* EventTableControlView.swift */; };
 		BF92258F2ABB8353001CAD81 /* WindowStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF92258E2ABB8353001CAD81 /* WindowStatusBar.swift */; };
 		BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */; };
 		BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC015CA2A3256EE008DF774 /* WelcomeView.swift */; };
@@ -59,6 +60,7 @@
 		BF475C9B2A468CE300417C44 /* ToolbarContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarContent.swift; sourceTree = "<group>"; };
 		BF475C9D2A4A3F0C00417C44 /* PlatformInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformInterface.swift; sourceTree = "<group>"; };
 		BF475C9F2A4BAE2700417C44 /* LibraryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryData.swift; sourceTree = "<group>"; };
+		BF6B7E382BDC41A7002E6634 /* EventTableControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableControlView.swift; sourceTree = "<group>"; };
 		BF92258E2ABB8353001CAD81 /* WindowStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowStatusBar.swift; sourceTree = "<group>"; };
 		BFC015C52A3256EE008DF774 /* Ohroniasz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ohroniasz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC015C82A3256EE008DF774 /* OhroniaszApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhroniaszApp.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				BF38D3202A3945460059AB6F /* EventLocationView.swift */,
 				BF475C9B2A468CE300417C44 /* ToolbarContent.swift */,
 				BF92258E2ABB8353001CAD81 /* WindowStatusBar.swift */,
+				BF6B7E382BDC41A7002E6634 /* EventTableControlView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				BFC015CB2A3256EE008DF774 /* WelcomeView.swift in Sources */,
 				BF38D2EA2A393C7D0059AB6F /* OrganizerViewModel.swift in Sources */,
 				BF0934CF2A7DAEE300A5861F /* Domain.swift in Sources */,
+				BF6B7E392BDC41A7002E6634 /* EventTableControlView.swift in Sources */,
 				BF191E852A392E100018938C /* DetailView.swift in Sources */,
 				BFC015C92A3256EE008DF774 /* OhroniaszApp.swift in Sources */,
 				BF475CA02A4BAE2700417C44 /* LibraryData.swift in Sources */,
