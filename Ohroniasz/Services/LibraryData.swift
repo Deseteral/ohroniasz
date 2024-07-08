@@ -10,7 +10,7 @@ class LibraryData: Codable {
         let dataFilePath = LibraryData.getDataFilePath(for: libraryPath)
 
         do {
-            // TODO: Create encode once and reuse it.
+            // TODO: Create encoder once and reuse it.
             let encoder = JSONEncoder()
             encoder.outputFormatting = .prettyPrinted
             let jsonData = try encoder.encode(self)
