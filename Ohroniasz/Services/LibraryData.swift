@@ -22,7 +22,7 @@ class LibraryData: Codable {
     }
 
     static func readFromDisk(libraryPath: String) -> LibraryData? {
-        let jsonData = try? String(contentsOfFile: getDataFilePath(for: libraryPath)).data(using: .utf8)
+        let jsonData = try? String(contentsOfFile: getDataFilePath(for: libraryPath), encoding: .utf8).data(using: .utf8)
 
         guard let jsonData else {
             return nil

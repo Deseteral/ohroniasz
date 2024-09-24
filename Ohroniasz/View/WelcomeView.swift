@@ -22,7 +22,6 @@ struct WelcomeView: View {
         let folderPicker = NSOpenPanel()
         
         folderPicker.title = "Select TeslaCam folder";
-        folderPicker.showsResizeIndicator = false;
         folderPicker.showsHiddenFiles = false;
         folderPicker.canChooseDirectories = true
         folderPicker.canChooseFiles = false

@@ -125,7 +125,7 @@ class LibraryScanner {
     private static func readEventMetadata(eventPath: String) -> CamEventMetadata? {
         let metadataPath = eventPath + "/" + "event.json"
 
-        guard let jsonData = try? String(contentsOfFile: metadataPath).data(using: .utf8) else {
+        guard let jsonData = try? String(contentsOfFile: metadataPath, encoding: .utf8).data(using: .utf8) else {
             return nil
         }
 
@@ -152,7 +152,7 @@ class LibraryScanner {
     }
 
     private static func readCache(libraryPath: String) -> [String : CamEvent] {
-        let jsonData = try? String(contentsOfFile: getCacheFilePath(for: libraryPath)).data(using: .utf8)
+        let jsonData = try? String(contentsOfFile: getCacheFilePath(for: libraryPath), encoding: .utf8).data(using: .utf8)
 
         guard let jsonData else {
             return [:]
