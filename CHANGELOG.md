@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [2024.1.0] - 2024-09-24
+
+### Changed
+
+- Upgraded minimal system target to MacOS 16 Sequoia.
+
 
 ## [2024.0.0] - 2024-04-28
 
