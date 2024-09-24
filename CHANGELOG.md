@@ -34,5 +34,6 @@ replaced by an event type picker above event table.
 - Initial release
 
 [unreleased]: https://github.com/Deseteral/ohroniasz/compare/v2024.0.0...HEAD
+[2024.1.0]: https://github.com/Deseteral/ohroniasz/compare/v2024.0.0...v2024.1.0
 [2024.0.0]: https://github.com/Deseteral/ohroniasz/compare/v2023.0.0...v2024.0.0
 [2023.0.0]: https://github.com/Deseteral/ohroniasz/releases/tag/v2023.0.0
